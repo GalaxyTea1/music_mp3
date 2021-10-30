@@ -1,0 +1,62 @@
+POST http://localhost:5001/api/register
+Content-Type: application/json
+
+{
+    "username": "admin12",
+    "password": "123123"
+}
+
+###
+
+POST http://localhost:5001/api/login
+Content-Type: application/json
+
+{
+    "username": "adminn",
+    "password": "123123"
+}
+
+###
+
+POST http://localhost:5001/api/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTZkNzcyYjUwOTJlYmE3YTQ2YzhjMTEiLCJpYXQiOjE2MzQ1NjU1MTR9.660zoP6_Yut_PnTBk7KKCjhnkNK8rKVDfoIOxtDQuEs
+
+{
+    "title": "Say Bye Bye",
+    "description": "Bye bye",
+    "url": "byebye.com",
+    "status": "BUSY"
+}
+
+###
+
+GET http://localhost:5001/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTZkNzcyYjUwOTJlYmE3YTQ2YzhjMTEiLCJpYXQiOjE2MzU0MDk0MTUsImV4cCI6MTYzNTQwOTQzNX0.wAhmFsvxbL7d_YUNgcFzMrqslhXXf0HmxseGO_Tuk2E
+
+###
+PUT http://localhost:5001/api/posts/6166c3e9a1686ba9c3ce5261
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTZkNzcyYjUwOTJlYmE3YTQ2YzhjMTEiLCJpYXQiOjE2MzQ1NjU1MTR9.660zoP6_Yut_PnTBk7KKCjhnkNK8rKVDfoIOxtDQuEs
+
+{
+    "title": "Test",
+    "description": "Say Test",
+    "url": "https://color.com",
+    "status": "BUSY"
+}
+
+###
+
+DELETE http://localhost:5001/api/posts/6166c3e9a1686ba9c3ce5261
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY1YTMwZmMzOTNkMWMzMzA2YzljNGQiLCJpYXQiOjE2MzQxMjQ2MjV9.ejfjEGiAeGWv75Sk0KLIC4Pcy-dx_KGY_XWhRIRaxfE
+
+###
+
+GET http://localhost:5001/api/auth/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTZkNzcyYjUwOTJlYmE3YTQ2YzhjMTEiLCJpYXQiOjE2MzU0MDI2Mzd9.ceyRUmRzqbtEsNlhfkKWnG-0adAG1KJ3DGY-E9u4HpQ
+
+###
+
+POST http://localhost:5001/api/refresh_token
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2FiMmJiYWQxMmU5ZDNiZjUzOGE3MSIsImlhdCI6MTYzNTU4NzI4MSwiZXhwIjoxNjM1NjczNjgxfQ.nRTKtS9ILfnVRvo3-otdifu_7ltlT4XedVDo6S5NgSE
