@@ -1,6 +1,8 @@
 const Users = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+var cookie = require('cookie');
 
 const handleAuth = {
     register: async (req, res) => {
@@ -83,9 +85,12 @@ const handleAuth = {
         }
     },
     generateAccessToken: async (req, res) => {
+        // console.log('hello');
         try {
-            const rf_token = await req.cookies.refreshtoken;
+            // console.log('hello');
+            const rf_token = req.cookies.refreshtoken;
             console.log(rf_token);
+            console.log('hello');
             if (!rf_token) return res.status(400).json({ msg: 'Please login now.' });
 
             jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, async (err, result) => {

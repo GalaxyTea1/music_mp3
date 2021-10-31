@@ -1,5 +1,5 @@
 import { GLOBALTYPES } from '../type/globalType';
-import { postDataAPI } from '../../util/fetchData';
+import { postDataAPI } from '../../api/postApi';
 import StorageKeys from '../../constants/storage-key';
 import axios from 'axios';
 
