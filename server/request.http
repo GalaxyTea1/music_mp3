@@ -2,7 +2,7 @@ POST http://localhost:5001/api/register
 Content-Type: application/json
 
 {
-    "username": "admin12",
+    "username": "thanh",
     "password": "123123"
 }
 
@@ -59,4 +59,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTZkN
 ###
 
 POST http://localhost:5001/api/refresh_token
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2FiMmJiYWQxMmU5ZDNiZjUzOGE3MSIsImlhdCI6MTYzNTU4NzI4MSwiZXhwIjoxNjM1NjczNjgxfQ.nRTKtS9ILfnVRvo3-otdifu_7ltlT4XedVDo6S5NgSE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2FiMmJiYWQxMmU5ZDNiZjUzOGE3MSIsImlhdCI6MTYzNTU5MTczOSwiZXhwIjoxNjM1Njc4MTM5fQ.dfMlu-I5RsSMJs44CcMtZrevdanbGqKYP_M8E_IWbMM
+
+
+

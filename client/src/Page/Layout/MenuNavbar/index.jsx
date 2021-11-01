@@ -187,7 +187,7 @@ export default function MenuNavbar() {
 
                         {isLoggedIn && <button>Thoát</button>} */}
                         {
-                            authReducer.token ? <button>Thoát</button> : <button onClick={handleClickOpen}>Đăng Nhập</button>
+                            authReducer.token ? <button onClick={() => dispatch(logout())}>Thoát</button> : <button onClick={handleClickOpen}>Đăng Nhập</button>
                         }
                     </div>
 
