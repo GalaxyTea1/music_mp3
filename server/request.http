@@ -53,13 +53,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY1Y
 
 ###
 
-GET http://localhost:5001/api/auth/logout
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTZkNzcyYjUwOTJlYmE3YTQ2YzhjMTEiLCJpYXQiOjE2MzU0MDI2Mzd9.ceyRUmRzqbtEsNlhfkKWnG-0adAG1KJ3DGY-E9u4HpQ
+POST http://localhost:5001/api/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2FiMmJiYWQxMmU5ZDNiZjUzOGE3MSIsImlhdCI6MTYzNTY4NzIyNywiZXhwIjoxNjM1NzczNjI3fQ.8kkhCVCo7HUkRxtpAnA1SKVVRUvQOwQuW2rc9lSZD-U
 
 ###
 
 POST http://localhost:5001/api/refresh_token
+<<<<<<< HEAD
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2FiMmJiYWQxMmU5ZDNiZjUzOGE3MSIsImlhdCI6MTYzNTU5MTczOSwiZXhwIjoxNjM1Njc4MTM5fQ.dfMlu-I5RsSMJs44CcMtZrevdanbGqKYP_M8E_IWbMM
 
 
 
+=======
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2FiMmJiYWQxMmU5ZDNiZjUzOGE3MSIsImlhdCI6MTYzNTY4NzIyNywiZXhwIjoxNjM1NzczNjI3fQ.8kkhCVCo7HUkRxtpAnA1SKVVRUvQOwQuW2rc9lSZD-U
+>>>>>>> d3e242b35ab0f473e9150a386b8064966eefe0fe

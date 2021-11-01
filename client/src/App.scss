@@ -238,25 +238,31 @@
     }
     .header__right {
       flex-grow: 0;
+
       button {
         background-color: $alpha-bg;
+      }
+      .form {
         position: relative;
+        margin-right: 190px;
+        margin-bottom: 20px;
+
+        form {
+          position: fixed;
+          height: 50px;
+          width: 200px;
+          
+          button{
+            height: 30px;
+            width: 50px;
+            background-color: whitesmoke;
+            color: black;
+            margin-top: 10px;
+          }
+        }
       }
-      input {
-        display: inline-block;
-        position: fixed;
-        width: 40px;
-        padding: 40px 0 0 0;
-        height: 40px;
-        opacity: 0;
-        overflow: hidden;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        // background: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698394-icon-130-cloud-upload-512.png') center center no-repeat #e4e4e4;
-        border-radius: 20px;
-        background-size: 60px 60px;
-      }
+      
+      
     }
   }
   .listMusic {
@@ -433,7 +439,7 @@
   }
   .khamPhaContent {
     position: absolute;
-    top: 0;
+    top: 10px;
     left: 240px;
     right: 320px;
     height: calc(100vh - 90px);
