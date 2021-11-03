@@ -2,7 +2,7 @@ POST http://localhost:5001/api/register
 Content-Type: application/json
 
 {
-    "username": "admin",
+    "username": "trong",
     "password": "123123"
 }
 
@@ -32,12 +32,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTZkN
 ###
 
 GET http://localhost:5001/api/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTZkNzcyYjUwOTJlYmE3YTQ2YzhjMTEiLCJpYXQiOjE2MzU0MDk0MTUsImV4cCI6MTYzNTQwOTQzNX0.wAhmFsvxbL7d_YUNgcFzMrqslhXXf0HmxseGO_Tuk2E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxODFmMWM3NmM3MmQ4ODEyMzBjMWQxZiIsImlhdCI6MTYzNTk0MTQ3MiwiZXhwIjoxNjM4NTMzNDcyfQ.w59zTb6W4F5hwqw9PepMVi-ojrqw9FQ4YUPo9zN233Y
 
 ###
 PUT http://localhost:5001/api/posts/6166c3e9a1686ba9c3ce5261
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTZkNzcyYjUwOTJlYmE3YTQ2YzhjMTEiLCJpYXQiOjE2MzQ1NjU1MTR9.660zoP6_Yut_PnTBk7KKCjhnkNK8rKVDfoIOxtDQuEs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxODFmMWM3NmM3MmQ4ODEyMzBjMWQxZiIsImlhdCI6MTYzNTk0MTAzMiwiZXhwIjoxNjM2MDI3NDMyfQ.xtYxkTLNb9uhAQ6VzlHX12U-5SiOcVkYimdEFmtkUBc
 
 {
     "title": "Test",
@@ -56,14 +56,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY1Y
 POST http://localhost:5001/api/logout
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2FiMmJiYWQxMmU5ZDNiZjUzOGE3MSIsImlhdCI6MTYzNTY4NzIyNywiZXhwIjoxNjM1NzczNjI3fQ.8kkhCVCo7HUkRxtpAnA1SKVVRUvQOwQuW2rc9lSZD-U
 
+
 ###
 
-POST http://localhost:5001/api/refresh_token
-<<<<<<< HEAD
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2FiMmJiYWQxMmU5ZDNiZjUzOGE3MSIsImlhdCI6MTYzNTU5MTczOSwiZXhwIjoxNjM1Njc4MTM5fQ.dfMlu-I5RsSMJs44CcMtZrevdanbGqKYP_M8E_IWbMM
+POST http://localhost:5001/api/discovery
+Content-Type: application/json
 
+{
+    "img": "https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/cover/c/8/e/4/c8e443a2298cdc1fbeaf1283df27fc90.jpg",
+    "title": "Test",
+    "author": "Trong"
+}
 
+###
+GET http://localhost:5001/api/discovery
 
-=======
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2FiMmJiYWQxMmU5ZDNiZjUzOGE3MSIsImlhdCI6MTYzNTY4NzIyNywiZXhwIjoxNjM1NzczNjI3fQ.8kkhCVCo7HUkRxtpAnA1SKVVRUvQOwQuW2rc9lSZD-U
->>>>>>> d3e242b35ab0f473e9150a386b8064966eefe0fe

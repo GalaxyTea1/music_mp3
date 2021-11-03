@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let UserSchema = new Schema({
+const DiscoverySchema = new Schema({
     img: {
         type: String,
         required: true,
@@ -12,10 +12,13 @@ let UserSchema = new Schema({
     author: {
         type: String,
     },
+    user: {
+        type: String,
+    },
     createdAt: {
         type: Date,
         default: Date.now,
     },
 });
 
-module.exports = mongoose.model('users', UserSchema);
+module.exports = mongoose.model('discoverys', DiscoverySchema);
