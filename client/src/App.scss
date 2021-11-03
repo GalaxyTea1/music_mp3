@@ -249,18 +249,30 @@
 
         form {
           position: fixed;
-          height: 50px;
-          width: 200px;
+          height: 60px;
+          width: 60px;
           
-          button{
-            height: 30px;
-            width: 50px;
-            background-color: whitesmoke;
-            color: black;
-            margin-top: 10px;
+          .hiddenFileInput {
+            >input {
+              height: 100%;
+              width: 50px;
+              opacity: 0;
+              cursor: pointer;
+              padding: 20px;
+            }
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            display: inline-block;
+            overflow: hidden;
+            background: center center no-repeat;
+            background-size: 100% 100%;
+            margin-left: 160px;
+            background-image: url(https://cdn-icons-png.flaticon.com/512/179/179378.png);
           }
         }
       }
+      
       
       
     }

@@ -162,30 +162,9 @@ export default function MenuNavbar() {
                             </li>
                         </NavLink>
 
-                        <NavLink exact to="/top-100" activeClassName="activeLi">
-                            <li>
-                                <i>
-                                    <AliwangwangOutlined className="block" />
-                                </i>
-                                Top 100
-                            </li>
-                        </NavLink>
-
-                        <NavLink exact to="/mv" activeClassName="activeLi">
-                            <li>
-                                <i>
-                                    <PlayCircleOutlined className="block" />
-                                </i>
-                                MV<span className="mt-1 ml-2"></span>
-                            </li>
-                        </NavLink>
                     </ul>
                     <div className="sideBar__banner">
                         <p>Đăng nhập để trải nghiệm cảm giác mới lạ hơn</p>
-                        {/* <button onClick={handleClickOpen}>Đăng Nhập</button> */}
-                        {/* {!isLoggedIn && <button onClick={handleClickOpen}>Đăng Nhập</button>}
-
-                        {isLoggedIn && <button>Thoát</button>} */}
                         {
                             authReducer.token ? <button onClick={() => dispatch(logout())}>Thoát</button> : <button onClick={handleClickOpen}>Đăng Nhập</button>
                         }

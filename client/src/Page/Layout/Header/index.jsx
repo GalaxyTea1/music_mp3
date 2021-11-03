@@ -6,33 +6,13 @@ export default function Header() {
     // let [tenBaiHat, setTenBaiHat] = useState({
     //     value: '',
     // });
-    // const [baseAudio, setBaseAudio] = useState('');
+    // document.getElementById('button').addEventListener('click', () => {
+    //     document.getElementById('fileInput').click();
+    // });
 
-    // const uploadAudio = async (e) => {
-    //     console.log(e.target.files);
-    //     const file = e.target.files[0];
-    //     const base64 = await convertBase64(file);
-    //     // setBaseAudio(base64);
-    //     console.log(base64);
-    // };
-
-    // const convertBase64 = (file) => {
-    //     return new Promise((resolve, reject) => {
-    //         const fileReader = new FileReader();
-    //         fileReader.readAsDataURL(file);
-
-    //         fileReader.onload = () => {
-    //             resolve(fileReader.result);
-    //         };
-
-    //         fileReader.onerror = (error) => {
-    //             reject(error);
-    //         };
-    //     });
-    // };
     const formHandler = (e) => {
         e.preventDefault();
-        const file = e.target[0].files[0];
+        const file = e.target.files[0];
         uploadFiles(file);
     };
 
@@ -71,17 +51,12 @@ export default function Header() {
                 </div>
                 <div className="header__right flex items-center">
                     <div className="form">
-                        <form onSubmit={formHandler}>
-                            <input type="file" />
-                            <button type="submit">Submit</button>
+                        <form id="form">
+                            <span className="hiddenFileInput">
+                                <input name="theFile" type="file" onChange={formHandler} />
+                            </span>
                         </form>
                     </div>
-                    <button className="w-10 h-10 flex items-center mx-2 rounded-full justify-center hover:opacity-80">
-                            <i className="fa fa-upload"></i>
-                        </button>
-                    <button className="w-10 h-10 flex items-center mx-2 rounded-full justify-center hover:opacity-80">
-                        <i className="fa fa-cog"></i>
-                    </button>
                 </div>
             </div>
         </div>
