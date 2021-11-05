@@ -63,11 +63,27 @@ POST http://localhost:5001/api/discovery
 Content-Type: application/json
 
 {
-    "img": "https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/cover/c/8/e/4/c8e443a2298cdc1fbeaf1283df27fc90.jpg",
-    "title": "Test",
-    "author": "Trong"
+    "img": "https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/cover/a/e/2/d/ae2d5f1d552eee3466f5a5eeb2a1a4fc.jpg",
+    "title": "Indie Việt Tháng 10",
+    "author": "TDuongg, Stary Night..."
 }
 
 ###
-GET http://localhost:5001/api/discovery
+GET http://localhost:5001/api/rank
+
+###
+
+DELETE http://localhost:5001/api/discovery/61829a960529e66462ecfce7
+
+###
+
+POST http://localhost:5001/api/radio
+Content-Type: application/json
+
+{
+    "img": "https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/cover/b/c/2/1/bc2115886f2e2e9f7cf2fa28a39cda12.jpg",
+    "icon": "https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/avatars/c/f/2/4/cf2428f7e56a8c2a52d84cb106891de2.jpg",
+    "title": "K-POP",
+    "listen": "1423"
+}
 

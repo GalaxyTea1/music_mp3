@@ -6,9 +6,6 @@ export default function Header() {
     // let [tenBaiHat, setTenBaiHat] = useState({
     //     value: '',
     // });
-    // document.getElementById('button').addEventListener('click', () => {
-    //     document.getElementById('fileInput').click();
-    // });
 
     const formHandler = (e) => {
         e.preventDefault();
@@ -44,7 +41,7 @@ export default function Header() {
                             style={{ fontSize: '24px', position: 'absolute', left: '10px' }}
                         />
                         <input
-                            placeholder="Nhập tên bài hát, nghệ sĩ hoặc MV..."
+                            placeholder="Nhập tên bài hát..."
                             name="tenBaiHat"
                         ></input>
                     </div>

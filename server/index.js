@@ -8,6 +8,8 @@ const path = require('path');
 const authRouter = require('./routers/authRouter');
 const postRouter = require('./routers/postsRouter');
 const discoveryRouter = require('./routers/discoveryRouter');
+const radioRouter = require('./routers/radioRouter');
+const rankRouter = require('./routers/rankRouter');
 
 const connectDB = async () => {
     try {
@@ -35,6 +37,8 @@ app.use(cookieParser());
 app.use('/api', authRouter);
 app.use('/api/posts', postRouter);
 app.use('/api/discovery', discoveryRouter);
+app.use('/api/radio', radioRouter);
+app.use('/api/rank', rankRouter);
 
 const PORT = process.env.PORT || 5001;
 

@@ -1,17 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-const Discovery = require('../models/Discovery');
+const Rank = require('../models/Rank');
 
 // @route GET api/posts
 // @desc Get posts
 // @access Private
 router.get('/', async (req, res) => {
     try {
-        const discoverys = await Discovery.find({ user: req.userId }).populate('user', [
-            'username',
-        ]);
-        res.json({ success: true, discoverys });
+        const ranks = await Rank.find({ user: req.userId }).populate('user', ['username']);
+        res.json({ success: true, ranks });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });
@@ -28,16 +26,16 @@ router.post('/', async (req, res) => {
     if (!img) return res.status(400).json({ success: false, message: 'Image is required' });
 
     try {
-        const newDiscovery = new Discovery({
+        const newRank = new Rank({
             img,
             title,
             author,
             user: req.userId,
         });
 
-        await newDiscovery.save();
+        await newRank.save();
 
-        res.json({ success: true, message: 'Happy!', discovery: newDiscovery });
+        res.json({ success: true, message: 'Happy!', rank: newRank });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });
@@ -54,31 +52,27 @@ router.put('/:id', async (req, res) => {
     if (!img) return res.status(400).json({ success: false, message: 'Image is required' });
 
     try {
-        let updatedDiscovery = {
+        let updatedRank = {
             img,
             title,
             author,
         };
 
-        const discoveryUpdateCondition = { _id: req.params.id };
+        const rankUpdateCondition = { _id: req.params.id };
 
-        updatedDiscovery = await Discovery.findOneAndUpdate(
-            discoveryUpdateCondition,
-            updatedDiscovery,
-            { new: true }
-        );
+        updatedRank = await Rank.findOneAndUpdate(rankUpdateCondition, updatedRank, { new: true });
 
         // User not authorised to update post or post not found
-        if (!updatedDiscovery)
+        if (!updatedRank)
             return res.status(401).json({
                 success: false,
-                message: 'Discovery not found or user not authorised',
+                message: 'Rank not found or user not authorised',
             });
 
         res.json({
             success: true,
             message: 'Excellent progress!',
-            discovery: updatedDiscovery,
+            rank: updatedRank,
         });
     } catch (error) {
         console.log(error);
@@ -92,17 +86,17 @@ router.put('/:id', async (req, res) => {
 // , user: req.userId
 router.delete('/:id', async (req, res) => {
     try {
-        const discoveryDeleteCondition = { _id: req.params.id };
-        const deletedDiscovery = await Discovery.findOneAndDelete(discoveryDeleteCondition);
+        const rankDeleteCondition = { _id: req.params.id };
+        const deletedRank = await Rank.findOneAndDelete(rankDeleteCondition);
 
         // User not authorised or post not found
-        if (!deletedDiscovery)
+        if (!deletedRank)
             return res.status(401).json({
                 success: false,
-                message: 'Discovery not found or user not authorised',
+                message: 'Rank not found or user not authorised',
             });
 
-        res.json({ success: true, discovery: deletedDiscovery });
+        res.json({ success: true, rank: deletedRank });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });

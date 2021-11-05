@@ -1,17 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-const Discovery = require('../models/Discovery');
+const Radio = require('../models/Radio');
 
 // @route GET api/posts
 // @desc Get posts
 // @access Private
 router.get('/', async (req, res) => {
     try {
-        const discoverys = await Discovery.find({ user: req.userId }).populate('user', [
-            'username',
-        ]);
-        res.json({ success: true, discoverys });
+        const radios = await Radio.find({ user: req.userId }).populate('user', ['username']);
+        res.json({ success: true, radios });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });
@@ -22,22 +20,23 @@ router.get('/', async (req, res) => {
 // @desc Create post
 // @access Private
 router.post('/', async (req, res) => {
-    const { img, title, author } = req.body;
+    const { img, icon, title, listen } = req.body;
 
     // Simple validation
     if (!img) return res.status(400).json({ success: false, message: 'Image is required' });
 
     try {
-        const newDiscovery = new Discovery({
+        const newRadio = new Radio({
             img,
+            icon,
             title,
-            author,
+            listen,
             user: req.userId,
         });
 
-        await newDiscovery.save();
+        await newRadio.save();
 
-        res.json({ success: true, message: 'Happy!', discovery: newDiscovery });
+        res.json({ success: true, message: 'Happy!', radio: newRadio });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });
@@ -48,7 +47,7 @@ router.post('/', async (req, res) => {
 // @desc Update post
 // @access Private
 router.put('/:id', async (req, res) => {
-    const { img, title, author } = req.body;
+    const { img, title, author, listen } = req.body;
 
     // Simple validation
     if (!img) return res.status(400).json({ success: false, message: 'Image is required' });
@@ -56,29 +55,28 @@ router.put('/:id', async (req, res) => {
     try {
         let updatedDiscovery = {
             img,
+            icon,
             title,
-            author,
+            listen,
         };
 
-        const discoveryUpdateCondition = { _id: req.params.id };
+        const radioUpdateCondition = { _id: req.params.id };
 
-        updatedDiscovery = await Discovery.findOneAndUpdate(
-            discoveryUpdateCondition,
-            updatedDiscovery,
-            { new: true }
-        );
+        updatedRadio = await Radio.findOneAndUpdate(radioUpdateCondition, updatedRadio, {
+            new: true,
+        });
 
         // User not authorised to update post or post not found
-        if (!updatedDiscovery)
+        if (!updatedRadio)
             return res.status(401).json({
                 success: false,
-                message: 'Discovery not found or user not authorised',
+                message: 'Radio not found or user not authorised',
             });
 
         res.json({
             success: true,
             message: 'Excellent progress!',
-            discovery: updatedDiscovery,
+            radio: updatedRadio,
         });
     } catch (error) {
         console.log(error);
@@ -92,17 +90,17 @@ router.put('/:id', async (req, res) => {
 // , user: req.userId
 router.delete('/:id', async (req, res) => {
     try {
-        const discoveryDeleteCondition = { _id: req.params.id };
-        const deletedDiscovery = await Discovery.findOneAndDelete(discoveryDeleteCondition);
+        const radioDeleteCondition = { _id: req.params.id };
+        const deletedRadio = await Radio.findOneAndDelete(radioDeleteCondition);
 
         // User not authorised or post not found
-        if (!deletedDiscovery)
+        if (!deletedRadio)
             return res.status(401).json({
                 success: false,
-                message: 'Discovery not found or user not authorised',
+                message: 'Radio not found or user not authorised',
             });
 
-        res.json({ success: true, discovery: deletedDiscovery });
+        res.json({ success: true, radio: deletedRadio });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });

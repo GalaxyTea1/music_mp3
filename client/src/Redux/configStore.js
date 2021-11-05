@@ -5,6 +5,8 @@ import SongReducer from './reducer/SongReducer';
 import authReducer from './reducer/authReducer';
 import alertReducer from './reducer/alertReducer';
 import discoveryReducer from './reducer/discoveryReducer';
+import radioReducer from './reducer/radioReducer';
+import rankReducer from './reducer/rankReducer';
 
 const rootReducer = combineReducers({
     SongReducer,
@@ -12,6 +14,8 @@ const rootReducer = combineReducers({
     authReducer,
     alertReducer,
     discoveryReducer,
+    radioReducer,
+    rankReducer,
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
