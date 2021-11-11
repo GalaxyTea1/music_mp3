@@ -1,5 +1,6 @@
 import { SearchOutlined } from '@ant-design/icons';
-import React from 'react';
+import { getDownloadURL, ref, uploadBytesResumable } from '@firebase/storage';
+import React, { useEffect, useState } from 'react';
 import { storage } from '../../../firebase';
 
 export default function Header() {
@@ -7,26 +8,37 @@ export default function Header() {
     //     value: '',
     // });
 
+
+    const [progress, setProgress] = useState(0);
+
     const formHandler = (e) => {
         e.preventDefault();
         const file = e.target.files[0];
         uploadFiles(file);
     };
 
+    useEffect(() => {
+        if (progress === 100)
+        setTimeout(() => {
+            setProgress(0);
+        }, 3000);
+    })
+
     const uploadFiles = (file) => {
-        const uploadTask = storage.ref(`files/${file.name}`).put(file);
+        if (!file) return;
+        const storageRef = ref(storage, `/files/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+        
         uploadTask.on(
             'state_changed',
-            (snapshot) => {},
-            (error) => console.log(error),
+            (snapshot) => {
+                const prog = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+
+                setProgress(prog);
+            },
+            (err) => console.log(err),
             () => {
-                storage
-                    .ref('files')
-                    .child(file.name)
-                    .getDownloadURL()
-                    .then((url) => {
-                        console.log(url);
-                    });
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => console.log(url));
             }
         );
     };
@@ -40,10 +52,7 @@ export default function Header() {
                             className="mr-5"
                             style={{ fontSize: '24px', position: 'absolute', left: '10px' }}
                         />
-                        <input
-                            placeholder="Nhập tên bài hát..."
-                            name="tenBaiHat"
-                        ></input>
+                        <input placeholder="Nhập tên bài hát..." name="tenBaiHat"></input>
                     </div>
                 </div>
                 <div className="header__right flex items-center">
@@ -53,7 +62,12 @@ export default function Header() {
                                 <input name="theFile" type="file" onChange={formHandler} />
                             </span>
                         </form>
-                    </div>
+                        { progress !== 0 &&
+                        <h3>
+                            Uploaded {progress} %
+                        </h3>
+                        }
+                    </div> 
                 </div>
             </div>
         </div>

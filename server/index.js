@@ -10,6 +10,7 @@ const postRouter = require('./routers/postsRouter');
 const discoveryRouter = require('./routers/discoveryRouter');
 const radioRouter = require('./routers/radioRouter');
 const rankRouter = require('./routers/rankRouter');
+const radioViewRouter = require('./routers/radioViewRouter');
 
 const connectDB = async () => {
     try {
@@ -39,6 +40,7 @@ app.use('/api/posts', postRouter);
 app.use('/api/discovery', discoveryRouter);
 app.use('/api/radio', radioRouter);
 app.use('/api/rank', rankRouter);
+app.use('/api/radioview', radioViewRouter);
 
 const PORT = process.env.PORT || 5001;
 

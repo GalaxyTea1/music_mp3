@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import _ from 'lodash';
-import MusicItemView from '../MusicItemView/index';
-import MusicRadio from '../MusicRadio/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { Discovery } from '../../Redux/action/discoveryAction';
 import { Radio } from '../../Redux/action/radioAction';
+import MusicItemView from '../MusicItemView/index';
+import MusicRadio from '../MusicRadio/index';
 
 export default function KhamPha() {
     const { discoveryReducer } = useSelector((state) => state);

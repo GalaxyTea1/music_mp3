@@ -9,7 +9,7 @@
 #root {
   font-family: "Inter", sans-serif;
   position: relative;
-  background-color: $purple;
+  // background-color: $purple;
   color: white;
   font-size: 14px;
   line-height: 1.5;
@@ -251,9 +251,9 @@
           position: fixed;
           height: 60px;
           width: 60px;
-          
+
           .hiddenFileInput {
-            >input {
+            > input {
               height: 100%;
               width: 50px;
               opacity: 0;
@@ -271,10 +271,13 @@
             background-image: url(https://cdn-icons-png.flaticon.com/512/179/179378.png);
           }
         }
+        h3 {
+          display: inline-block;
+          position: fixed;
+          margin-top: 10px;
+          margin-left: 40px;
+        }
       }
-      
-      
-      
     }
   }
   .listMusic {
@@ -714,6 +717,42 @@
           @include btnPlaylist();
         }
       }
+    }
+  }
+
+  .main {
+    background-color: #d3ded6;
+    width: 100%;
+    height: 721px;
+    display: flex;
+    
+    .navBar_left {
+      width: 30%;
+      height: 100%;
+      position: sticky;
+      top: 0;
+      left: 0;
+    }
+    .navBar_right {
+      width: 69%;
+      height: 100%;
+    }
+    .add_album {
+      z-index: 99999;
+      color: black;
+      background-color: #6897e3;
+      padding: 30px;
+      width: 800px;
+      height: 600px;
+    }
+    button {
+      width: 29%;
+      height: 5%;
+      background-color: gray;
+      border-radius: 5px;
+      position: fixed;
+      bottom: 120px;
+      left: 42%
     }
   }
 

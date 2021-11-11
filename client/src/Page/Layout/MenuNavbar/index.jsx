@@ -120,7 +120,7 @@ export default function MenuNavbar() {
                             <i>
                                 <RedditOutlined className="block" />
                             </i>
-                            Radio & Podcast{' '}
+                            Radio{' '}
                             <span className="mt-1 ml-2">
                                 <img
                                     src="https://zjs.zadn.vn/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg"

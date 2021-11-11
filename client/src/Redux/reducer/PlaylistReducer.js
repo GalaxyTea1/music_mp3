@@ -9,17 +9,19 @@ import {
     REMOVE_MUSIC_TO_PLAYLIST,
     REMOVE_PLAYLIST,
 } from '../type/Music';
+import authReducer from '../../Redux/reducer/authReducer';
 
 /* eslint-disable import/no-anonymous-default-export */
 const initialState = {
     Modal: false,
-    Component: <p>123</p>,
+    Component: <p>list</p>,
     listPlaylist: [],
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case OPEN_MODAL: {
+            // if (authReducer.token === true)
             return { ...state, Modal: true, Component: action.Component };
         }
         case CLOSE_MODAL: {

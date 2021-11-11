@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 
-
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -39,7 +38,6 @@ function a11yProps(index) {
     return {
         id: `full-width-tab-${index}`,
         'aria-controls': `full-width-tabpanel-${index}`,
-        
     };
 }
 
@@ -56,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     avatar: {
-       margin: theme.spacing(12, 0 , 10, 70),
+        margin: theme.spacing(12, 0, 10, 70),
         width: '100px',
         height: '100px',
     },
@@ -67,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     appBar: {
-        backgroundColor: 'black'
+        backgroundColor: 'black',
     },
 
     swiper: {
@@ -76,9 +74,8 @@ const useStyles = makeStyles((theme) => ({
     },
 
     tabpanels: {
-       color: 'black'
+        color: 'black',
     },
-   
 }));
 
 export default function Profile() {
@@ -95,12 +92,12 @@ export default function Profile() {
     };
 
     return (
-        <div className={classes.container} >
+        <div className={classes.container}>
             <div className={classes.root}>
                 <Avatar className={classes.avatar} alt="User" src="" />
             </div>
             <div className={classes.tabsRoot}>
-                <AppBar position="static" color="default" style={{backgroundColor:'#a0aaba'}}>
+                <AppBar position="static" color="default" style={{ backgroundColor: '#a0aaba' }}>
                     <Tabs
                         value={value}
                         onChange={handleChange}
@@ -114,23 +111,38 @@ export default function Profile() {
                         <Tab label="Tải lên" {...a11yProps(2)} />
                     </Tabs>
                 </AppBar>
-                <SwipeableViews className={classes.swiper}
+                <SwipeableViews
+                    className={classes.swiper}
                     axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                     index={value}
                     onChangeIndex={handleChangeIndex}
                 >
-                    <TabPanel className={classes.tabpanels} value={value} index={0} dir={theme.direction}>
+                    <TabPanel
+                        className={classes.tabpanels}
+                        value={value}
+                        index={0}
+                        dir={theme.direction}
+                    >
                         Bài hát
                     </TabPanel>
-                    <TabPanel className={classes.tabpanels} value={value} index={1} dir={theme.direction}>
+                    <TabPanel
+                        className={classes.tabpanels}
+                        value={value}
+                        index={1}
+                        dir={theme.direction}
+                    >
                         Playlist
                     </TabPanel>
-                    <TabPanel className={classes.tabpanels} value={value} index={2} dir={theme.direction}>
+                    <TabPanel
+                        className={classes.tabpanels}
+                        value={value}
+                        index={2}
+                        dir={theme.direction}
+                    >
                         Tải lên
                     </TabPanel>
                 </SwipeableViews>
             </div>
-           
         </div>
     );
 }

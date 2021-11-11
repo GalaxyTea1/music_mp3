@@ -59,21 +59,21 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxN2FiMmJiY
 
 ###
 
-POST http://localhost:5001/api/discovery
+POST http://localhost:5001/api/radioview
 Content-Type: application/json
 
 {
-    "img": "https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/cover/a/e/2/d/ae2d5f1d552eee3466f5a5eeb2a1a4fc.jpg",
-    "title": "Indie Việt Tháng 10",
-    "author": "TDuongg, Stary Night..."
+    "img": "https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/avatars/d/0/c/6/d0c6364ef0f5565529ee23ec7559c19b.jpg",
+    "title": "Tóm Lại Là",
+    "author": ""
 }
 
 ###
-GET http://localhost:5001/api/rank
+GET http://localhost:5001/api/radioview
 
 ###
 
-DELETE http://localhost:5001/api/discovery/61829a960529e66462ecfce7
+DELETE http://localhost:5001/api/radioview/6187dd9c5e2329b5aeb2e3af
 
 ###
 
