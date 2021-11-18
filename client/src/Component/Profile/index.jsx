@@ -6,6 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import SwipeableViews from 'react-swipeable-views';
 
 function TabPanel(props) {
@@ -54,14 +55,15 @@ const useStyles = makeStyles((theme) => ({
     },
 
     avatar: {
-        margin: theme.spacing(12, 0, 10, 70),
+        margin: theme.spacing(11, 0, 10, 70),
         width: '100px',
         height: '100px',
     },
 
     tabsRoot: {
-        width: 1150,
-        marginLeft: '80px',
+        width: 1100,
+        marginLeft: '100px',
+        marginTop: '50px'
     },
 
     appBar: {
@@ -70,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 
     swiper: {
         backgroundColor: '#bcc5d4',
-        height: '300px',
+        height: '250px',
     },
 
     tabpanels: {
@@ -82,6 +84,7 @@ export default function Profile() {
     const classes = useStyles();
     const theme = useTheme();
     const [value, setValue] = useState(0);
+    const { authReducer } = useSelector((state) => state);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -96,6 +99,7 @@ export default function Profile() {
             <div className={classes.root}>
                 <Avatar className={classes.avatar} alt="User" src="" />
             </div>
+            <div style={{marginTop: '-50px', marginLeft:'49%'}}><h3>{authReducer?.user?.username}</h3></div>
             <div className={classes.tabsRoot}>
                 <AppBar position="static" color="default" style={{ backgroundColor: '#a0aaba' }}>
                     <Tabs

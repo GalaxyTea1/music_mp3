@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const DiscoverySchema = new Schema({
-    img: {
-        type: String,
-        required: true,
-    },
     title: {
         type: String,
     },
     author: {
         type: String,
+    },
+    img: {
+        data: Buffer,
+        contentType: String,
     },
     user: {
         type: String,

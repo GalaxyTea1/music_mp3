@@ -8,6 +8,7 @@ export const getListSongAction = () => {
                 url: 'https://mp3.zing.vn/xhr/chart-realtime?songId=0&videoId=0&albumId=0&chart=song&time=-1',
                 method: 'GET',
             });
+            console.log(data.data.song);
             if (status === 200) {
                 disaptch({
                     type: GET_LIST_SONG,

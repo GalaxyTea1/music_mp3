@@ -47,7 +47,7 @@ export default function DashRadio() {
                             height="200px !important"
                         />
                     )}
-                    <button type="submit">Submit3</button>
+                    <button type="submit">Thêm Album</button>
                 </form>
             </div>
         </div>

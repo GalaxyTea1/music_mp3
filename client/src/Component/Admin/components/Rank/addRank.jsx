@@ -1,55 +1,107 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addRank } from 'Redux/action/rankAction';
+import axios from 'axios';
+
+DashRank.propTypes = {
+    onSubmit: PropTypes.func,
+};
 
 export default function DashRank() {
-    const [avatar, setAvatar] = useState();
+    const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
+    const [image, setImage] = useState();
 
-    useEffect(() => {
-        //Clean up
-        return () => {
-            avatar && URL.revokeObjectURL(avatar.preview);
-        };
-    }, [avatar]);
-
-    const handlePreviewAvatar = (e) => {
-        const file = e.target.files[0];
-
-        file.preview = URL.createObjectURL(file);
-        setAvatar(file);
+    const handleChange = (e) => {
+        const titleChange = e.target.value;
+        
+        setTitle(titleChange);
+        
     };
 
+    const handleChangeAuthor = (e) => {
+        const authorChange = e.target.value;
+        setAuthor(authorChange);
+    } 
+
+    const handleImageChange = (e) => {
+        const imageFile = e.target.files[0];
+        setImage(imageFile);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        let form_data = new FormData();
+        form_data.append('image', image, image.name);
+        form_data.append('title', title);
+        form_data.append('author', author);
+        let url = 'http://localhost:5001/api/rank/';
+        axios
+            .post(url, form_data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => console.log(err));
+    };
+    // const [avatar, setAvatar] = useState();
+    // const [img, setImg] = useState();
+    // const initialValues = { title: '', author: '' };
+    // const [inputV, setInputV] = useState(initialValues);
+    // const { title, author } = inputV;
+
+    // const dispatch = useDispatch();
+
+    // const handleChangValues = (e) => {
+    //     const { name, value } = e.target;
+    //     setInputV({ ...inputV, [name]: value });
+    // };
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     dispatch(addRank(inputV, img));
+    // };
+
     return (
-        <div className="main">
-            <div className="add_album" style={{ margin: '40px 10px 10px 0' }}>
-                <form>
-                    <input type="text" label="title" placeholder="Nhập tiêu đề" size="50" /> <br />
-                    <br />
+        <div className="main" style={{ color: 'black' }}>
+            <form onSubmit={handleSubmit}>
+                <p>
                     <input
                         type="text"
-                        label="author"
-                        placeholder="Nhập tên ca sĩ, tác giả"
-                        size="50"
+                        placeholder="Title"
+                        id="title"
+                        value={title}
+                        onChange={handleChange}
+                        required
                     />
-                    <br />
-                    <br />
+                </p>
+                <p>
+                    <input
+                        type="text"
+                        placeholder="Author"
+                        id="author"
+                        value={author}
+                        onChange={handleChangeAuthor}
+                        required
+                    />
+                </p>
+                <p>
                     <input
                         type="file"
-                        label="image"
-                        placeholder="Thêm Ảnh"
-                        onChange={handlePreviewAvatar}
+                        id="image"
+                        name="photo"
+                        accept="image/png, image/jpeg"
+                        onChange={handleImageChange}
+                        required
                     />
-                    <br />
-                    <br />
-                    {avatar && (
-                        <img
-                            src={avatar.preview}
-                            alt="album"
-                            width="50% !important"
-                            height="200px !important"
-                        />
-                    )}
-                    <button type="submit">Submit4</button>
-                </form>
-            </div>
+                </p>
+                <input type="submit" />
+            </form>
         </div>
     );
 }

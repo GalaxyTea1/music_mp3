@@ -14,6 +14,7 @@ import React, { useState } from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom';
 import DashRadio from './components/Radio/addRadio';
 import DashRank from './components/Rank/addRank';
+import showDiscovery from './components/Discovery/showDiscovery';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -86,7 +87,11 @@ export default function DashAd() {
                                 <ListItemIcon>
                                     <StarBorder />
                                 </ListItemIcon>
-                                <ListItemText primary="Hiển Thị Các Album" />
+                                <NavLink exact to="/admin/update-albums" activeClassName="activeLi">
+                                    <li>
+                                        <ListItemText primary="Hiển Thị Các Album" />
+                                    </li>
+                                </NavLink>
                             </ListItem>
                         </List>
                     </Collapse>
@@ -167,6 +172,7 @@ export default function DashAd() {
             <div className="navBar_right">
                 <Switch>
                     <Route path="/admin/add-albums" exact component={DashKhamPha} />
+                    <Route path="/admin/update-albums" exact component={showDiscovery} />
                     <Route path="/admin/add-categorys" exact component={DashTheLoai} />
                     <Route path="/admin/add-radios" exact component={DashRadio} />
                     <Route path="/admin/add-ranks" exact component={DashRank} />

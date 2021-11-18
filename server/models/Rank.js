@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const RankSchema = new Schema({
-    img: {
+    image: {
+        // data: Buffer,
+        // contentType: String,
         type: String,
-        required: true,
     },
     title: {
         type: String,

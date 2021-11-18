@@ -33,20 +33,20 @@ export default function Footer(props) {
         if (index !== -1) {
             if (thamSo === 1) {
                 if (list[index].id === lastSong.id) {
-                    console.log('Day la bai cuoi cung');
-                    return;
+                    return dispatch(getSongDetailAction(list[0], typeSong));
                 } else {
                     nowSong = list[index + thamSo];
                 }
             } else if (thamSo === -1) {
+                
                 if (index === 0) {
-                    console.log('Day la bai dau tien');
-                    return;
+                    // console.log('Day la bai dau tien');
+                    return dispatch(getSongDetailAction(list[99], typeSong));
                 } else {
                     nowSong = list[index + thamSo];
                 }
             } else {
-                return;
+                return 
             }
         }
         dispatch(getSongDetailAction(nowSong, typeSong));
@@ -63,8 +63,9 @@ export default function Footer(props) {
         }
         
     }, [songDetail]);
-    
 
+    console.log();
+    
     const [audio, setAudio] = useState({
         source: '',
         play: true,
@@ -122,7 +123,6 @@ export default function Footer(props) {
     
     const handleChangeVolume = (e) => {
         setVolume(e.target.value)
-        console.log(e.target.value);
     }
     
 

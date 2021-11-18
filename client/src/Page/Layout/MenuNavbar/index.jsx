@@ -1,13 +1,10 @@
 import {
-    AliwangwangOutlined,
     BulbOutlined,
     CustomerServiceOutlined,
     ExceptionOutlined,
-    LineChartOutlined,
-    PlayCircleOutlined,
-    RedditOutlined,
+    LineChartOutlined, RedditOutlined,
     TeamOutlined,
-    WeiboOutlined,
+    WeiboOutlined
 } from '@ant-design/icons';
 import { Button, IconButton, makeStyles } from '@material-ui/core';
 import Box from '@material-ui/core/Box';

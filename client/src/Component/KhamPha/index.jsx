@@ -204,7 +204,7 @@ export default function KhamPha() {
             </div>
             <div className="ngheGanDay mt-3">
                 <h3 className="px-3 mt-4 text-xl font-bold">Nhạc Mới Mỗi Ngày</h3>
-                <div className="flex">{renderDataView(discoveryReducer.slice(24, 29))}</div>
+                <div className="flex">{renderDataView(discoveryReducer.slice(24, 30))}</div>
             </div>
         </div>
     );

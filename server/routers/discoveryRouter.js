@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 const Discovery = require('../models/Discovery');
 
@@ -21,17 +23,17 @@ router.get('/', async (req, res) => {
 // @route POST api/posts
 // @desc Create post
 // @access Private
-router.post('/', async (req, res) => {
-    const { img, title, author } = req.body;
+router.post('/', upload.single('discoveryImage'), async (req, res) => {
+    const { title, author, img } = req.body;
 
     // Simple validation
-    if (!img) return res.status(400).json({ success: false, message: 'Image is required' });
+    // if (!img) return res.status(400).json({ success: false, message: 'Image is required' });
 
     try {
         const newDiscovery = new Discovery({
-            img,
             title,
             author,
+            img,
             user: req.userId,
         });
 

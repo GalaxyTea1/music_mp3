@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const fileUpload = require('express-fileupload');
 
 const authRouter = require('./routers/authRouter');
 const postRouter = require('./routers/postsRouter');
@@ -34,6 +35,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
+
+app.use(
+    fileUpload({
+        useTempFiles: true,
+    })
+);
 
 app.use('/api', authRouter);
 app.use('/api/posts', postRouter);

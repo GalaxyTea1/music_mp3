@@ -1,6 +1,5 @@
-import { GLOBALTYPES } from '../type/globalType';
 import { postDataAPI } from '../../api/postApi';
-import axios from 'axios';
+import { GLOBALTYPES } from '../type/globalType';
 
 export const login = (data) => async (dispatch) => {
     try {
