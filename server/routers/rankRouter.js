@@ -33,8 +33,7 @@ router.get('/', async (req, res) => {
 // @access Private
 router.post('/', async (req, res) => {
     const { image, title, author } = req.body;
-    const file = req.files.photo;
-
+    const file = req.files.image;
     await cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
         try {
             const newRank = new Rank({
@@ -70,14 +69,11 @@ router.post('/', async (req, res) => {
 // @desc Update post
 // @access Private
 router.put('/:id', async (req, res) => {
-    const { img, title, author } = req.body;
-
-    // Simple validation
-    if (!img) return res.status(400).json({ success: false, message: 'Image is required' });
+    const { image, title, author } = req.body;
 
     try {
         let updatedRank = {
-            img,
+            image,
             title,
             author,
         };

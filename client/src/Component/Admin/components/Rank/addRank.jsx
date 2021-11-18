@@ -15,15 +15,15 @@ export default function DashRank() {
 
     const handleChange = (e) => {
         const titleChange = e.target.value;
-        
+
         setTitle(titleChange);
-        
     };
+    const dispatch = useDispatch();
 
     const handleChangeAuthor = (e) => {
         const authorChange = e.target.value;
         setAuthor(authorChange);
-    } 
+    };
 
     const handleImageChange = (e) => {
         const imageFile = e.target.files[0];
@@ -37,6 +37,7 @@ export default function DashRank() {
         form_data.append('image', image, image.name);
         form_data.append('title', title);
         form_data.append('author', author);
+        console.log(form_data);
         let url = 'http://localhost:5001/api/rank/';
         axios
             .post(url, form_data, {
@@ -48,6 +49,7 @@ export default function DashRank() {
                 console.log(res.data);
             })
             .catch((err) => console.log(err));
+        // dispatch(addRank(form_data))
     };
     // const [avatar, setAvatar] = useState();
     // const [img, setImg] = useState();
@@ -68,40 +70,48 @@ export default function DashRank() {
     // };
 
     return (
-        <div className="main" style={{ color: 'black' }}>
-            <form onSubmit={handleSubmit}>
-                <p>
-                    <input
-                        type="text"
-                        placeholder="Title"
-                        id="title"
-                        value={title}
-                        onChange={handleChange}
-                        required
-                    />
-                </p>
-                <p>
-                    <input
-                        type="text"
-                        placeholder="Author"
-                        id="author"
-                        value={author}
-                        onChange={handleChangeAuthor}
-                        required
-                    />
-                </p>
-                <p>
-                    <input
-                        type="file"
-                        id="image"
-                        name="photo"
-                        accept="image/png, image/jpeg"
-                        onChange={handleImageChange}
-                        required
-                    />
-                </p>
-                <input type="submit" />
-            </form>
+        <div className="main">
+            <div className="add_album" style={{ margin: '40px 10px 10px 0' }}>
+                <form onSubmit={handleSubmit}>
+                   
+                        <input
+                            type="text"
+                            placeholder="Title"
+                            id="title"
+                            value={title}
+                            onChange={handleChange}
+                            required
+                        />
+                        <br />
+                        <br />
+                        
+                   
+                        <input
+                            type="text"
+                            placeholder="Author"
+                            id="author"
+                            value={author}
+                            onChange={handleChangeAuthor}
+                            required
+                        />
+                        <br />
+                        <br />
+                    
+                   
+                        <input
+                            type="file"
+                            id="image"
+                            name="photo"
+                            fieldname="photo"
+                            filename="photo"
+                            accept="image/png, image/jpeg"
+                            onChange={handleImageChange}
+                            required
+                        />
+                   
+                    <button type="submit">Thêm Album</button>
+                </form>
+            </div>
         </div>
     );
 }
