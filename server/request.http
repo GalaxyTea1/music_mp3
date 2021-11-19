@@ -35,14 +35,14 @@ GET http://localhost:5001/api/posts
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxODFmMWM3NmM3MmQ4ODEyMzBjMWQxZiIsImlhdCI6MTYzNTk0MTQ3MiwiZXhwIjoxNjM4NTMzNDcyfQ.w59zTb6W4F5hwqw9PepMVi-ojrqw9FQ4YUPo9zN233Y
 
 ###
-PUT http://localhost:5001/api/discovery/6190bd59c1dfbc0d99c352bd
+PUT http://localhost:5001/api/rank/6183d613e266e5a94a16989e
 Content-Type: application/json
 
 
 {
-    "title": "Test",
+    "title": "halo",
     "author": "test",
-    "img": "https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/avatars/d/0/c/6/d0c6364ef0f5565529ee23ec7559c19b.jpg"
+    "image": "https://photo-resize-zmp3.zadn.vn/w320_r1x1_jpeg/avatars/d/0/c/6/d0c6364ef0f5565529ee23ec7559c19b.jpg"
 }
 
 ###
