@@ -2,18 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Rank = require('../models/Rank');
 const cloudinary = require('../utils/cloudinary');
-// const multer = require('multer');
-// const upload = require('../middleware/upload');
-// const storage = multer.diskStorage({
-//     destination: (req, file, callback) => {
-//         callback(null, './client/public/uploads/');
-//     },
-//     filename: (req, file, callback) => {
-//         callback(null, file.originalname);
-//     },
-// });
-
-// const upload = multer({ storage: storage });
 
 // @route GET api/posts
 // @desc Get posts
@@ -50,20 +38,6 @@ router.post('/', async (req, res) => {
         }
     });
 });
-
-// router.post('/', async (req, res) => {
-//     try {
-//         const fileStr = req.body.data;
-//         const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-//             upload_preset: 'dev_setups',
-//         });
-//         console.log(uploadResponse);
-//         res.json({ msg: uploadResponse });
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json({ err: 'Something went wrong' });
-//     }
-// });
 
 // @route PUT api/posts
 // @desc Update post

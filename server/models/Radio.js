@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const RadioSchema = new Schema({
-    img: {
+    image: {
         type: String,
         required: true,
     },

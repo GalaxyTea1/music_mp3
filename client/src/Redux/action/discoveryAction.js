@@ -11,13 +11,13 @@ export const Discovery = async (dispatch) => {
     }
 };
 
-export const addDiscovery = (inputV, img) => async (dispatch) => {
-    const data = { ...inputV, img };
-    console.log(data);
-    try {
-        const res = await postDataAPI('discovery', data);
-        console.log(res);
-    } catch (error) {
-        console.log(error);
-    }
-};
+// export const addDiscovery = (inputV, img) => async (dispatch) => {
+//     const data = { ...inputV, img };
+//     console.log(data);
+//     try {
+//         const res = await postDataAPI('discovery', data);
+//         console.log(res);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };

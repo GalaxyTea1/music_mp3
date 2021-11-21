@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
 // @desc Create post
 // @access Private
 router.post('/', upload.single('discoveryImage'), async (req, res) => {
-    const { title, author, img } = req.body;
+    const { title, author, image } = req.body;
 
     // Simple validation
     // if (!img) return res.status(400).json({ success: false, message: 'Image is required' });
@@ -33,7 +33,7 @@ router.post('/', upload.single('discoveryImage'), async (req, res) => {
         const newDiscovery = new Discovery({
             title,
             author,
-            img,
+            image,
             user: req.userId,
         });
 
@@ -50,14 +50,14 @@ router.post('/', upload.single('discoveryImage'), async (req, res) => {
 // @desc Update post
 // @access Private
 router.put('/:id', async (req, res) => {
-    const { img, title, author } = req.body;
+    const { image, title, author } = req.body;
 
     // Simple validation
-    if (!img) return res.status(400).json({ success: false, message: 'Image is required' });
+    // if (!image) return res.status(400).json({ success: false, message: 'Image is required' });
 
     try {
         let updatedDiscovery = {
-            img,
+            image,
             title,
             author,
         };

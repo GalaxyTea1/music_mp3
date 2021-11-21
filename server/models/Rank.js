@@ -3,8 +3,6 @@ const Schema = mongoose.Schema;
 
 const RankSchema = new Schema({
     image: {
-        // data: Buffer,
-        // contentType: String,
         type: String,
     },
     title: {

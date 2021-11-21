@@ -11,13 +11,13 @@ export const RankItem = async (dispatch) => {
     }
 };
 
-export const addRank = (form_data) => async (dispatch) => {
-    const data = { form_data };
-    console.log(data);
-    try {
-        const res = await postDataAPI('rank', data);
-        console.log('123', res);
-    } catch (error) {
-        console.log(error);
-    }
-};
+// export const addRank = (form_data) => async (dispatch) => {
+//     const data = { form_data };
+//     console.log(data);
+//     try {
+//         const res = await postDataAPI('rank', data);
+//         console.log('123', res);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };

@@ -5,7 +5,8 @@ import { RankItem } from 'Redux/action/rankAction';
 export default function ShowDiscovery() {
     const [avatar, setAvatar] = useState();
 
-    const [dataRank, setDataRank] = useState();
+    const [data, setData] = useState({title: '', author: ''});
+    const [value, setValue] = useState([]);
 
     const { rankReducer } = useSelector((state) => state);
 
@@ -28,20 +29,24 @@ export default function ShowDiscovery() {
         setAvatar(file);
     };
 
-    function albumHandler(album) {
-        return album.title;
+    const changeValueHandle = (e) => {
+        const inputValue = e.target.value;
+        const checkValue = rankReducer.map(item => {
+            if (item._id === inputValue) {
+                return item
+            }
+            
+        })
+        setValue(checkValue)
     }
 
-    function idHandler(album) {
-        return album._id;
-    }
+    const filterArr = value.filter(function (item) {
+        return item
+    })
 
-    const idAlbum = rankReducer.map(idHandler);
-    console.log(idAlbum);
-
-    const newAlbum = rankReducer.map(albumHandler);
-    console.log(newAlbum);
-
+    const imageFilter =  filterArr.map(item => (item._id))
+    const titleFilter =  filterArr.map(item => (item.title))
+    const authorFilter =  filterArr.map(item => (item.author))
 
     return (
         <div className="main">
@@ -50,15 +55,15 @@ export default function ShowDiscovery() {
                 style={{ backgroundColor: 'green', color: 'black', marginTop: '40px' }}
             >
                 <form>
-                    <select>
+                    <select onChange={changeValueHandle}>
                         {rankReducer.map((option) => (
-                            <option value={option._id}>{option.title}</option>
+                            <option value={option._id} key={option._id}>{option.title}</option>
                         ))}
                     </select> <br/><br/>
-                    
-                    <input type="text" label="title" placeholder="" size="50" />
+                
+                    <input type="text" label="title" placeholder={titleFilter} size="50" />
                <br/><br/>
-                    <input type="text" label="author" placeholder="" size="50" />
+                    <input type="text" label="author" placeholder={authorFilter} size="50" />
                     <br/><br/>
                     <input
                         type="file"

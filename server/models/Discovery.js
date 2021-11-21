@@ -8,7 +8,7 @@ const DiscoverySchema = new Schema({
     author: {
         type: String,
     },
-    img: {
+    image: {
         data: Buffer,
         contentType: String,
     },
