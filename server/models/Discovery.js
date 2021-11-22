@@ -9,8 +9,7 @@ const DiscoverySchema = new Schema({
         type: String,
     },
     image: {
-        data: Buffer,
-        contentType: String,
+        type: String,
     },
     user: {
         type: String,

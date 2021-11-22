@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
+const cloudinary = require('../utils/cloudinary');
 
 const Discovery = require('../models/Discovery');
 
@@ -23,27 +22,24 @@ router.get('/', async (req, res) => {
 // @route POST api/posts
 // @desc Create post
 // @access Private
-router.post('/', upload.single('discoveryImage'), async (req, res) => {
-    const { title, author, image } = req.body;
-
-    // Simple validation
-    // if (!img) return res.status(400).json({ success: false, message: 'Image is required' });
-
-    try {
-        const newDiscovery = new Discovery({
-            title,
-            author,
-            image,
-            user: req.userId,
-        });
-
-        await newDiscovery.save();
-
-        res.json({ success: true, message: 'Happy!', discovery: newDiscovery });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: 'Internal server error' });
-    }
+router.post('/', async (req, res) => {
+    const { image, title, author } = req.body;
+    const file = req.files.image;
+    await cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+        try {
+            const newDiscovery = new Discovery({
+                image: result.url,
+                title,
+                author,
+                user: req.userId,
+            });
+            newDiscovery.save();
+            res.json({ success: true, message: 'Happy!', discovery: newDiscovery });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ success: false, message: 'Internal server error' });
+        }
+    });
 });
 
 // @route PUT api/posts
@@ -51,9 +47,6 @@ router.post('/', upload.single('discoveryImage'), async (req, res) => {
 // @access Private
 router.put('/:id', async (req, res) => {
     const { image, title, author } = req.body;
-
-    // Simple validation
-    // if (!image) return res.status(400).json({ success: false, message: 'Image is required' });
 
     try {
         let updatedDiscovery = {

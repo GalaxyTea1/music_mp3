@@ -43,35 +43,40 @@ router.post('/', async (req, res) => {
 // @desc Update post
 // @access Private
 router.put('/:id', async (req, res) => {
-    const { image, title, author } = req.body;
+    const { title, author } = req.body;
+    const file = req.files.image;
 
-    try {
-        let updatedRank = {
-            image,
-            title,
-            author,
-        };
+    const rankUpdateCondition = { _id: req.params.id };
 
-        const rankUpdateCondition = { _id: req.params.id };
+    await cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
+        try {
+            let updatedRank = {
+                image: result.url,
+                title,
+                author,
+            };
 
-        updatedRank = await Rank.findOneAndUpdate(rankUpdateCondition, updatedRank, { new: true });
-
-        // User not authorised to update post or post not found
-        if (!updatedRank)
-            return res.status(401).json({
-                success: false,
-                message: 'Rank not found or user not authorised',
+            updatedRank = await Rank.findOneAndUpdate(rankUpdateCondition, updatedRank, {
+                new: true,
             });
 
-        res.json({
-            success: true,
-            message: 'Excellent progress!',
-            rank: updatedRank,
-        });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: 'Internal server error' });
-    }
+            // User not authorised to update post or post not found
+            if (!updatedRank)
+                return res.status(401).json({
+                    success: false,
+                    message: 'Rank not found or user not authorised',
+                });
+
+            res.json({
+                success: true,
+                message: 'Excellent progress!',
+                rank: updatedRank,
+            });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ success: false, message: 'Internal server error' });
+        }
+    });
 });
 
 // @route DELETE api/posts

@@ -65,13 +65,18 @@ function Rank(props) {
                 <div className="flex">{renderDataView(rankReducer.slice(5, 10))}</div>
             </div>
             <div className="ngheGanDay mt-3">
-                <h3 className="px-3 mt-4 text-xl font-bold">Top US - UK</h3>
-                <div className="flex">{renderDataView(rankReducer.slice(15, 20))}</div>
+                <h3 className="px-3 mt-4 text-xl font-bold">Top US-UK</h3>
+                <div className="flex">{renderDataView(rankReducer.slice(10, 15))}</div>
             </div>
             <div className="ngheGanDay mt-3">
                 <h3 className="px-3 mt-4 text-xl font-bold">Top K- Pop</h3>
-                <div className="flex">{renderDataView(rankReducer.slice(10, 15))}</div>
+                <div className="flex">{renderDataView(rankReducer.slice(15, 20))}</div>
             </div>
+            <div className="ngheGanDay mt-3">
+                <h3 className="px-3 mt-4 text-xl font-bold">aa </h3> 
+                <div className="flex"> </div>
+            </div>
+            
         </div>
     );
 }

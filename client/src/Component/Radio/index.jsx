@@ -94,12 +94,13 @@ function RadioPage(props) {
                 </div>
                 <div className="ngheGanDay mt-3">
                     <h3 className="px-3 mt-4 text-xl font-bold">On Air</h3>
-                    <div className="flex">{renderDataView(radioViewReducer.slice(15, 20))}</div>
+                    <div className="flex">{renderDataView(radioViewReducer.slice(10, 15))}</div>
                 </div>
                 <div className="ngheGanDay mt-3">
                     <h3 className="px-3 mt-4 text-xl font-bold">XONE's CORNER</h3>
-                    <div className="flex">{renderDataView(radioViewReducer.slice(10, 15))}</div>
+                    <div className="flex">{renderDataView(radioViewReducer.slice(15, 20))}</div>
                 </div>
+                
             </div>
         </div>
     );

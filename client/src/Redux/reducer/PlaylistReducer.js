@@ -9,7 +9,6 @@ import {
     REMOVE_MUSIC_TO_PLAYLIST,
     REMOVE_PLAYLIST,
 } from '../type/Music';
-import authReducer from '../../Redux/reducer/authReducer';
 
 /* eslint-disable import/no-anonymous-default-export */
 const initialState = {

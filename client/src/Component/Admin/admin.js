@@ -8,13 +8,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
-import DashKhamPha from 'Component/Admin/components/Discovery/addDiscovery';
-import DashTheLoai from 'Component/Admin/components/Category/addCategory';
+import DashCategory from 'Component/Admin/components/Category/addCategory';
+import DashDiscovery from 'Component/Admin/components/Discovery/addDiscovery';
 import React, { useState } from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom';
-import DashRadio from './components/Radio/addRadio';
-import DashRank from './components/Rank/addRank';
+import ShowCategory from './components/Category/showCategory';
 import showDiscovery from './components/Discovery/showDiscovery';
+import DashRadio from './components/Radio/addRadio';
+import showRadio from './components/Radio/showRadio';
+import DashRank from './components/Rank/addRank';
 import showRank from './components/Rank/showRank';
 
 const useStyles = makeStyles((theme) => ({
@@ -144,7 +146,11 @@ export default function DashAd() {
                                 <ListItemIcon>
                                     <StarBorder />
                                 </ListItemIcon>
-                                <ListItemText primary="Hiển Thị Các Album" />
+                                <NavLink exact to="/admin/update-radios" activeClassName="activeLi">
+                                    <li>
+                                        <ListItemText primary="Hiển Thị Các Album" />
+                                    </li>
+                                </NavLink>
                             </ListItem>
                         </List>
                     </Collapse>
@@ -158,7 +164,11 @@ export default function DashAd() {
                                 <ListItemIcon>
                                     <StarBorder />
                                 </ListItemIcon>
-                                <NavLink exact to="/admin/add-categorys" activeClassName="activeLi">
+                                <NavLink
+                                    exact
+                                    to="/admin/add-categories"
+                                    activeClassName="activeLi"
+                                >
                                     <li>
                                         <ListItemText primary="Thêm Thể Loại" />
                                     </li>
@@ -168,7 +178,15 @@ export default function DashAd() {
                                 <ListItemIcon>
                                     <StarBorder />
                                 </ListItemIcon>
-                                <ListItemText primary="Hiển Thị Các Album" />
+                                <NavLink
+                                    exact
+                                    to="/admin/update-categories"
+                                    activeClassName="activeLi"
+                                >
+                                    <li>
+                                        <ListItemText primary="Hiển Thị Các Album" />
+                                    </li>
+                                </NavLink>
                             </ListItem>
                         </List>
                     </Collapse>
@@ -176,10 +194,12 @@ export default function DashAd() {
             </div>
             <div className="navBar_right">
                 <Switch>
-                    <Route path="/admin/add-albums" exact component={DashKhamPha} />
+                    <Route path="/admin/add-albums" exact component={DashDiscovery} />
                     <Route path="/admin/update-albums" exact component={showDiscovery} />
-                    <Route path="/admin/add-categorys" exact component={DashTheLoai} />
+                    <Route path="/admin/add-categories" exact component={DashCategory} />
+                    <Route path="/admin/update-categories" exact component={ShowCategory} />
                     <Route path="/admin/add-radios" exact component={DashRadio} />
+                    <Route path="/admin/update-radios" exact component={showRadio} />
                     <Route path="/admin/add-ranks" exact component={DashRank} />
                     <Route path="/admin/update-ranks" exact component={showRank} />
                 </Switch>

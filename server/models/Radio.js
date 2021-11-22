@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const RadioSchema = new Schema({
     image: {
         type: String,
-        required: true,
     },
     icon: {
         type: String,

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const cloudinary = require('../utils/cloudinary');
 
 const radioView = require('../models//radioView');
 
@@ -22,68 +23,67 @@ router.get('/', async (req, res) => {
 // @desc Create post
 // @access Private
 router.post('/', async (req, res) => {
-    const { img, title, author } = req.body;
-
-    // Simple validation
-    if (!img) return res.status(400).json({ success: false, message: 'Image is required' });
-
-    try {
-        const newRadioView = new radioView({
-            img,
-            title,
-            author,
-            user: req.userId,
-        });
-
-        await newRadioView.save();
-
-        res.json({ success: true, message: 'Happy!', radioview: newRadioView });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: 'Internal server error' });
-    }
+    const { title, author } = req.body;
+    const file = req.files.image;
+    await cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+        try {
+            const newRadioView = new radioView({
+                image: result.url,
+                title,
+                author,
+                user: req.userId,
+            });
+            newRadioView.save();
+            res.json({ success: true, message: 'Happy!', radioview: newRadioView });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ success: false, message: 'Internal server error' });
+        }
+    });
 });
 
 // @route PUT api/posts
 // @desc Update post
 // @access Private
 router.put('/:id', async (req, res) => {
-    const { img, title, author } = req.body;
+    const { title, author } = req.body;
+    const file = req.files.image;
 
-    // Simple validation
-    if (!img) return res.status(400).json({ success: false, message: 'Image is required' });
+    const radioViewUpdateCondition = { _id: req.params.id };
 
-    try {
-        let updatedRadioView = {
-            img,
-            title,
-            author,
-        };
+    await cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
+        try {
+            let updatedRadioView = {
+                image: result.url,
+                title,
+                author,
+            };
 
-        const radioViewUpdateCondition = { _id: req.params.id };
+            updatedRadioView = await radioView.findOneAndUpdate(
+                radioViewUpdateCondition,
+                updatedRadioView,
+                {
+                    new: true,
+                }
+            );
 
-        updatedRadioView = await radioView.findOneAndUpdate(
-            radioViewUpdateCondition,
-            updatedRadioView,
-            { new: true }
-        );
+            // User not authorised to update post or post not found
+            if (!updatedRadioView)
+                return res.status(401).json({
+                    success: false,
+                    message: 'Radio not found or user not authorised',
+                });
 
-        // User not authorised to update post or post not found
-        if (!updatedRadioView)
-            return res.status(401).json({
-                success: false,
-                message: 'Radio view not found or user not authorised',
+            res.json({
+                success: true,
+                message: 'Excellent progress!',
+                radioview: updatedRadioView,
             });
-
-        res.json({
-            success: true,
-            message: 'Excellent progress!',
-            radioview: updatedRadioView,
-        });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: 'Internal server error' });
-    }
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ success: false, message: 'Internal server error' });
+        }
+    });
 });
 
 // @route DELETE api/posts

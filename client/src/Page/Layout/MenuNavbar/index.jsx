@@ -2,9 +2,10 @@ import {
     BulbOutlined,
     CustomerServiceOutlined,
     ExceptionOutlined,
-    LineChartOutlined, RedditOutlined,
+    LineChartOutlined,
+    RedditOutlined,
     TeamOutlined,
-    WeiboOutlined
+    WeiboOutlined,
 } from '@ant-design/icons';
 import { Button, IconButton, makeStyles } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
@@ -53,7 +54,7 @@ export default function MenuNavbar() {
     const [mode, setMode] = useState(MODE.LOGIN);
     // const loggedInUser = useSelector((state) => state);
     // const isLoggedIn = !!loggedInUser._id
-    
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -112,6 +113,22 @@ export default function MenuNavbar() {
                         </li>
                     </NavLink>
 
+                    <NavLink exact to="/type" activeClassName="activeLi">
+                            <li>
+                                <i>
+                                    <CustomerServiceOutlined className="block" />
+                                </i>
+                                Thể Loại
+                            </li>
+                        </NavLink>
+
+                    
+                </ul>
+            </div>
+            <div className="gach"></div>
+            <div className="sideBar__music">
+                <div className="sideBar__menu2 mt-3" onScroll={handleScroll}>
+                    <ul className="mt-2">
                     <NavLink exact to="/radio" activeClassName="activeLi">
                         <li>
                             <i>
@@ -126,45 +143,15 @@ export default function MenuNavbar() {
                             </span>
                         </li>
                     </NavLink>
-
-                    <NavLink exact to="/follow" activeClassName="activeLi">
-                        <li>
-                            <i>
-                                <TeamOutlined className="block" />
-                            </i>
-                            Theo Dõi
-                        </li>
-                    </NavLink>
-                </ul>
-            </div>
-            <div className="gach"></div>
-            <div className="sideBar__music">
-                <div className="sideBar__menu2 mt-3" onScroll={handleScroll}>
-                    <ul className="mt-2">
-                        <NavLink exact to="/new-songs" activeClassName="activeLi">
-                            <li>
-                                <i>
-                                    <BulbOutlined className="block" />
-                                </i>
-                                Nhạc Mới
-                            </li>
-                        </NavLink>
-
-                        <NavLink exact to="/type" activeClassName="activeLi">
-                            <li>
-                                <i>
-                                    <CustomerServiceOutlined className="block" />
-                                </i>
-                                Thể Loại
-                            </li>
-                        </NavLink>
-
                     </ul>
+                    <br/>
                     <div className="sideBar__banner">
                         <p>Đăng nhập để trải nghiệm cảm giác mới lạ hơn</p>
-                        {
-                            authReducer.token ? <button onClick={() => dispatch(logout())}>Thoát</button> : <button onClick={handleClickOpen}>Đăng Nhập</button>
-                        }
+                        {authReducer.token ? (
+                            <button onClick={() => dispatch(logout())}>Thoát</button>
+                        ) : (
+                            <button onClick={handleClickOpen}>Đăng Nhập</button>
+                        )}
                     </div>
 
                     <div className="sideBar__category">

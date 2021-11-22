@@ -12,6 +12,7 @@ const discoveryRouter = require('./routers/discoveryRouter');
 const radioRouter = require('./routers/radioRouter');
 const rankRouter = require('./routers/rankRouter');
 const radioViewRouter = require('./routers/radioViewRouter');
+const categoryRouter = require('./routers/categoryRouter');
 
 const connectDB = async () => {
     try {
@@ -20,7 +21,6 @@ const connectDB = async () => {
             {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
-                useCreateIndex: true,
             }
         );
         console.log('MongoDB connected');
@@ -49,6 +49,7 @@ app.use('/api/discovery', discoveryRouter);
 app.use('/api/radio', radioRouter);
 app.use('/api/rank', rankRouter);
 app.use('/api/radioview', radioViewRouter);
+app.use('/api/category', categoryRouter);
 
 const PORT = process.env.PORT || 5001;
 

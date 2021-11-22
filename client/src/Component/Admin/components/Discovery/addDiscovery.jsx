@@ -1,19 +1,26 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-DashKhamPha.propTypes = {
+DashDiscovery.propTypes = {
     onSubmit: PropTypes.func,
 };
 
-export default function DashKhamPha() {
+export default function DashDiscovery() {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [image, setImage] = useState();
 
+    const [avatar, setAvatar] = useState();
+
+    useEffect(() => {
+        return () => {
+            avatar && URL.revokeObjectURL(avatar.preview);
+        };
+    }, [avatar]);
+
     const handleChange = (e) => {
         const titleChange = e.target.value;
-
         setTitle(titleChange);
     };
 
@@ -25,7 +32,12 @@ export default function DashKhamPha() {
     const handleImageChange = (e) => {
         const imageFile = e.target.files[0];
         setImage(imageFile);
+
+        const file = e.target.files[0];
+        file.preview = URL.createObjectURL(file);
+        setAvatar(file);
     };
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -46,6 +58,9 @@ export default function DashKhamPha() {
                 console.log(res.data);
             })
             .catch((err) => console.log(err));
+
+        setTitle('');
+        setAuthor('');
     };
 
     return (
@@ -54,6 +69,7 @@ export default function DashKhamPha() {
                 <form onSubmit={handleSubmit}>
                     <input
                         type="text"
+                        size="50"
                         placeholder="Title"
                         id="title"
                         value={title}
@@ -65,6 +81,7 @@ export default function DashKhamPha() {
 
                     <input
                         type="text"
+                        size="50"
                         placeholder="Author"
                         id="author"
                         value={author}
@@ -77,16 +94,16 @@ export default function DashKhamPha() {
                     <input
                         type="file"
                         id="image"
-                        name="photo"
-                        fieldname="photo"
-                        filename="photo"
-                        accept="image/png, image/jpeg, image/webp"
+                        name="image"
+                        accept="image/png, image/jpeg, image/webp, image/jpg, image/jfif"
                         onChange={handleImageChange}
                         required
                     />
-
                     <button type="submit">Thêm Album</button>
                 </form>
+                <br />
+                <br />
+                {avatar && <img src={avatar.preview} alt="album" width="250px !important" />}
             </div>
         </div>
     );

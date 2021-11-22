@@ -11,6 +11,8 @@ export default function DashRank() {
     const [author, setAuthor] = useState('');
     const [image, setImage] = useState();
 
+    const [avatar, setAvatar] = useState();
+
     const handleChange = (e) => {
         const titleChange = e.target.value;
 
@@ -25,6 +27,10 @@ export default function DashRank() {
     const handleImageChange = (e) => {
         const imageFile = e.target.files[0];
         setImage(imageFile);
+
+        const file = e.target.files[0];
+        file.preview = URL.createObjectURL(file);
+        setAvatar(file);
     };
 
     const handleSubmit = (e) => {
@@ -46,6 +52,9 @@ export default function DashRank() {
                 console.log(res.data);
             })
             .catch((err) => console.log(err));
+
+        setTitle('');
+        setAuthor('');
     };
 
     return (
@@ -54,6 +63,7 @@ export default function DashRank() {
                 <form onSubmit={handleSubmit}>
                     <input
                         type="text"
+                        size="50"
                         placeholder="Title"
                         id="title"
                         value={title}
@@ -65,6 +75,7 @@ export default function DashRank() {
 
                     <input
                         type="text"
+                        size="50"
                         placeholder="Author"
                         id="author"
                         value={author}
@@ -77,9 +88,7 @@ export default function DashRank() {
                     <input
                         type="file"
                         id="image"
-                        name="photo"
-                        fieldname="photo"
-                        filename="photo"
+                        name="image"
                         accept="image/png, image/jpeg, image/webp"
                         onChange={handleImageChange}
                         required
@@ -87,6 +96,9 @@ export default function DashRank() {
 
                     <button type="submit">Thêm Album</button>
                 </form>
+                <br />
+                <br />
+                {avatar && <img src={avatar.preview} alt="album" width="250px !important" />}
             </div>
         </div>
     );
