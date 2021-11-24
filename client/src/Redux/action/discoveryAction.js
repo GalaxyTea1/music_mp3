@@ -11,8 +11,8 @@ export const Discovery = async (dispatch) => {
     }
 };
 
-// export const addDiscovery = (inputV, img) => async (dispatch) => {
-//     const data = { ...inputV, img };
+// export const addDiscovery = (form-data) => async (dispatch) => {
+//     const data = { form-data};
 //     console.log(data);
 //     try {
 //         const res = await postDataAPI('discovery', data);

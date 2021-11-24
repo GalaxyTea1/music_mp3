@@ -20,11 +20,12 @@ const SongSchema = new Schema({
     type: {
         type: String,
     },
-    user: {
-        type: String,
-    },
     length: {
         type: String,
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users',
     },
     createdAt: {
         type: Date,

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 DashCategory.propTypes = {
     onSubmit: PropTypes.func,
@@ -10,6 +11,9 @@ export default function DashCategory() {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [image, setImage] = useState();
+
+    const { authReducer } = useSelector((state) => state);
+    console.log(authReducer)
 
     const [avatar, setAvatar] = useState();
 
@@ -46,7 +50,7 @@ export default function DashCategory() {
         form_data.append('image', image, image.name);
         form_data.append('title', title);
         form_data.append('author', author);
-        console.log(form_data);
+        
         let url = 'http://localhost:5001/api/category/';
         axios
             .post(url, form_data, {
@@ -61,6 +65,7 @@ export default function DashCategory() {
 
         setTitle('');
         setAuthor('');
+        console.log(form_data);
     };
 
     return (

@@ -20,10 +20,9 @@ Content-Type: application/json
 
 POST http://localhost:5001/api/posts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTZkNzcyYjUwOTJlYmE3YTQ2YzhjMTEiLCJpYXQiOjE2MzQ1NjU1MTR9.660zoP6_Yut_PnTBk7KKCjhnkNK8rKVDfoIOxtDQuEs
 
 {
-    "title": "Say Bye Bye",
+    "title": "say",
     "description": "Bye bye",
     "url": "byebye.com",
     "status": "BUSY"

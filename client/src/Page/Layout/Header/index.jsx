@@ -10,30 +10,28 @@ export default function Header() {
     // });
     const [value, setValue] = useState([]);
     const { songMusicReducer } = useSelector((state) => state);
+    const { authReducer } = useSelector((state) => state);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(SongItem);
     }, [dispatch]);
+    // const changeValueHandle = (e) => {
+    //     const inputValue = e.target.value;
+    //     const checkValue = songMusicReducer.map((item) => {
+    //         if (item._id === inputValue) {
+    //             return item;
+    //         }
+    //     });
+    //     setValue(checkValue);
+    // };
 
-    console.log(songMusicReducer);
+    // const filterArr = value.filter(function (item) {
+    //     return item;
+    // });
+    // const nameFilter = filterArr.map((item) => item.name);
+    // const titleFilter = filterArr.map((item) => item.title);
+    // const authorFilter = filterArr.map((item) => item.author);
 
-    const changeValueHandle = (e) => {
-        const inputValue = e.target.value;
-        const checkValue = songMusicReducer.map((item) => {
-            if (item._id === inputValue) {
-                return item;
-            }
-        });
-        setValue(checkValue);
-    };
-
-    const filterArr = value.filter(function (item) {
-        return item;
-    });
-    const nameFilter = filterArr.map((item) => item.name);
-    const titleFilter = filterArr.map((item) => item.title);
-    const authorFilter = filterArr.map((item) => item.author);
-   
     const [audio, setAudio] = useState();
     const handleChangeAudio = (e) => {
         const audioFile = e.target.files[0];
@@ -52,6 +50,7 @@ export default function Header() {
             .post(url, form_data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    'Authorization': authReducer.token,
                 },
             })
             .then((res) => {
@@ -78,7 +77,18 @@ export default function Header() {
                             <span className="hiddenFileInput">
                                 <input name="audio" type="file" onChange={handleChangeAudio} />
                             </span>
-                            <button type="submit">submit</button>
+                            <button
+                                style={{
+                                    backgroundColor: 'gray',
+                                    marginLeft: '155px',
+                                    // display: 'none',
+                                    cursor: 'pointer'
+                                }}
+                                type="submit"
+
+                            >
+                                submit
+                            </button>
                         </form>
                     </div>
                 </div>

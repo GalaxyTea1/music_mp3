@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const verifyToken = require('../middleware/auth');
 const Song = require('../models/Song');
 const cloudinary = require('../utils/cloudinary');
 var jsmediatags = require('jsmediatags');
 
 router.get('/', async (req, res) => {
     try {
-        const songs = await Song.find({ user: req.userId }).populate('user', ['username']);
+        const songs = await Song.find({ user: req.user._id }).populate('user', ['username']);
         res.json({ success: true, songs });
     } catch (error) {
         console.log(error);
@@ -14,7 +15,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
     const file = req.files.audio;
     await cloudinary.uploader.upload(
         file.tempFilePath,
@@ -22,14 +23,13 @@ router.post('/', async (req, res) => {
         function (error, result) {
             new jsmediatags.Reader(result.url).setTagsToRead(['title', 'artist']).read({
                 onSuccess: function (tag) {
-                    console.log(tag);
                     try {
                         const newSong = new Song({
                             audio: result.url,
                             length: result.duration,
                             author: tag.tags.artist,
                             name: tag.tags.title,
-                            user: req.userId,
+                            user: req.user._id,
                         });
                         newSong.save();
                         res.json({ success: true, message: 'Happy!', song: newSong });
@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     const file = req.files.audio;
-    const songUpdateCondition = { _id: req.params.id };
+    const songUpdateCondition = { _id: req.params.id, user: req.user._id };
     await cloudinary.uploader.upload(
         file.tempFilePath,
         { resource_type: 'video' },
@@ -61,7 +61,7 @@ router.put('/:id', async (req, res) => {
                             length: result.duration,
                             author: tag.tags.artist,
                             name: tag.tags.title,
-                            user: req.userId,
+                            user: req.user._id,
                         };
 
                         updatedSong = await Song.findOneAndUpdate(
@@ -99,7 +99,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const songDeleteCondition = { _id: req.params.id };
+        const songDeleteCondition = { _id: req.params.id, user: req.user._id };
         const deletedSong = await Song.findOneAndDelete(songDeleteCondition);
 
         // User not authorised or post not found

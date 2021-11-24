@@ -14,12 +14,14 @@ const PostSchema = new Schema({
     },
     status: {
         type: String,
-        enum: ['ONLINE', 'OFFLINE', 'BUSY'],
+        enum: ['TO LEARN', 'LEARNING', 'LEARNED'],
     },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'users',
     },
 });
+
+module.exports = mongoose.model('posts', PostSchema);
 
 module.exports = mongoose.model('posts', PostSchema);
