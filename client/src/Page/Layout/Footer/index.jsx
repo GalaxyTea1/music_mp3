@@ -38,7 +38,6 @@ export default function Footer(props) {
                     nowSong = list[index + thamSo];
                 }
             } else if (thamSo === -1) {
-                
                 if (index === 0) {
                     // console.log('Day la bai dau tien');
                     return dispatch(getSongDetailAction(list[99], typeSong));
@@ -46,14 +45,14 @@ export default function Footer(props) {
                     nowSong = list[index + thamSo];
                 }
             } else {
-                return 
+                return;
             }
         }
         dispatch(getSongDetailAction(nowSong, typeSong));
     };
 
     useEffect(() => {
-       audioRef.current.volume = volume / 100;
+        audioRef.current.volume = volume / 100;
     });
 
     useEffect(() => {
@@ -61,11 +60,13 @@ export default function Footer(props) {
             updateSong(`https://vnso-qt-3-tf-${songDetail.source['128']?.slice(2)}`);
             audioRef.current.play();
         }
-        
     }, [songDetail]);
 
-    console.log();
-    
+    // useEffect(() => {
+    //     updateSong(`${songDetail.audio}`);
+    //     audioRef.current.play();
+    // }, [songDetail]);
+
     const [audio, setAudio] = useState({
         source: '',
         play: true,
@@ -119,16 +120,15 @@ export default function Footer(props) {
                 dispatch(getSongDetailAction(list[index + 1], typeSong));
             }
         }
-    };   
-    
+    };
+
     const handleChangeVolume = (e) => {
-        setVolume(e.target.value)
-    }
-    
+        setVolume(e.target.value);
+    };
 
     return (
         <div
-            className="footer flex px-4 justify-between w-full items-center"
+            className='footer flex px-4 justify-between w-full items-center'
             style={{
                 background:
                     'url(https://i.pinimg.com/originals/aa/4a/16/aa4a16851449aa6155f36686013bbb81.png)',
@@ -138,29 +138,29 @@ export default function Footer(props) {
         >
             <div
                 style={{ width: '30%' }}
-                className="flex footer__left items-center transform translate-x-5 transition-all duration-500 "
+                className='flex footer__left items-center transform translate-x-5 transition-all duration-500 '
             >
-                <div className="rounded-full border-2 border-white">
+                <div className='rounded-full border-2 border-white'>
                     <animated.img
-                        className="rounded-full imgDetails"
+                        className='rounded-full imgDetails'
                         onError={(e) => {
                             e.target.onerror = null;
                             e.target.src = '';
                         }}
                         src={songDetail?.thumbnail}
-                        alt=""
+                        alt=''
                         style={audio.play ? spring : {}}
                     ></animated.img>
                 </div>
-                <div className="ml-3">
-                    <p className="text-white font-semibold">{songDetail?.name}</p>
-                    <p className="text-white opacity-60 hover:text-pink-500 hover:opacity-100">
+                <div className='ml-3'>
+                    <p className='text-white font-semibold'>{songDetail?.name}</p>
+                    <p className='text-white opacity-60 hover:text-pink-500 hover:opacity-100'>
                         {songDetail?.artists_names}
                     </p>
                 </div>
             </div>
-            <div className="footer__center flex flex-col flex-grow">
-                <div className="flex text-white footer__button justify-center">
+            <div className='footer__center flex flex-col flex-grow'>
+                <div className='flex text-white footer__button justify-center'>
                     <button
                         onClick={() => {
                             setShuffle(!shuffle);
@@ -173,10 +173,10 @@ export default function Footer(props) {
                             changeSong(-1);
                         }}
                     >
-                        <i className="fa fa-angle-double-left"></i>
+                        <i className='fa fa-angle-double-left'></i>
                     </button>
                     <button
-                        className="button__play"
+                        className='button__play'
                         onClick={() => {
                             if (audio.play) {
                                 audioRef.current.pause();
@@ -203,7 +203,7 @@ export default function Footer(props) {
                             }
                         }}
                     >
-                        <i className="fa fa-angle-double-right"></i>
+                        <i className='fa fa-angle-double-right'></i>
                     </button>
                     <button
                         onClick={() => {
@@ -213,8 +213,8 @@ export default function Footer(props) {
                         <i className={`fa fa-redo ${loop ? 'text-pink-500' : ''}`}></i>
                     </button>
                 </div>
-                <div className="flex flex-1 text-white mt-2">
-                    <span className="cursor-default">
+                <div className='flex flex-1 text-white mt-2'>
+                    <span className='cursor-default'>
                         {' '}
                         {moment.utc(timeSong * 1000).format('mm:ss')}{' '}
                     </span>
@@ -226,9 +226,9 @@ export default function Footer(props) {
                             audioRef.current.currentTime = e.target.value;
                             setTimeSong(e.target.value);
                         }}
-                        type="range"
-                        className="w-full mx-2"
-                        id="myRange"
+                        type='range'
+                        className='w-full mx-2'
+                        id='myRange'
                         style={{
                             background: `linear-gradient(to right , white ${
                                 (timeSong / duration) * 100
@@ -261,30 +261,26 @@ export default function Footer(props) {
                     />
                 )}
             </div>
-            <div style={{ width: '30%' }} className="footer__right flex justify-end text-white">
-                <button className="footer__right__button">
-                    <i className="fa fa-film "></i>
+            <div style={{ width: '30%' }} className='footer__right flex justify-end text-white'>
+                <button className='footer__right__button'>
+                    <i className='fa fa-film '></i>
                 </button>
 
                 <div>
                     <input
-                        // ref={audioRef}
-                        type="range"
-                        className="mx-2 mt-3"
-                        id="myRange"
-                        // onChange={(e) => {
-                        //     setVolume(e.target.value);
-                        // }}
+                        type='range'
+                        className='mx-2 mt-3'
+                        id='myRange'
                         onChange={handleChangeVolume}
-                        step = "1"
+                        step='1'
                         value={volume}
-                        min="0"
-                        max="100"
+                        min='0'
+                        max='100'
                     ></input>
                 </div>
 
-                <button className="footer__right__button">
-                    <i className="fa fa-volume-up"></i>
+                <button className='footer__right__button'>
+                    <i className='fa fa-volume-up'></i>
                 </button>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import DashAd from 'Component/Admin/admin';
 import Follow from 'Component/Follow';
-import NewSongs from 'Component/NewSongs';
 import Radio from 'Component/Radio';
+import SongMusicItem from 'Component/test';
 import Type from 'Component/Type';
 import { createBrowserHistory } from 'history';
 import NotFound from 'NotFound';
@@ -18,11 +18,11 @@ import HOCplaylist from './HOC/HOCplaylist';
 import Playlist from './Page/Layout/Playlist/index';
 import { refreshToken } from './Redux/action/authAction';
 import { HomeTemplate } from './Template/HomeTemplate/index';
+import Album from './Component/AlbumView/index';
 
 export const history = createBrowserHistory();
 
 function App() {
-    const { authReducer } = useSelector((state) => state);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(refreshToken());
@@ -31,20 +31,20 @@ function App() {
     return (
         <>
             <Alerts />
-
+            <SongMusicItem />
             <Router history={history}>
                 <HOCplaylist></HOCplaylist>
                 <Switch>
-                    <Route path="/admin" component={DashAd}></Route>
-                    <HomeTemplate exact path="/playlist/:name" Component={Playlist}></HomeTemplate>
-                    <HomeTemplate exact path="/type" Component={Type}></HomeTemplate>
-                    <HomeTemplate exact path="/new-songs" Component={NewSongs}></HomeTemplate>
-                    <HomeTemplate exact path="/follow" Component={Follow}></HomeTemplate>
-                    <HomeTemplate exact path="/radio" Component={Radio}></HomeTemplate>
-                    <HomeTemplate exact path="/rank" Component={Rank}></HomeTemplate>
-                    <HomeTemplate exact path="/profile" Component={Profile}></HomeTemplate>
-                    <HomeTemplate exact path="/discovery" Component={KhamPha}></HomeTemplate>
-                    <HomeTemplate exact path="/" Component={KhamPha}></HomeTemplate>
+                    <Route path='/admin' component={DashAd}></Route>
+                    <HomeTemplate exact path='/playlist/:name' Component={Playlist}></HomeTemplate>
+                    <HomeTemplate exact path='/albumview/:name' Component={Album}></HomeTemplate>
+                    <HomeTemplate exact path='/type' Component={Type}></HomeTemplate>
+                    <HomeTemplate exact path='/follow' Component={Follow}></HomeTemplate>
+                    <HomeTemplate exact path='/radio' Component={Radio}></HomeTemplate>
+                    <HomeTemplate exact path='/rank' Component={Rank}></HomeTemplate>
+                    <HomeTemplate exact path='/profile' Component={Profile}></HomeTemplate>
+                    <HomeTemplate exact path='/discovery' Component={KhamPha}></HomeTemplate>
+                    <HomeTemplate exact path='/' Component={KhamPha}></HomeTemplate>
                     <Route component={NotFound} />
                 </Switch>
             </Router>

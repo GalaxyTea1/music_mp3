@@ -9,7 +9,6 @@
 #root {
   font-family: "Inter", sans-serif;
   position: relative;
-  // background-color: $purple;
   color: white;
   font-size: 14px;
   line-height: 1.5;
@@ -18,7 +17,7 @@
     background-color: $sidebar-bg;
     height: calc(100vh - 90px);
     position: relative;
-    padding-top: 70px;
+    padding-top: 80px;
     padding-bottom: 240px;
     .activeLi {
       li {
@@ -28,20 +27,21 @@
     }
     .logoMp3 {
       position: fixed;
-      width: 240px;
-      top: 10px;
+      width: 190px;
+      top: 15px;
       padding: 0 25px 0 28px;
       display: flex;
       align-items: center;
-      height: 70px;
+      height: 60px;
       left: 20px;
       h1 {
-        font-size: 32px;
+        font-size: 30px;
       }
     }
     .sideBar__menu {
       list-style: none;
       margin-bottom: 15px;
+      margin-top: 20px;
       font-weight: 700;
       color: $text-color;
       line-height: normal;
@@ -351,6 +351,79 @@
       }
     }
   }
+
+  .listSong {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 320px;
+    border-bottom: none;
+    border-left: 1px solid $border-primary;
+    height: 100%;
+    .listSong__tab {
+      display: flex;
+      justify-content: space-between;
+      .listSong__content {
+        background-color: $alpha-bg;
+        border-radius: 999px;
+        padding: 4px;
+        .listSong__items {
+          padding: 5px 10px;
+          border-radius: 999px;
+          white-space: nowrap;
+          font-size: 12px;
+          cursor: pointer;
+          opacity: 0.7;
+        }
+        .is-active {
+          background-color: $tab-active-bg;
+          opacity: 1;
+        }
+      }
+    }
+    .button__vip {
+      background-color: $alpha-bg;
+    }
+    .listSong__content {
+      overflow: hidden scroll;
+      height: calc(100% - 68px);
+      &::-webkit-scrollbar {
+        width: 6px;
+        transition: all 0.5s;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: $border-primary;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .media {
+        &:hover {
+          background-color: $alpha-bg;
+          .media__text {
+            opacity: 1;
+          }
+        }
+      }
+      .activeBgPink {
+        background-color: $purple__3 !important;
+        color: white;
+        opacity: 1;
+        &:hover {
+          background-color: transparent;
+          color: white;
+        }
+        p {
+          color: white;
+          opacity: 1;
+          &:hover {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+
   .footer {
     position: absolute;
     bottom: -90px;

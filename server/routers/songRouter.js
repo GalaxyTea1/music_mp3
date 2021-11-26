@@ -7,7 +7,7 @@ var jsmediatags = require('jsmediatags');
 
 router.get('/', async (req, res) => {
     try {
-        const songs = await Song.find({ user: req.user._id }).populate('user', ['username']);
+        const songs = await Song.find({});
         res.json({ success: true, songs });
     } catch (error) {
         console.log(error);
@@ -26,8 +26,8 @@ router.post('/', verifyToken, async (req, res) => {
                     try {
                         const newSong = new Song({
                             audio: result.url,
-                            length: result.duration,
-                            author: tag.tags.artist,
+                            duration: result.duration,
+                            artists_names: tag.tags.artist,
                             name: tag.tags.title,
                             user: req.user._id,
                         });

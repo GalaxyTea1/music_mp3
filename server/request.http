@@ -29,9 +29,12 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:5001/api/song
 
-GET http://localhost:5001/api/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxODFmMWM3NmM3MmQ4ODEyMzBjMWQxZiIsImlhdCI6MTYzNTk0MTQ3MiwiZXhwIjoxNjM4NTMzNDcyfQ.w59zTb6W4F5hwqw9PepMVi-ojrqw9FQ4YUPo9zN233Y
+###
+
+GET http://localhost:5001/api/song
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxODFmMWM3NmM3MmQ4ODEyMzBjMWQxZiIsImlhdCI6MTYzNzc0ODMyNiwiZXhwIjoxNjM3ODM0NzI2fQ.Z5hDP_cpj1qE43jReGpuChEf5m789ZDbM4LKPxUGrFk
 
 ###
 PUT http://localhost:5001/api/rank/6198d73dfababf3eb8ee6032

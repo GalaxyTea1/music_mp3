@@ -13,7 +13,7 @@ export default function DashCategory() {
     const [image, setImage] = useState();
 
     const { authReducer } = useSelector((state) => state);
-    console.log(authReducer)
+    // console.log(authReducer)
 
     const [avatar, setAvatar] = useState();
 
@@ -41,7 +41,6 @@ export default function DashCategory() {
         file.preview = URL.createObjectURL(file);
         setAvatar(file);
     };
-    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -50,7 +49,7 @@ export default function DashCategory() {
         form_data.append('image', image, image.name);
         form_data.append('title', title);
         form_data.append('author', author);
-        
+
         let url = 'http://localhost:5001/api/category/';
         axios
             .post(url, form_data, {
@@ -69,14 +68,14 @@ export default function DashCategory() {
     };
 
     return (
-        <div className="main">
-            <div className="add_album" style={{ margin: '40px 10px 10px 0' }}>
+        <div className='main'>
+            <div className='add_album' style={{ margin: '40px 10px 10px 0' }}>
                 <form onSubmit={handleSubmit}>
                     <input
-                        type="text"
-                        size="50"
-                        placeholder="Title"
-                        id="title"
+                        type='text'
+                        size='50'
+                        placeholder='Title'
+                        id='title'
                         value={title}
                         onChange={handleChange}
                         required
@@ -85,10 +84,10 @@ export default function DashCategory() {
                     <br />
 
                     <input
-                        type="text"
-                        size="50"
-                        placeholder="Author"
-                        id="author"
+                        type='text'
+                        size='50'
+                        placeholder='Author'
+                        id='author'
                         value={author}
                         onChange={handleChangeAuthor}
                         required
@@ -97,18 +96,18 @@ export default function DashCategory() {
                     <br />
 
                     <input
-                        type="file"
-                        id="image"
-                        name="image"
-                        accept="image/png, image/jpeg, image/webp, image/jpg, image/jfif"
+                        type='file'
+                        id='image'
+                        name='image'
+                        accept='image/png, image/jpeg, image/webp, image/jpg, image/jfif'
                         onChange={handleImageChange}
                         required
                     />
-                    <button type="submit">Thêm Thể Loại</button>
+                    <button type='submit'>Thêm Thể Loại</button>
                 </form>
                 <br />
                 <br />
-                {avatar && <img src={avatar.preview} alt="album" width="250px !important" />}
+                {avatar && <img src={avatar.preview} alt='album' width='250px !important' />}
             </div>
         </div>
     );

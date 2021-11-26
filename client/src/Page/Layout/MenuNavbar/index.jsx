@@ -80,72 +80,89 @@ export default function MenuNavbar() {
     };
 
     return (
-        <div className="sideBar">
-            <div className="logoMp3">
-                <Link to="">
-                    <h1>Logo</h1>
+        <div className='sideBar'>
+            <div className='logoMp3'>
+                <Link to=''>
+                    <span className='mt-1 ml-2'>
+                        <img
+                            src='https://res.cloudinary.com/boo-it/image/upload/v1637924699/test/pn90mkevtweoulwpnanj.png'
+                            alt='logo'
+                        ></img>
+                    </span>
                 </Link>
             </div>
-            <div className="sideBar__menu">
+            <div className='sideBar__menu'>
                 <ul>
-                    <NavLink exact to="/profile" activeClassName="activeLi">
+                    <NavLink exact to='/profile' activeClassName='activeLi'>
                         <li>
                             <i>
-                                <ExceptionOutlined className="block" />
+                                <ExceptionOutlined className='block' />
                             </i>
                             Cá Nhân
                         </li>
                     </NavLink>
-                    <NavLink exact to="/discovery" activeClassName="activeLi">
+                    <NavLink exact to='/discovery' activeClassName='activeLi'>
                         <li>
                             <i>
-                                <WeiboOutlined className="block" />
+                                <WeiboOutlined className='block' />
                             </i>
                             Khám Phá
                         </li>
                     </NavLink>
-                    <NavLink exact to="/rank" activeClassName="activeLi">
+                    <NavLink exact to='/rank' activeClassName='activeLi'>
                         <li>
                             <i>
-                                <LineChartOutlined className="block" />
+                                <LineChartOutlined className='block' />
                             </i>{' '}
-                            #Rank
+                            Top 100
                         </li>
                     </NavLink>
 
-                    <NavLink exact to="/type" activeClassName="activeLi">
-                            <li>
-                                <i>
-                                    <CustomerServiceOutlined className="block" />
-                                </i>
-                                Thể Loại
-                            </li>
-                        </NavLink>
-
-                    
-                </ul>
-            </div>
-            <div className="gach"></div>
-            <div className="sideBar__music">
-                <div className="sideBar__menu2 mt-3" onScroll={handleScroll}>
-                    <ul className="mt-2">
-                    <NavLink exact to="/radio" activeClassName="activeLi">
+                    <NavLink exact to='/type' activeClassName='activeLi'>
                         <li>
                             <i>
-                                <RedditOutlined className="block" />
+                                <CustomerServiceOutlined className='block' />
+                            </i>
+                            Thể Loại
+                        </li>
+                    </NavLink>
+                    <NavLink exact to='/radio' activeClassName='activeLi'>
+                        <li>
+                            <i>
+                                <RedditOutlined className='block' />
                             </i>
                             Radio{' '}
-                            <span className="mt-1 ml-2">
+                            <span className='mt-1 ml-2'>
                                 <img
-                                    src="https://zjs.zadn.vn/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg"
-                                    alt="liveLogo"
+                                    src='https://zjs.zadn.vn/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg'
+                                    alt='liveLogo'
                                 ></img>
                             </span>
                         </li>
                     </NavLink>
+                </ul>
+            </div>
+            {/* <div className='gach'></div> */}
+            <div className='sideBar__music'>
+                <div className='sideBar__menu2 mt-3' onScroll={handleScroll}>
+                    {/* <ul className='mt-2'>
+                        <NavLink exact to='/radio' activeClassName='activeLi'>
+                            <li>
+                                <i>
+                                    <RedditOutlined className='block' />
+                                </i>
+                                Radio{' '}
+                                <span className='mt-1 ml-2'>
+                                    <img
+                                        src='https://zjs.zadn.vn/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg'
+                                        alt='liveLogo'
+                                    ></img>
+                                </span>
+                            </li>
+                        </NavLink>
                     </ul>
-                    <br/>
-                    <div className="sideBar__banner">
+                    <br /> */}
+                    <div className='sideBar__banner'>
                         <p>Đăng nhập để trải nghiệm cảm giác mới lạ hơn</p>
                         {authReducer.token ? (
                             <button onClick={() => dispatch(logout())}>Thoát</button>
@@ -154,18 +171,18 @@ export default function MenuNavbar() {
                         )}
                     </div>
 
-                    <div className="sideBar__category">
-                        <div className="sideBar__text">
+                    <div className='sideBar__category'>
+                        <div className='sideBar__text'>
                             <p>THƯ VIỆN</p>
-                            <i className="fa fa-pen"></i>
+                            <i className='fa fa-pen'></i>
                         </div>
                     </div>
-                    <div className="sideBar__playlist">
+                    <div className='sideBar__playlist'>
                         {listPlaylist.map((item, index) => {
                             return (
                                 <div
                                     key={index}
-                                    className="playlist_item opacity-70 hover:opacity-100"
+                                    className='playlist_item opacity-70 hover:opacity-100'
                                 >
                                     <NavLink
                                         to={`/playlist/${item.name}`}
@@ -182,17 +199,17 @@ export default function MenuNavbar() {
             <Dialog
                 className={classes.root}
                 disableEscapeKeyDown
-                onBackdropClick="false"
+                onBackdropClick='false'
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="form-dialog-title"
+                aria-labelledby='form-dialog-title'
             >
                 <DialogContent>
                     {mode === MODE.REGISTER && (
                         <>
                             <RegisterForm closeDialog={handleClose} />
-                            <Box textAlign="center">
-                                <Button color="primary" onClick={() => setMode(MODE.LOGIN)}>
+                            <Box textAlign='center'>
+                                <Button color='primary' onClick={() => setMode(MODE.LOGIN)}>
                                     Already have an account? Login here
                                 </Button>
                             </Box>
@@ -202,8 +219,8 @@ export default function MenuNavbar() {
                     {mode === MODE.LOGIN && (
                         <>
                             <LoginForm closeDialog={handleClose} />
-                            <Box textAlign="center">
-                                <Button color="primary" onClick={() => setMode(MODE.REGISTER)}>
+                            <Box textAlign='center'>
+                                <Button color='primary' onClick={() => setMode(MODE.REGISTER)}>
                                     Don't have an account? Register here
                                 </Button>
                             </Box>
@@ -215,9 +232,9 @@ export default function MenuNavbar() {
                 </IconButton>
             </Dialog>
 
-            <div className="sideBar__footer cursor-pointer" onClick={handleClick}>
+            <div className='sideBar__footer cursor-pointer' onClick={handleClick}>
                 <span>
-                    <i className="fa fa-plus mr-2"></i>Tạo playlist mới
+                    <i className='fa fa-plus mr-2'></i>Tạo playlist mới
                 </span>
             </div>
         </div>

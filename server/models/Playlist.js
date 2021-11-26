@@ -7,8 +7,15 @@ const PlaylistSchema = new Schema({
     },
     song: [
         {
-            type: mongoose.Types.ObjectId,
-            ref: 'songs',
+            title: {
+                type: String,
+            },
+            artists_names: {
+                type: String,
+            },
+            audio: {
+                type: String,
+            },
         },
     ],
     user: {

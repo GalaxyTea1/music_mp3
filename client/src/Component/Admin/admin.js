@@ -18,6 +18,7 @@ import DashRadio from './components/Radio/addRadio';
 import showRadio from './components/Radio/showRadio';
 import DashRank from './components/Rank/addRank';
 import showRank from './components/Rank/showRank';
+import Test from './components/Category/test';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,34 +56,34 @@ export default function DashAd() {
     };
 
     return (
-        <div className="main">
-            <div className="navBar_left">
+        <div className='main'>
+            <div className='navBar_left'>
                 <List
-                    component="nav"
-                    aria-labelledby="nested-list-subheader"
+                    component='nav'
+                    aria-labelledby='nested-list-subheader'
                     subheader={
-                        <ListSubheader component="div" id="nested-list-subheader">
+                        <ListSubheader component='div' id='nested-list-subheader'>
                             Hello Admin!
                         </ListSubheader>
                     }
                     className={classes.root}
                 >
                     <ListItem button>
-                        <ListItemText primary="Tổng quan" />
+                        <ListItemText primary='Tổng quan' />
                     </ListItem>
                     <ListItem button onClick={handleClick}>
-                        <ListItemText primary="Khám Phá" />
+                        <ListItemText primary='Khám Phá' />
                         {open ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
+                    <Collapse in={open} timeout='auto' unmountOnExit>
+                        <List component='div' disablePadding>
                             <ListItem button className={classes.nested}>
                                 <ListItemIcon>
                                     <StarBorder />
                                 </ListItemIcon>
-                                <NavLink exact to="/admin/add-albums" activeClassName="activeLi">
+                                <NavLink exact to='/admin/add-albums' activeClassName='activeLi'>
                                     <li>
-                                        <ListItemText primary="Thêm Album" />
+                                        <ListItemText primary='Thêm Album' />
                                     </li>
                                 </NavLink>
                             </ListItem>
@@ -90,27 +91,27 @@ export default function DashAd() {
                                 <ListItemIcon>
                                     <StarBorder />
                                 </ListItemIcon>
-                                <NavLink exact to="/admin/update-albums" activeClassName="activeLi">
+                                <NavLink exact to='/admin/update-albums' activeClassName='activeLi'>
                                     <li>
-                                        <ListItemText primary="Hiển Thị Các Album" />
+                                        <ListItemText primary='Hiển Thị Các Album' />
                                     </li>
                                 </NavLink>
                             </ListItem>
                         </List>
                     </Collapse>
                     <ListItem button onClick={handleClickOpen}>
-                        <ListItemText primary="Rank" />
+                        <ListItemText primary='Rank' />
                         {open1 ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
-                    <Collapse in={open1} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
+                    <Collapse in={open1} timeout='auto' unmountOnExit>
+                        <List component='div' disablePadding>
                             <ListItem button className={classes.nested}>
                                 <ListItemIcon>
                                     <StarBorder />
                                 </ListItemIcon>
-                                <NavLink exact to="/admin/add-ranks" activeClassName="activeLi">
+                                <NavLink exact to='/admin/add-ranks' activeClassName='activeLi'>
                                     <li>
-                                        <ListItemText primary="Thêm Album" />
+                                        <ListItemText primary='Thêm Album' />
                                     </li>
                                 </NavLink>
                             </ListItem>
@@ -118,27 +119,27 @@ export default function DashAd() {
                                 <ListItemIcon>
                                     <StarBorder />
                                 </ListItemIcon>
-                                <NavLink exact to="/admin/update-ranks" activeClassName="activeLi">
+                                <NavLink exact to='/admin/update-ranks' activeClassName='activeLi'>
                                     <li>
-                                        <ListItemText primary="Hiển Thị Các Album" />
+                                        <ListItemText primary='Hiển Thị Các Album' />
                                     </li>
                                 </NavLink>
                             </ListItem>
                         </List>
                     </Collapse>
                     <ListItem button onClick={handleClickOpen2}>
-                        <ListItemText primary="Radio" />
+                        <ListItemText primary='Radio' />
                         {open2 ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
-                    <Collapse in={open2} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
+                    <Collapse in={open2} timeout='auto' unmountOnExit>
+                        <List component='div' disablePadding>
                             <ListItem button className={classes.nested}>
                                 <ListItemIcon>
                                     <StarBorder />
                                 </ListItemIcon>
-                                <NavLink exact to="/admin/add-radios" activeClassName="activeLi">
+                                <NavLink exact to='/admin/add-radios' activeClassName='activeLi'>
                                     <li>
-                                        <ListItemText primary="Thêm Album" />
+                                        <ListItemText primary='Thêm Album' />
                                     </li>
                                 </NavLink>
                             </ListItem>
@@ -146,31 +147,31 @@ export default function DashAd() {
                                 <ListItemIcon>
                                     <StarBorder />
                                 </ListItemIcon>
-                                <NavLink exact to="/admin/update-radios" activeClassName="activeLi">
+                                <NavLink exact to='/admin/update-radios' activeClassName='activeLi'>
                                     <li>
-                                        <ListItemText primary="Hiển Thị Các Album" />
+                                        <ListItemText primary='Hiển Thị Các Album' />
                                     </li>
                                 </NavLink>
                             </ListItem>
                         </List>
                     </Collapse>
                     <ListItem button onClick={handleClickOpen3}>
-                        <ListItemText primary="Thể Loại" />
+                        <ListItemText primary='Thể Loại' />
                         {open3 ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
-                    <Collapse in={open3} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
+                    <Collapse in={open3} timeout='auto' unmountOnExit>
+                        <List component='div' disablePadding>
                             <ListItem button className={classes.nested}>
                                 <ListItemIcon>
                                     <StarBorder />
                                 </ListItemIcon>
                                 <NavLink
                                     exact
-                                    to="/admin/add-categories"
-                                    activeClassName="activeLi"
+                                    to='/admin/add-categories'
+                                    activeClassName='activeLi'
                                 >
                                     <li>
-                                        <ListItemText primary="Thêm Thể Loại" />
+                                        <ListItemText primary='Thêm Thể Loại' />
                                     </li>
                                 </NavLink>
                             </ListItem>
@@ -180,11 +181,21 @@ export default function DashAd() {
                                 </ListItemIcon>
                                 <NavLink
                                     exact
-                                    to="/admin/update-categories"
-                                    activeClassName="activeLi"
+                                    to='/admin/update-categories'
+                                    activeClassName='activeLi'
                                 >
                                     <li>
-                                        <ListItemText primary="Hiển Thị Các Album" />
+                                        <ListItemText primary='Hiển Thị Các Album' />
+                                    </li>
+                                </NavLink>
+                            </ListItem>
+                            <ListItem button className={classes.nested}>
+                                <ListItemIcon>
+                                    <StarBorder />
+                                </ListItemIcon>
+                                <NavLink exact to='/admin/add-test' activeClassName='activeLi'>
+                                    <li>
+                                        <ListItemText primary='Test' />
                                     </li>
                                 </NavLink>
                             </ListItem>
@@ -192,16 +203,17 @@ export default function DashAd() {
                     </Collapse>
                 </List>
             </div>
-            <div className="navBar_right">
+            <div className='navBar_right'>
                 <Switch>
-                    <Route path="/admin/add-albums" exact component={DashDiscovery} />
-                    <Route path="/admin/update-albums" exact component={showDiscovery} />
-                    <Route path="/admin/add-categories" exact component={DashCategory} />
-                    <Route path="/admin/update-categories" exact component={ShowCategory} />
-                    <Route path="/admin/add-radios" exact component={DashRadio} />
-                    <Route path="/admin/update-radios" exact component={showRadio} />
-                    <Route path="/admin/add-ranks" exact component={DashRank} />
-                    <Route path="/admin/update-ranks" exact component={showRank} />
+                    <Route path='/admin/add-albums' exact component={DashDiscovery} />
+                    <Route path='/admin/update-albums' exact component={showDiscovery} />
+                    <Route path='/admin/add-categories' exact component={DashCategory} />
+                    <Route path='/admin/update-categories' exact component={ShowCategory} />
+                    <Route path='/admin/add-radios' exact component={DashRadio} />
+                    <Route path='/admin/update-radios' exact component={showRadio} />
+                    <Route path='/admin/add-ranks' exact component={DashRank} />
+                    <Route path='/admin/update-ranks' exact component={showRank} />
+                    <Route path='/admin/add-test' exact component={Test} />
                 </Switch>
             </div>
         </div>

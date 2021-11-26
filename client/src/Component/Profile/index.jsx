@@ -11,10 +11,9 @@ import SwipeableViews from 'react-swipeable-views';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
     return (
         <div
-            role="tabpanel"
+            role='tabpanel'
             hidden={value !== index}
             id={`full-width-tabpanel-${index}`}
             aria-labelledby={`full-width-tab-${index}`}
@@ -63,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     tabsRoot: {
         width: 1100,
         marginLeft: '100px',
-        marginTop: '50px'
+        marginTop: '50px',
     },
 
     appBar: {
@@ -85,6 +84,23 @@ export default function Profile() {
     const theme = useTheme();
     const [value, setValue] = useState(0);
     const { authReducer } = useSelector((state) => state);
+    const { songMusicReducer } = useSelector((state) => state);
+
+    let isId = authReducer?.user?._id;
+
+    const resultValueSong = songMusicReducer.map((item) => item);
+
+    const isSong = resultValueSong.filter(function (song) {
+        return song.user === `${isId}`;
+    });
+
+    const isCheck = isSong.map((item) => {
+        return item;
+    });
+
+    const isName = isSong.map((item) => {
+        return item.name;
+    });
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -94,25 +110,31 @@ export default function Profile() {
         setValue(index);
     };
 
+    function List({ data, children }) {
+        return <ul>{data.map((item) => children(item))}</ul>;
+    }
+
     return (
         <div className={classes.container}>
             <div className={classes.root}>
-                <Avatar className={classes.avatar} alt="User" src="" />
+                <Avatar className={classes.avatar} alt='User' src='' />
             </div>
-            <div style={{marginTop: '-50px', marginLeft:'49%'}}><h3>{authReducer?.user?.username}</h3></div>
+            <div style={{ marginTop: '-50px', marginLeft: '49%' }}>
+                <h3>{authReducer?.user?.username}</h3>
+            </div>
             <div className={classes.tabsRoot}>
-                <AppBar position="static" color="default" style={{ backgroundColor: '#a0aaba' }}>
+                <AppBar position='static' color='default' style={{ backgroundColor: '#a0aaba' }}>
                     <Tabs
                         value={value}
                         onChange={handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        variant="fullWidth"
-                        aria-label="full width tabs example"
+                        indicatorColor='primary'
+                        textColor='primary'
+                        variant='fullWidth'
+                        aria-label='full width tabs example'
                     >
-                        <Tab label="Bài hát" {...a11yProps(0)} />
-                        <Tab label="Playlist" {...a11yProps(1)} />
-                        <Tab label="Tải lên" {...a11yProps(2)} />
+                        <Tab label='Bài hát' {...a11yProps(0)} />
+                        <Tab label='Playlist' {...a11yProps(1)} />
+                        <Tab label='Tải lên' {...a11yProps(2)} />
                     </Tabs>
                 </AppBar>
                 <SwipeableViews
@@ -126,9 +148,7 @@ export default function Profile() {
                         value={value}
                         index={0}
                         dir={theme.direction}
-                    >
-                        Bài hát
-                    </TabPanel>
+                    ></TabPanel>
                     <TabPanel
                         className={classes.tabpanels}
                         value={value}
@@ -143,7 +163,19 @@ export default function Profile() {
                         index={2}
                         dir={theme.direction}
                     >
-                        Tải lên
+                        <List data={isName}>
+                            {(item) => (
+                                <li
+                                    style={{
+                                        marginBottom: '10px',
+                                        color: 'red',
+                                        cursor: 'pointer',
+                                    }}
+                                >
+                                    {item}
+                                </li>
+                            )}
+                        </List>
                     </TabPanel>
                 </SwipeableViews>
             </div>

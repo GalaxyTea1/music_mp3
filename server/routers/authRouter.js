@@ -86,7 +86,6 @@ router.post('/logout', async (req, res) => {
 router.post('/refresh_token', async (req, res) => {
     try {
         const rf_token = req.cookies.refreshtoken;
-        console.log(rf_token);
         if (!rf_token) return res.status(400).json({ msg: 'Please login now.' });
 
         jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, async (err, result) => {

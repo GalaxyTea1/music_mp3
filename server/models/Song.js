@@ -5,7 +5,10 @@ const SongSchema = new Schema({
     name: {
         type: String,
     },
-    image: {
+    artists_names: {
+        type: String,
+    },
+    thumbnail: {
         type: String,
     },
     audio: {
@@ -17,10 +20,10 @@ const SongSchema = new Schema({
     album: {
         type: String,
     },
-    type: {
+    lyric: {
         type: String,
     },
-    length: {
+    duration: {
         type: String,
     },
     user: {

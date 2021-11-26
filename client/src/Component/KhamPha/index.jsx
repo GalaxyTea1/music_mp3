@@ -74,17 +74,17 @@ export default function KhamPha() {
     const renderDataView = (arr) => {
         return arr.map((item, index) => {
             return (
-                <div key={index} className="p-3">
+                <div key={index} className='p-3'>
                     <MusicItemView item={item}></MusicItemView>
-                    <div className="w-full">
+                    <div className='w-full'>
                         <p
-                            className="mt-2 font-bold  hover:text-pink-500"
+                            className='mt-2 font-bold  hover:text-pink-500'
                             style={{ fontSize: '15px' }}
                         >
                             {item.title}
                         </p>
                         <p
-                            className=" hover:text-pink-500 opacity-60 hover:opacity-100"
+                            className=' hover:text-pink-500 opacity-60 hover:opacity-100'
                             style={{ fontSize: '13px', marginTop: '2px' }}
                         >
                             {item.author}
@@ -112,7 +112,7 @@ export default function KhamPha() {
             }
             return (
                 <div key={index} className={`itemGallary ${classActive}`}>
-                    <img src={item.img} alt={index} className="p-3"></img>
+                    <img src={item.img} alt={index} className='p-3'></img>
                 </div>
             );
         });
@@ -120,13 +120,13 @@ export default function KhamPha() {
     const renderRadio = (arr) => {
         return arr.map((item, index) => {
             return (
-                <div key={index} className="p-2">
+                <div key={index} className='p-2'>
                     <MusicRadio item={item}></MusicRadio>
-                    <div className="w-full flex items-center justify-center flex-col mt-3">
-                        <p className="font-bold text-lg cursor-pointer hover:text-pink-500">
+                    <div className='w-full flex items-center justify-center flex-col mt-3'>
+                        <p className='font-bold text-lg cursor-pointer hover:text-pink-500'>
                             {item.title}
                         </p>
-                        <span className="text-xs opacity-60">{item.listen} đang nghe</span>
+                        <span className='text-xs opacity-60'>{item.listen} đang nghe</span>
                     </div>
                 </div>
             );
@@ -135,7 +135,7 @@ export default function KhamPha() {
 
     return (
         <div
-            className="khamPhaContent"
+            className='khamPhaContent'
             onScroll={(e) => {
                 const header = e.target.previousSibling.style;
                 if (e.target.scrollTop > 80) {
@@ -152,59 +152,58 @@ export default function KhamPha() {
                 }
             }}
         >
-            <div className="mt-14">
-                <div className="gallery pt-6">
-                    <div className="gallery-content flex w-full ">
+            <div className='mt-14'>
+                <div className='gallery pt-6'>
+                    <div className='gallery-content flex w-full '>
                         {renderData()}
                         <button
-                            className="galleryButton btn2"
+                            className='galleryButton btn2'
                             onClick={() => {
                                 changeSlide();
                             }}
                         >
-                            <i className="fa fa-arrow-right"></i>
+                            <i className='fa fa-arrow-right'></i>
                         </button>
                         <button
-                            className="galleryButton btn1"
+                            className='galleryButton btn1'
                             onClick={() => {
                                 changeSlide2();
                             }}
                         >
-                            <i className="fa fa-arrow-left"></i>
+                            <i className='fa fa-arrow-left'></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            {/* <div className="flex">{discoveryReducer && renderDataView(discoveryReducer.slice(0, 5))}</div> */}
-            <div className="ngheGanDay mt-3">
-                <h3 className="px-3 mt-4 text-xl font-bold">Nghe Gần Đây</h3>
-                <div className="flex">{renderDataView(discoveryReducer.slice(0, 5))}</div>
+            <div className='ngheGanDay mt-3'>
+                <h3 className='px-3 mt-4 text-xl font-bold'>Nghe Gần Đây</h3>
+                <div className='flex'>{renderDataView(discoveryReducer.slice(0, 5))}</div>
             </div>
 
-            <div className="ngheGanDay mt-3">
-                <h3 className="px-3 mt-4 text-xl font-bold">Có Thể Bạn Sẽ Thích</h3>
-                <div className="flex">{renderDataView(discoveryReducer.slice(5, 10))}</div>
+            <div className='ngheGanDay mt-3'>
+                <h3 className='px-3 mt-4 text-xl font-bold'>Có Thể Bạn Sẽ Thích</h3>
+                <div className='flex'>{renderDataView(discoveryReducer.slice(5, 10))}</div>
             </div>
-            <div className="ngheGanDay mt-3">
-                <h3 className="px-3 mt-4 text-xl font-bold">Nhạc Hay Nghe Ngay</h3>
-                <div className="flex">{renderDataView(discoveryReducer.slice(15, 20))}</div>
+            <div className='ngheGanDay mt-3'>
+                <h3 className='px-3 mt-4 text-xl font-bold'>Nhạc Hay Nghe Ngay</h3>
+                <div className='flex'>{renderDataView(discoveryReducer.slice(15, 20))}</div>
             </div>
-            <div className="ngheGanDay mt-3">
-                <h3 className="px-3 mt-4 text-xl font-bold">XONE's CORNER</h3>
-                <div className="flex">{renderDataView(discoveryReducer.slice(10, 15))}</div>
+            <div className='ngheGanDay mt-3'>
+                <h3 className='px-3 mt-4 text-xl font-bold'>XONE's CORNER</h3>
+                <div className='flex'>{renderDataView(discoveryReducer.slice(10, 15))}</div>
             </div>
-            <div className="ngheGanDay mt-3">
-                <h3 className="px-3 mt-4 text-xl font-bold">RADIO NỔI BẬT</h3>
-                <div className="flex radioContent flex-wrap">{renderRadio(radioReducer)}</div>
+            <div className='ngheGanDay mt-3'>
+                <h3 className='px-3 mt-4 text-xl font-bold'>RADIO NỔI BẬT</h3>
+                <div className='flex radioContent flex-wrap'>{renderRadio(radioReducer)}</div>
             </div>
-            <div className="ngheGanDay mt-3">
-                <h3 className="px-3 mt-4 text-xl font-bold">Mix Riêng Cho Bạn</h3>
-                <div className="flex">{renderDataView(discoveryReducer.slice(20, 24))}</div>
+            <div className='ngheGanDay mt-3'>
+                <h3 className='px-3 mt-4 text-xl font-bold'>Mix Riêng Cho Bạn</h3>
+                <div className='flex'>{renderDataView(discoveryReducer.slice(20, 24))}</div>
             </div>
-            <div className="ngheGanDay mt-3">
-                <h3 className="px-3 mt-4 text-xl font-bold">Nhạc Mới Mỗi Ngày</h3>
-                <div className="flex">{renderDataView(discoveryReducer.slice(24, 30))}</div>
+            <div className='ngheGanDay mt-3'>
+                <h3 className='px-3 mt-4 text-xl font-bold'>Nhạc Mới Mỗi Ngày</h3>
+                <div className='flex'>{renderDataView(discoveryReducer.slice(24, 30))}</div>
             </div>
         </div>
     );

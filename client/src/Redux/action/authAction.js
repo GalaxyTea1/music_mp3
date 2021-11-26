@@ -38,7 +38,6 @@ export const refreshToken = () => async (dispatch) => {
     if (mp3Music) {
         try {
             const res = await postDataAPI('refresh_token');
-            console.log(res);
             dispatch({
                 type: GLOBALTYPES.AUTH,
                 payload: {

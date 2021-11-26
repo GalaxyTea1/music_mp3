@@ -8,29 +8,11 @@ export default function Header() {
     // let [tenBaiHat, setTenBaiHat] = useState({
     //     value: '',
     // });
-    const [value, setValue] = useState([]);
-    const { songMusicReducer } = useSelector((state) => state);
     const { authReducer } = useSelector((state) => state);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(SongItem);
     }, [dispatch]);
-    // const changeValueHandle = (e) => {
-    //     const inputValue = e.target.value;
-    //     const checkValue = songMusicReducer.map((item) => {
-    //         if (item._id === inputValue) {
-    //             return item;
-    //         }
-    //     });
-    //     setValue(checkValue);
-    // };
-
-    // const filterArr = value.filter(function (item) {
-    //     return item;
-    // });
-    // const nameFilter = filterArr.map((item) => item.name);
-    // const titleFilter = filterArr.map((item) => item.title);
-    // const authorFilter = filterArr.map((item) => item.author);
 
     const [audio, setAudio] = useState();
     const handleChangeAudio = (e) => {
@@ -50,7 +32,7 @@ export default function Header() {
             .post(url, form_data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'Authorization': authReducer.token,
+                    Authorization: authReducer.token,
                 },
             })
             .then((res) => {
@@ -60,32 +42,31 @@ export default function Header() {
     };
 
     return (
-        <div className="header">
-            <div className="header__content flex justify-between w-full">
-                <div className="header__left">
-                    <div className="header__search" style={{ left: '24px' }}>
+        <div className='header'>
+            <div className='header__content flex justify-between w-full'>
+                <div className='header__left'>
+                    <div className='header__search' style={{ left: '24px' }}>
                         <SearchOutlined
-                            className="mr-5"
+                            className='mr-5'
                             style={{ fontSize: '24px', position: 'absolute', left: '10px' }}
                         />
-                        <input placeholder="Nhập tên bài hát..." name="tenBaiHat"></input>
+                        <input placeholder='Nhập tên bài hát...' name='tenBaiHat'></input>
                     </div>
                 </div>
-                <div className="header__right flex items-center">
-                    <div className="form">
-                        <form id="form" onSubmit={handleSubmit}>
-                            <span className="hiddenFileInput">
-                                <input name="audio" type="file" onChange={handleChangeAudio} />
+                <div className='header__right flex items-center'>
+                    <div className='form'>
+                        <form id='form' onSubmit={handleSubmit}>
+                            <span className='hiddenFileInput'>
+                                <input name='audio' type='file' onChange={handleChangeAudio} />
                             </span>
                             <button
                                 style={{
                                     backgroundColor: 'gray',
                                     marginLeft: '155px',
                                     // display: 'none',
-                                    cursor: 'pointer'
+                                    cursor: 'pointer',
                                 }}
-                                type="submit"
-
+                                type='submit'
                             >
                                 submit
                             </button>
