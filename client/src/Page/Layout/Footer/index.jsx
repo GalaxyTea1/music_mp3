@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
-import { getSongDetailAction } from '../../../Redux/action/ListMusicAction';
+import { getSongAction } from '../../../Redux/action/ListMusicAction';
 import { useSpring, animated } from 'react-spring';
 import moment from 'moment';
+import { SONG_MUSIC_DETAIL } from 'Redux/type/Music';
 
 export default function Footer(props) {
     const [volume, setVolume] = useState(50);
@@ -16,51 +17,87 @@ export default function Footer(props) {
     const dispatch = useDispatch();
 
     let { listSong, songDetail, typeSong } = useSelector((state) => state.SongReducer);
+    const { musicDetail, listSongMusic } = useSelector((state) => state.detailReducer);
     const { listPlaylist } = useSelector((state) => state.PlaylistReducer);
-    const changeSong = (thamSo, list = listSong) => {
-        if (typeSong === false) {
-            const path = props.computedMatch.params.name;
-            const index = listPlaylist.findIndex((item) => item.name === path);
-            if (index !== -1) {
-                list = listPlaylist[index].listBaiHat;
-            }
-        }
-        const lastSong = list[list.length - 1];
-        //tim bai dang phat (songDetail) trong list;
-        //neu nhu bai nay la index thu = (index = 0) return; ko lam gi ca
-        const index = list.findIndex((item) => item.id === songDetail.id);
-        let nowSong = {};
-        if (index !== -1) {
-            if (thamSo === 1) {
-                if (list[index].id === lastSong.id) {
-                    return dispatch(getSongDetailAction(list[0], typeSong));
-                } else {
-                    nowSong = list[index + thamSo];
-                }
-            } else if (thamSo === -1) {
-                if (index === 0) {
-                    // console.log('Day la bai dau tien');
-                    return dispatch(getSongDetailAction(list[99], typeSong));
-                } else {
-                    nowSong = list[index + thamSo];
-                }
-            } else {
-                return;
-            }
-        }
-        dispatch(getSongDetailAction(nowSong, typeSong));
+    // const changeSong2 = (thamSo, list = listSongMusic) => {
+    //     const index = list.findIndex((item) => item._id === musicDetail._id);
+
+    //     if (thamSo === -1) {
+    //         //bai dau tien se bi loi
+    //         //check newu day la baiu dau tien => return ;
+    //         //kiem tra musicDetail co p la bai dau tien hay ko ?
+    //         if (list[0]._id === musicDetail._id) {
+    //             return;
+    //         }
+    //         const newSong = list[index + thamSo];
+    //         dispatch({
+    //             type: SONG_MUSIC_DETAIL,
+    //             musicDetail: newSong,
+    //             typeSong: true,
+    //         });
+    //     } else {
+    //         //bai cuoi cung se bi loi
+    //         //check neu day la bai cyuoi cung => return
+    //         if (list[list.length - 1]._id === musicDetail._id) {
+    //             return;
+    //         }
+    //         const newSong = list[index + thamSo];
+    //         dispatch({
+    //             type: SONG_MUSIC_DETAIL,
+    //             musicDetail: newSong,
+    //             typeSong: true,
+    //         });
+    //     }
+    // };
+
+    const changeSong = (thamSo, list = listSongMusic) => {
+        const index = list.findIndex((item) => item._id === thamSo._id);
     };
+
+    // const changeSong = (thamSo, list = listSongMusic) => {
+    //     if (typeSong === false) {
+    //         const path = props.computedMatch.params.name;
+    //         const index = listPlaylist.findIndex((item) => item.name === path);
+    //         if (index !== -1) {
+    //             list = listPlaylist[index].listBaiHat;
+    //         }
+    //     }
+    //     const lastSong = list[list.length - 1];
+    //     //tim bai dang phat (songDetail) trong list;
+    //     //neu nhu bai nay la index thu = (index = 0) return; ko lam gi ca
+    //     const index = list.findIndex((item) => item.id === musicDetail.id);
+    //     let nowSong = {};
+    //     if (index !== -1) {
+    //         if (thamSo === 1) {
+    //             if (list[index].id === lastSong.id) {
+    //                 return dispatch(getSongAction(list[0], typeSong));
+    //             } else {
+    //                 nowSong = list[index + thamSo];
+    //             }
+    //         } else if (thamSo === -1) {
+    //             if (index === 0) {
+    //                 // console.log('Day la bai dau tien');
+    //                 return dispatch(getSongAction(list[list.length - 1], typeSong));
+    //             } else {
+    //                 nowSong = list[index + thamSo];
+    //             }
+    //         } else {
+    //             return;
+    //         }
+    //     }
+    //     dispatch(getSongAction(nowSong, typeSong));
+    // };
 
     useEffect(() => {
         audioRef.current.volume = volume / 100;
-    });
+    }, []);
 
     useEffect(() => {
-        if (songDetail.source !== undefined) {
-            updateSong(`https://vnso-qt-3-tf-${songDetail.source['128']?.slice(2)}`);
+        if (musicDetail.audio) {
+            updateSong(musicDetail.audio);
             audioRef.current.play();
         }
-    }, [songDetail]);
+    }, [musicDetail]);
 
     // useEffect(() => {
     //     updateSong(`${songDetail.audio}`);
@@ -108,16 +145,16 @@ export default function Footer(props) {
             }
         }
         const lastSong = list[list.length - 1];
-        let index = list.findIndex((item) => item.id === songDetail.id);
+        let index = list.findIndex((item) => item.id === musicDetail.id);
         if (index !== -1) {
             if (shuffle) {
                 const random = Math.floor(Math.random() * 100);
-                dispatch(getSongDetailAction(list[random], typeSong));
+                dispatch(getSongAction(list[random], typeSong));
             } else if (list[index].id === lastSong.id) {
                 console.log('Day la bai hat cuoi cung');
                 return;
             } else {
-                dispatch(getSongDetailAction(list[index + 1], typeSong));
+                dispatch(getSongAction(list[index + 1], typeSong));
             }
         }
     };
@@ -147,15 +184,15 @@ export default function Footer(props) {
                             e.target.onerror = null;
                             e.target.src = '';
                         }}
-                        src={songDetail?.thumbnail}
+                        src={musicDetail?.thumbnail}
                         alt=''
                         style={audio.play ? spring : {}}
                     ></animated.img>
                 </div>
                 <div className='ml-3'>
-                    <p className='text-white font-semibold'>{songDetail?.name}</p>
+                    <p className='text-white font-semibold'>{musicDetail?.name}</p>
                     <p className='text-white opacity-60 hover:text-pink-500 hover:opacity-100'>
-                        {songDetail?.artists_names}
+                        {musicDetail?.artists_names}
                     </p>
                 </div>
             </div>
@@ -197,7 +234,7 @@ export default function Footer(props) {
                             let list = listSong;
                             if (shuffle === true) {
                                 const random = Math.floor(Math.random() * 100);
-                                dispatch(getSongDetailAction(list[random], typeSong));
+                                dispatch(getSongAction(list[random], typeSong));
                             } else {
                                 changeSong(1);
                             }

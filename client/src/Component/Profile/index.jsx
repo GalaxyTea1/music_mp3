@@ -6,8 +6,9 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SwipeableViews from 'react-swipeable-views';
+import { SONG_MUSIC_DETAIL } from 'Redux/type/Music';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -85,7 +86,8 @@ export default function Profile() {
     const [value, setValue] = useState(0);
     const { authReducer } = useSelector((state) => state);
     const { songMusicReducer } = useSelector((state) => state);
-
+    const { listSongMusic } = useSelector((state) => state.detailReducer);
+    const dispatch = useDispatch();
     let isId = authReducer?.user?._id;
 
     const resultValueSong = songMusicReducer.map((item) => item);
@@ -94,13 +96,14 @@ export default function Profile() {
         return song.user === `${isId}`;
     });
 
-    const isCheck = isSong.map((item) => {
+    const isCheck = listSongMusic?.map((item) => {
         return item;
     });
+    console.log(isCheck);
 
-    const isName = isSong.map((item) => {
-        return item.name;
-    });
+    // const isName = listSongMusic.map((item) => {
+    //     return item.name;
+    // });
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -110,8 +113,24 @@ export default function Profile() {
         setValue(index);
     };
 
-    function List({ data, children }) {
-        return <ul>{data.map((item) => children(item))}</ul>;
+    function List() {
+        return listSongMusic?.map((item) => {
+            return (
+                <div
+                    onClick={() => {
+                        console.log('item', item);
+                        dispatch({
+                            type: SONG_MUSIC_DETAIL,
+                            musicDetail: item,
+                            typeSongMusic: true,
+                        });
+                    }}
+                    style={{ color: 'red' }}
+                >
+                    {item.name}
+                </div>
+            );
+        });
     }
 
     return (
@@ -163,19 +182,7 @@ export default function Profile() {
                         index={2}
                         dir={theme.direction}
                     >
-                        <List data={isName}>
-                            {(item) => (
-                                <li
-                                    style={{
-                                        marginBottom: '10px',
-                                        color: 'red',
-                                        cursor: 'pointer',
-                                    }}
-                                >
-                                    {item}
-                                </li>
-                            )}
-                        </List>
+                        <List />
                     </TabPanel>
                 </SwipeableViews>
             </div>

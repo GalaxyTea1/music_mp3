@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSongAction } from '../../Redux/action/ListMusicAction';
 
 export default function SongMusicDetail(props) {
-    // const { musicDetail } = useSelector((state) => state.detailReducer);
+    const { musicDetail } = useSelector((state) => state.detailReducer);
+
     // const dispatch = useDispatch();
 
     const { item, index, listSongMusic } = props;
