@@ -20,7 +20,6 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case OPEN_MODAL: {
-            // if (authReducer.token === true)
             return { ...state, Modal: true, Component: action.Component };
         }
         case CLOSE_MODAL: {

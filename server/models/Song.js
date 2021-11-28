@@ -10,6 +10,8 @@ const SongSchema = new Schema({
     },
     thumbnail: {
         type: String,
+        default:
+            'https://w7.pngwing.com/pngs/741/277/png-transparent-scalable-graphics-compact-disc-icon-cd-logo-cartoon-cd-player-thumbnail.png',
     },
     audio: {
         type: String,

@@ -1,15 +1,15 @@
 import DashAd from 'Component/Admin/admin';
 import Follow from 'Component/Follow';
 import Radio from 'Component/Radio';
-import SongMusicItem from 'Component/test';
 import Type from 'Component/Type';
 import { createBrowserHistory } from 'history';
 import NotFound from 'NotFound';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Route } from 'react-router';
 import { Router, Switch } from 'react-router-dom';
 import './App.scss';
+import Album from './Component/AlbumView/index';
 import Alerts from './Component/Alert/alert';
 import KhamPha from './Component/KhamPha/index';
 import Profile from './Component/Profile/index';
@@ -18,7 +18,6 @@ import HOCplaylist from './HOC/HOCplaylist';
 import Playlist from './Page/Layout/Playlist/index';
 import { refreshToken } from './Redux/action/authAction';
 import { HomeTemplate } from './Template/HomeTemplate/index';
-import Album from './Component/AlbumView/index';
 
 export const history = createBrowserHistory();
 
@@ -31,13 +30,12 @@ function App() {
     return (
         <>
             <Alerts />
-            <SongMusicItem />
             <Router history={history}>
                 <HOCplaylist></HOCplaylist>
                 <Switch>
                     <Route path='/admin' component={DashAd}></Route>
                     <HomeTemplate exact path='/playlist/:name' Component={Playlist}></HomeTemplate>
-                    <HomeTemplate exact path='/albumview/:name' Component={Album}></HomeTemplate>
+                    <HomeTemplate exact path='/albumview/:id' Component={Album}></HomeTemplate>
                     <HomeTemplate exact path='/type' Component={Type}></HomeTemplate>
                     <HomeTemplate exact path='/follow' Component={Follow}></HomeTemplate>
                     <HomeTemplate exact path='/radio' Component={Radio}></HomeTemplate>

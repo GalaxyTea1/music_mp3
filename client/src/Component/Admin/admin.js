@@ -18,7 +18,6 @@ import DashRadio from './components/Radio/addRadio';
 import showRadio from './components/Radio/showRadio';
 import DashRank from './components/Rank/addRank';
 import showRank from './components/Rank/showRank';
-import Test from './components/Category/test';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -189,16 +188,6 @@ export default function DashAd() {
                                     </li>
                                 </NavLink>
                             </ListItem>
-                            <ListItem button className={classes.nested}>
-                                <ListItemIcon>
-                                    <StarBorder />
-                                </ListItemIcon>
-                                <NavLink exact to='/admin/add-test' activeClassName='activeLi'>
-                                    <li>
-                                        <ListItemText primary='Test' />
-                                    </li>
-                                </NavLink>
-                            </ListItem>
                         </List>
                     </Collapse>
                 </List>
@@ -213,7 +202,6 @@ export default function DashAd() {
                     <Route path='/admin/update-radios' exact component={showRadio} />
                     <Route path='/admin/add-ranks' exact component={DashRank} />
                     <Route path='/admin/update-ranks' exact component={showRank} />
-                    <Route path='/admin/add-test' exact component={Test} />
                 </Switch>
             </div>
         </div>

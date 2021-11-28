@@ -1,5 +1,5 @@
 import { SearchOutlined } from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { SongItem } from 'Redux/action/songMusicAction';
@@ -13,9 +13,14 @@ export default function Header() {
     useEffect(() => {
         dispatch(SongItem);
     }, [dispatch]);
-
+    const inputRef = useRef(null);
     const [audio, setAudio] = useState();
     const handleChangeAudio = (e) => {
+        // document.getElementById('formAudio').submit();
+        // console.log(inputRef.current);
+        // inputRef.current.dispatchEvent(new Event('submit'));
+        // inputRef.current && inputRef.current.submit();
+        inputRef.current.click();
         const audioFile = e.target.files[0];
         setAudio(audioFile);
     };
@@ -25,7 +30,6 @@ export default function Header() {
 
         let form_data = new FormData();
         form_data.append('audio', audio, audio.name);
-        console.log(audio);
         console.log(form_data);
         let url = 'http://localhost:5001/api/song/';
         axios
@@ -55,21 +59,21 @@ export default function Header() {
                 </div>
                 <div className='header__right flex items-center'>
                     <div className='form'>
-                        <form id='form' onSubmit={handleSubmit}>
+                        <form id='formAudio' onSubmit={handleSubmit}>
                             <span className='hiddenFileInput'>
                                 <input name='audio' type='file' onChange={handleChangeAudio} />
                             </span>
-                            <button
+
+                            <input
                                 style={{
                                     backgroundColor: 'gray',
                                     marginLeft: '155px',
-                                    // display: 'none',
+                                    display: 'none',
                                     cursor: 'pointer',
                                 }}
+                                ref={inputRef}
                                 type='submit'
-                            >
-                                submit
-                            </button>
+                            ></input>
                         </form>
                     </div>
                 </div>

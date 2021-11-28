@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Discovery } from '../../Redux/action/discoveryAction';
 import { Radio } from '../../Redux/action/radioAction';
 import MusicItemView from '../MusicItemView/index';
 import MusicRadio from '../MusicRadio/index';
 
 export default function KhamPha() {
-    const { discoveryReducer } = useSelector((state) => state);
+    const { discoveryList } = useSelector((state) => state.discoveryReducer);
     const { radioReducer } = useSelector((state) => state);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -74,23 +75,25 @@ export default function KhamPha() {
     const renderDataView = (arr) => {
         return arr.map((item, index) => {
             return (
-                <div key={index} className='p-3'>
-                    <MusicItemView item={item}></MusicItemView>
-                    <div className='w-full'>
-                        <p
-                            className='mt-2 font-bold  hover:text-pink-500'
-                            style={{ fontSize: '15px' }}
-                        >
-                            {item.title}
-                        </p>
-                        <p
-                            className=' hover:text-pink-500 opacity-60 hover:opacity-100'
-                            style={{ fontSize: '13px', marginTop: '2px' }}
-                        >
-                            {item.author}
-                        </p>
+                <Link to={`/albumview/${item._id}`}>
+                    <div key={index} className='p-3'>
+                        <MusicItemView item={item}></MusicItemView>
+                        <div className='w-full'>
+                            <p
+                                className='mt-2 font-bold  hover:text-pink-500'
+                                style={{ fontSize: '15px' }}
+                            >
+                                {item.title}
+                            </p>
+                            <p
+                                className=' hover:text-pink-500 opacity-60 hover:opacity-100'
+                                style={{ fontSize: '13px', marginTop: '2px' }}
+                            >
+                                {item.author}
+                            </p>
+                        </div>
                     </div>
-                </div>
+                </Link>
             );
         });
     };
@@ -175,23 +178,22 @@ export default function KhamPha() {
                     </div>
                 </div>
             </div>
-
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>Nghe Gần Đây</h3>
-                <div className='flex'>{renderDataView(discoveryReducer.slice(0, 5))}</div>
+                <div className='flex'>{renderDataView(discoveryList.slice(0, 5))}</div>
             </div>
 
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>Có Thể Bạn Sẽ Thích</h3>
-                <div className='flex'>{renderDataView(discoveryReducer.slice(5, 10))}</div>
+                <div className='flex'>{renderDataView(discoveryList.slice(5, 10))}</div>
             </div>
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>Nhạc Hay Nghe Ngay</h3>
-                <div className='flex'>{renderDataView(discoveryReducer.slice(15, 20))}</div>
+                <div className='flex'>{renderDataView(discoveryList.slice(15, 20))}</div>
             </div>
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>XONE's CORNER</h3>
-                <div className='flex'>{renderDataView(discoveryReducer.slice(10, 15))}</div>
+                <div className='flex'>{renderDataView(discoveryList.slice(10, 15))}</div>
             </div>
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>RADIO NỔI BẬT</h3>
@@ -199,11 +201,11 @@ export default function KhamPha() {
             </div>
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>Mix Riêng Cho Bạn</h3>
-                <div className='flex'>{renderDataView(discoveryReducer.slice(20, 24))}</div>
+                <div className='flex'>{renderDataView(discoveryList.slice(20, 24))}</div>
             </div>
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>Nhạc Mới Mỗi Ngày</h3>
-                <div className='flex'>{renderDataView(discoveryReducer.slice(24, 30))}</div>
+                <div className='flex'>{renderDataView(discoveryList.slice(24, 30))}</div>
             </div>
         </div>
     );

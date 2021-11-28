@@ -1,11 +1,35 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getSongAction } from '../../Redux/action/ListMusicAction';
-import { ADD_MUSIC_TO_PLAYLIST, REMOVE_MUSIC_TO_PLAYLIST } from '../../Redux/type/Music';
+import {
+    ADD_MUSIC_TO_PLAYLIST,
+    REMOVE_MUSIC_TO_PLAYLIST,
+    SONG_MUSIC_DETAIL,
+} from '../../Redux/type/Music';
 
 export default function PlaylistItem(props) {
     const dispatch = useDispatch();
     const { item, namePlaylist, type } = props;
+    const { listSongMusic } = useSelector((state) => state.detailReducer);
+
+    function List() {
+        return listSongMusic?.map((item) => {
+            return (
+                <div
+                    onClick={() => {
+                        dispatch({
+                            type: SONG_MUSIC_DETAIL,
+                            musicDetail: item,
+                            typeSongMusic: true,
+                        });
+                    }}
+                    style={{ color: 'blue', cursor: 'pointer', padding: '3px' }}
+                >
+                    <img src={item.thumbnail} alt='a' />
+                </div>
+            );
+        });
+    }
 
     return (
         <>
@@ -16,10 +40,16 @@ export default function PlaylistItem(props) {
                 <div className='ml-2'>
                     <img
                         onClick={() => {
-                            !type ? dispatch(getSongAction(item, false)) : console.log('');
+                            !type
+                                ? dispatch({
+                                      type: SONG_MUSIC_DETAIL,
+                                      musicDetail: item,
+                                      typeSongMusic: true,
+                                  })
+                                : console.log('');
                         }}
                         src={item.thumbnail}
-                        alt='hihi'
+                        alt='thumb'
                         style={{ width: 40, height: 40 }}
                         className='rounded-sm cursor-pointer'
                     ></img>

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 DashCategory.propTypes = {
     onSubmit: PropTypes.func,
@@ -11,10 +10,6 @@ export default function DashCategory() {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [image, setImage] = useState();
-
-    const { authReducer } = useSelector((state) => state);
-    // console.log(authReducer)
-
     const [avatar, setAvatar] = useState();
 
     useEffect(() => {
@@ -64,7 +59,6 @@ export default function DashCategory() {
 
         setTitle('');
         setAuthor('');
-        console.log(form_data);
     };
 
     return (

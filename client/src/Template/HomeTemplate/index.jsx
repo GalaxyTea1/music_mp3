@@ -26,7 +26,7 @@ export const HomeTemplate = (props) => {
                             <Header></Header>
                             <Component {...propsRouter}></Component>
                         </div>
-                        <ListMusic></ListMusic>
+                        {/* <ListMusic></ListMusic> */}
                         {/* <ListSong></ListSong> */}
                         <Footer {...restProps}></Footer>
                     </div>

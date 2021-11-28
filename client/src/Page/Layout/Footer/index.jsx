@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
-import { getSongAction } from '../../../Redux/action/ListMusicAction';
+import { getListAction, getSongAction } from '../../../Redux/action/ListMusicAction';
 import { useSpring, animated } from 'react-spring';
 import moment from 'moment';
 import { SONG_MUSIC_DETAIL } from 'Redux/type/Music';
@@ -16,42 +16,42 @@ export default function Footer(props) {
     const [shuffle, setShuffle] = useState(false);
     const dispatch = useDispatch();
 
-    let { listSong, songDetail, typeSong } = useSelector((state) => state.SongReducer);
-    const { musicDetail, listSongMusic } = useSelector((state) => state.detailReducer);
+    const { musicDetail, listSongMusic, typeSong } = useSelector((state) => state.detailReducer);
+    useEffect(() => {
+        dispatch(getListAction());
+    }, []);
+    useEffect(() => {
+        dispatch(getSongAction());
+    }, []);
+
     const { listPlaylist } = useSelector((state) => state.PlaylistReducer);
-    // const changeSong2 = (thamSo, list = listSongMusic) => {
-    //     const index = list.findIndex((item) => item._id === musicDetail._id);
-
-    //     if (thamSo === -1) {
-    //         //bai dau tien se bi loi
-    //         //check newu day la baiu dau tien => return ;
-    //         //kiem tra musicDetail co p la bai dau tien hay ko ?
-    //         if (list[0]._id === musicDetail._id) {
-    //             return;
-    //         }
-    //         const newSong = list[index + thamSo];
-    //         dispatch({
-    //             type: SONG_MUSIC_DETAIL,
-    //             musicDetail: newSong,
-    //             typeSong: true,
-    //         });
-    //     } else {
-    //         //bai cuoi cung se bi loi
-    //         //check neu day la bai cyuoi cung => return
-    //         if (list[list.length - 1]._id === musicDetail._id) {
-    //             return;
-    //         }
-    //         const newSong = list[index + thamSo];
-    //         dispatch({
-    //             type: SONG_MUSIC_DETAIL,
-    //             musicDetail: newSong,
-    //             typeSong: true,
-    //         });
-    //     }
-    // };
-
     const changeSong = (thamSo, list = listSongMusic) => {
-        const index = list.findIndex((item) => item._id === thamSo._id);
+        const index = list.findIndex((item) => item._id === musicDetail._id);
+        if (thamSo === -1) {
+            //check new day la bai dau tien => return ;
+            //kiem tra musicDetail co p la bai dau tien hay ko ?
+            if (list[0]?._id === musicDetail?._id) {
+                return;
+            }
+            const newSong = list[index + thamSo];
+            dispatch({
+                type: SONG_MUSIC_DETAIL,
+                musicDetail: newSong,
+                typeSong: true,
+            });
+        } else {
+            //bai cuoi cung se bi loi
+            //check neu day la bai cyuoi cung => return
+            if (list[list.length - 1]?._id === musicDetail?._id) {
+                return;
+            }
+            const newSong = list[index + thamSo];
+            dispatch({
+                type: SONG_MUSIC_DETAIL,
+                musicDetail: newSong,
+                typeSong: true,
+            });
+        }
     };
 
     // const changeSong = (thamSo, list = listSongMusic) => {
@@ -90,7 +90,7 @@ export default function Footer(props) {
 
     useEffect(() => {
         audioRef.current.volume = volume / 100;
-    }, []);
+    }, [volume]);
 
     useEffect(() => {
         if (musicDetail.audio) {
@@ -98,11 +98,6 @@ export default function Footer(props) {
             audioRef.current.play();
         }
     }, [musicDetail]);
-
-    // useEffect(() => {
-    //     updateSong(`${songDetail.audio}`);
-    //     audioRef.current.play();
-    // }, [songDetail]);
 
     const [audio, setAudio] = useState({
         source: '',
@@ -128,10 +123,9 @@ export default function Footer(props) {
     });
     const handleLoadedData = () => {
         setDuration(audioRef.current.duration);
-        // audioRef.current.play()
     };
     const handleEnded = () => {
-        let list = listSong;
+        let list = listSongMusic;
         setAudio({
             ...audio,
             play: false,
@@ -145,16 +139,25 @@ export default function Footer(props) {
             }
         }
         const lastSong = list[list.length - 1];
-        let index = list.findIndex((item) => item.id === musicDetail.id);
+        let index = list.findIndex((item) => item?._id === musicDetail?._id);
         if (index !== -1) {
             if (shuffle) {
-                const random = Math.floor(Math.random() * 100);
-                dispatch(getSongAction(list[random], typeSong));
-            } else if (list[index].id === lastSong.id) {
+                // getSongAction(list[random], typeSong)
+                const random = Math.floor(Math.random() * 10);
+                dispatch({
+                    type: SONG_MUSIC_DETAIL,
+                    musicDetail: list[random],
+                    typeSong: true,
+                });
+            } else if (list[index]._id === lastSong._id) {
                 console.log('Day la bai hat cuoi cung');
                 return;
             } else {
-                dispatch(getSongAction(list[index + 1], typeSong));
+                dispatch({
+                    type: SONG_MUSIC_DETAIL,
+                    musicDetail: list[index + 1],
+                    typeSong: true,
+                });
             }
         }
     };
@@ -231,10 +234,15 @@ export default function Footer(props) {
                     </button>
                     <button
                         onClick={() => {
-                            let list = listSong;
+                            let list = listSongMusic;
                             if (shuffle === true) {
-                                const random = Math.floor(Math.random() * 100);
-                                dispatch(getSongAction(list[random], typeSong));
+                                const random = Math.floor(Math.random() * 10);
+                                console.log(random);
+                                dispatch({
+                                    type: SONG_MUSIC_DETAIL,
+                                    musicDetail: list[random],
+                                    typeSong: true,
+                                });
                             } else {
                                 changeSong(1);
                             }
@@ -305,6 +313,7 @@ export default function Footer(props) {
 
                 <div>
                     <input
+                        // ref={audioRef}
                         type='range'
                         className='mx-2 mt-3'
                         id='myRange'

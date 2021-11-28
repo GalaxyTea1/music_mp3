@@ -1,24 +1,24 @@
 import axios from 'axios';
-import { GET_LIST_SONG, SONG_DETAIL, SONG_MUSIC_DETAIL, GET_DETAIL } from '../type/Music';
+import { GET_DETAIL, SONG_MUSIC_DETAIL } from '../type/Music';
 
-export const getListSongAction = () => {
-    return async (disaptch) => {
-        try {
-            const { data, status } = await axios({
-                url: 'https://mp3.zing.vn/xhr/chart-realtime?songId=0&videoId=0&albumId=0&chart=song&time=-1',
-                method: 'GET',
-            });
-            if (status === 200) {
-                disaptch({
-                    type: GET_LIST_SONG,
-                    listSong: data.data.song,
-                });
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-};
+// export const getListSongAction = () => {
+//     return async (disaptch) => {
+//         try {
+//             const { data, status } = await axios({
+//                 url: 'https://mp3.zing.vn/xhr/chart-realtime?songId=0&videoId=0&albumId=0&chart=song&time=-1',
+//                 method: 'GET',
+//             });
+//             if (status === 200) {
+//                 disaptch({
+//                     type: GET_LIST_SONG,
+//                     listSong: data.data.song,
+//                 });
+//             }
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     };
+// };
 
 // export const getSongDetailAction = (newSong, typeSong = true) => {
 //     return async (dispatch) => {
@@ -47,13 +47,13 @@ export const getListAction = () => {
                 url: 'http://localhost:5001/api/song',
                 method: 'GET',
             });
+
             if (status === 200) {
                 dispatch({
                     type: GET_DETAIL,
                     listSongMusic: data.songs,
                 });
             }
-            console.log(data.songs);
         } catch (error) {
             console.log(error);
         }

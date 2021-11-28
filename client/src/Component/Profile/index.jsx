@@ -96,15 +96,6 @@ export default function Profile() {
         return song.user === `${isId}`;
     });
 
-    const isCheck = listSongMusic?.map((item) => {
-        return item;
-    });
-    console.log(isCheck);
-
-    // const isName = listSongMusic.map((item) => {
-    //     return item.name;
-    // });
-
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -114,18 +105,36 @@ export default function Profile() {
     };
 
     function List() {
-        return listSongMusic?.map((item) => {
+        return isSong?.map((item) => {
             return (
                 <div
                     onClick={() => {
-                        console.log('item', item);
                         dispatch({
                             type: SONG_MUSIC_DETAIL,
                             musicDetail: item,
                             typeSongMusic: true,
                         });
                     }}
-                    style={{ color: 'red' }}
+                    style={{ color: 'blue', cursor: 'pointer', padding: '3px' }}
+                >
+                    {item.name}
+                </div>
+            );
+        });
+    }
+
+    function List2() {
+        return listSongMusic?.map((item) => {
+            return (
+                <div
+                    onClick={() => {
+                        dispatch({
+                            type: SONG_MUSIC_DETAIL,
+                            musicDetail: item,
+                            typeSongMusic: true,
+                        });
+                    }}
+                    style={{ color: 'blue', cursor: 'pointer', padding: '3px' }}
                 >
                     {item.name}
                 </div>
@@ -167,7 +176,9 @@ export default function Profile() {
                         value={value}
                         index={0}
                         dir={theme.direction}
-                    ></TabPanel>
+                    >
+                        <List2 />
+                    </TabPanel>
                     <TabPanel
                         className={classes.tabpanels}
                         value={value}
