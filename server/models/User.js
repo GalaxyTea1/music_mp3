@@ -18,6 +18,10 @@ let UserSchema = new Schema({
     roles: {
         type: String,
     },
+    playlist: {
+        type: mongoose.Types.ObjectId,
+        ref: 'playlists',
+    },
     createdAt: {
         type: Date,
         default: Date.now,

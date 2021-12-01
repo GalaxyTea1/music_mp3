@@ -88,9 +88,9 @@ export default function ShowRank() {
     const authorFilter = filterArr.map((item) => item.author);
 
     return (
-        <div className="main">
+        <div className='main'>
             <div
-                className="add_album"
+                className='add_album'
                 style={{ backgroundColor: 'green', color: 'black', marginTop: '40px' }}
             >
                 <form onSubmit={handleSubmit}>
@@ -104,35 +104,37 @@ export default function ShowRank() {
                     <br />
                     <br />
                     <input
-                        type="text"
-                        label="title"
+                        type='text'
+                        label='title'
                         placeholder={titleFilter}
-                        size="50"
+                        size='50'
                         value={title}
                         onChange={handleChange}
                     />
                     <br />
                     <br />
                     <input
-                        type="text"
-                        label="author"
+                        type='text'
+                        label='author'
                         placeholder={authorFilter}
-                        size="50"
+                        size='50'
                         value={author}
                         onChange={handleChangeAuthor}
                     />
                     <br />
                     <br />
                     <input
-                        type="file"
-                        label="image"
-                        placeholder="Thêm Ảnh"
+                        type='file'
+                        label='image'
+                        placeholder='Thêm Ảnh'
                         onChange={handlePreviewAvatar}
                     />
                     <br />
                     <br />
-                    {avatar && <img src={avatar.preview} alt="album" width="250px !important" />}
-                    <button type="submit">Cập nhật Album</button>
+                    {avatar && <img src={avatar.preview} alt='album' width='250px !important' />}
+                    <button type='submit' className='btn__control'>
+                        Cập nhật Album
+                    </button>
                 </form>
             </div>
         </div>

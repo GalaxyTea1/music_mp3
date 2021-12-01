@@ -97,7 +97,9 @@ export default function DashCategory() {
                         onChange={handleImageChange}
                         required
                     />
-                    <button type='submit'>Thêm Thể Loại</button>
+                    <button type='submit' className='btn__control'>
+                        Thêm Thể Loại
+                    </button>
                 </form>
                 <br />
                 <br />

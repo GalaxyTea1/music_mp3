@@ -7,7 +7,6 @@ import { getListAction } from '../../../Redux/action/ListMusicAction';
 
 export default function ListSong() {
     const { listSongMusic, listRandomMusic } = useSelector((state) => state.detailReducer);
-    console.log(listSongMusic);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getListAction());

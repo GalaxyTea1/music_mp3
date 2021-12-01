@@ -39,7 +39,7 @@ export default (state = initialState, action) => {
             let newListPlaylist = [...state.listPlaylist];
             let index = newListPlaylist.findIndex((item) => item.name === namePlaylist);
             if (index !== -1) {
-                newListPlaylist[index].listBaiHat.push(music);
+                newListPlaylist[index].list_song.push(music);
             }
             state.listPlaylist = [...newListPlaylist];
             return { ...state };
@@ -49,11 +49,11 @@ export default (state = initialState, action) => {
             let newListPlaylist = [...state.listPlaylist];
             let index = newListPlaylist.findIndex((item) => item.name === namePlaylist);
             if (index !== -1) {
-                let indexRemove = newListPlaylist[index].listBaiHat.findIndex(
+                let indexRemove = newListPlaylist[index].list_song.findIndex(
                     (item) => item.name === music.name
                 );
                 if (indexRemove !== -1) {
-                    newListPlaylist[index].listBaiHat.splice(indexRemove, 1);
+                    newListPlaylist[index].list_song.splice(indexRemove, 1);
                 }
             }
             state.listPlaylist = [...newListPlaylist];

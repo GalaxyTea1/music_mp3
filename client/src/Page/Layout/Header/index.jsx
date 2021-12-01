@@ -1,26 +1,26 @@
 import { SearchOutlined } from '@ant-design/icons';
-import React, { useEffect, useRef, useState } from 'react';
+import { getDataAPI } from 'api/postApi';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SongItem } from 'Redux/action/songMusicAction';
+import { SONG_MUSIC_DETAIL } from 'Redux/type/Music';
 
 export default function Header() {
-    // let [tenBaiHat, setTenBaiHat] = useState({
-    //     value: '',
-    // });
+    const [valueSearch, setValueSearch] = useState('');
+    const [resultSearch, setResultSearch] = useState([]);
+    const [close, setClose] = useState(false);
+    const [upload, setUpload] = useState(false);
     const { authReducer } = useSelector((state) => state);
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(SongItem);
-    }, [dispatch]);
-    const inputRef = useRef(null);
     const [audio, setAudio] = useState();
+    useEffect(() => {
+        if (audio === undefined) {
+            setUpload(true);
+        } else {
+            setUpload(false);
+        }
+    }, [audio]);
     const handleChangeAudio = (e) => {
-        // document.getElementById('formAudio').submit();
-        // console.log(inputRef.current);
-        // inputRef.current.dispatchEvent(new Event('submit'));
-        // inputRef.current && inputRef.current.submit();
-        inputRef.current.click();
         const audioFile = e.target.files[0];
         setAudio(audioFile);
     };
@@ -31,7 +31,7 @@ export default function Header() {
         let form_data = new FormData();
         form_data.append('audio', audio, audio.name);
         console.log(form_data);
-        let url = 'http://localhost:5001/api/song/';
+        let url = 'http://localhost:5001/api/handlesong/';
         axios
             .post(url, form_data, {
                 headers: {
@@ -45,35 +45,84 @@ export default function Header() {
             .catch((err) => console.log(err));
     };
 
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        const res = await getDataAPI(`search?name=${valueSearch}`);
+        setResultSearch(res.data.search);
+        console.log(res);
+    };
+
     return (
         <div className='header'>
             <div className='header__content flex justify-between w-full'>
                 <div className='header__left'>
-                    <div className='header__search' style={{ left: '24px' }}>
+                    <div
+                        className='header__search'
+                        style={{ left: '24px' }}
+                        onFocus={() => setClose(true)}
+                    >
                         <SearchOutlined
                             className='mr-5'
                             style={{ fontSize: '24px', position: 'absolute', left: '10px' }}
                         />
-                        <input placeholder='Nhập tên bài hát...' name='tenBaiHat'></input>
+                        <form onSubmit={handleSearch}>
+                            <input
+                                placeholder='Nhập tên bài hát...'
+                                value={valueSearch}
+                                onChange={(e) => setValueSearch(e.target.value)}
+                                name='inputSearch'
+                            ></input>
+                        </form>
+
+                        <div className='header__input' onInput={() => setClose(true)}>
+                            {close ? (
+                                <div>
+                                    <h3>Từ Khóa Liên Quan</h3>
+                                    <i
+                                        class='fas fa-window-close'
+                                        onClick={() => setClose(false)}
+                                    ></i>
+                                </div>
+                            ) : null}
+
+                            {close ? (
+                                <div>
+                                    {resultSearch.map((item) => (
+                                        <div
+                                            className='search__item'
+                                            onClick={() => {
+                                                dispatch({
+                                                    type: SONG_MUSIC_DETAIL,
+                                                    musicDetail: item,
+                                                    typeSongMusic: true,
+                                                });
+                                            }}
+                                        >
+                                            {item.name} - {item.artists_names}
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : null}
+                        </div>
                     </div>
                 </div>
                 <div className='header__right flex items-center'>
                     <div className='form'>
-                        <form id='formAudio' onSubmit={handleSubmit}>
-                            <span className='hiddenFileInput'>
-                                <input name='audio' type='file' onChange={handleChangeAudio} />
-                            </span>
-
-                            <input
+                        <form onSubmit={handleSubmit}>
+                            <div
                                 style={{
-                                    backgroundColor: 'gray',
-                                    marginLeft: '155px',
-                                    display: 'none',
-                                    cursor: 'pointer',
+                                    display:
+                                        typeof authReducer.token === 'string' ? 'block' : 'none',
                                 }}
-                                ref={inputRef}
-                                type='submit'
-                            ></input>
+                            >
+                                <span className='hiddenFileInput'>
+                                    <input name='audio' type='file' onChange={handleChangeAudio} />
+                                </span>
+                                {/* ref={inputRef} */}
+                                <span className='isSubmit'>
+                                    <input type='submit' disabled={upload} value='Tải lên' />
+                                </span>
+                            </div>
                         </form>
                     </div>
                 </div>

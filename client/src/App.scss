@@ -41,7 +41,7 @@
     .sideBar__menu {
       list-style: none;
       margin-bottom: 15px;
-      margin-top: 20px;
+      margin-top: 35px;
       font-weight: 700;
       color: $text-color;
       line-height: normal;
@@ -234,6 +234,41 @@
             color: white;
           }
         }
+        .header__input {
+          // background-color: #81858c;
+          background-image: url("https://s1.favim.com/orig/151010/beautiful-black-and-white-landscape-stars-Favim.com-3416920.jpg");
+          border-radius: 20px;
+          padding: 0 15px 0 15px;
+          width: 530px;
+          position: fixed;
+          top: 55px;
+          left: 300px;
+          h3 {
+            display: inline-block;
+            margin-top: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            background-color: transparent;
+          }
+          i {
+            margin-left: 355px;
+            cursor: pointer;
+            opacity: 1;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+
+          .search__item {
+            margin: 10px;
+            padding: 2px;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
       }
     }
     .header__right {
@@ -269,6 +304,24 @@
             background-size: 100% 100%;
             margin-left: 160px;
             background-image: url(https://cdn-icons-png.flaticon.com/512/179/179378.png);
+          }
+          .isSubmit {
+            > input {
+              display: block;
+              background-color: #c1d3e9;
+              position: fixed;
+              width: 60px;
+              height: 30px;
+              margin-left: 80px;
+              top: 4%;
+              cursor: pointer;
+              outline: none;
+              color: black;
+            }
+            &:hover {
+              opacity: 0.9;
+              color: white;
+            }
           }
         }
         h3 {
@@ -423,6 +476,16 @@
           }
         }
       }
+    }
+  }
+
+  .List__item {
+    font-weight: bold;
+    font-size: 16px;
+    opacity: 0.7;
+    &:hover {
+      opacity: 1;
+      font-size: 17px;
     }
   }
 
@@ -805,11 +868,44 @@
       }
     }
   }
+  .table_check {
+    border: 1px solid black;
+    // border-collapse: collapse;
+    width: 100%;
+    // position: relative;
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    tr:hover {
+      background-color: #d6eeee;
+    }
+    button {
+      width: 50px;
+      height: 5%;
+      background-color: gray;
+      border-radius: 4px;
+      position: none !important;
+      // bottom: 120px;
+      // left: 42%;
+    }
+  }
+  .btn__control {
+    width: 29%;
+    height: 5%;
+    background-color: gray;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 150px;
+    left: 42%;
+  }
 
-  .main {
+  .main_admin {
     background-color: #d3ded6;
     width: 100%;
-    height: 721px;
+    height: 770px;
     display: flex;
     .navBar_left {
       width: 30%;
@@ -830,20 +926,13 @@
       width: 800px;
       height: 600px;
     }
-    button {
-      width: 29%;
-      height: 5%;
-      background-color: gray;
-      border-radius: 5px;
-      position: fixed;
-      bottom: 120px;
-      left: 42%
-    }
   }
 
   .container {
-    table, th, td {
-      border:1px solid black;
+    table,
+    th,
+    td {
+      border: 1px solid black;
     }
   }
 

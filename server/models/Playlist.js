@@ -5,17 +5,10 @@ const PlaylistSchema = new Schema({
     name: {
         type: String,
     },
-    song: [
+    list_song: [
         {
-            title: {
-                type: String,
-            },
-            artists_names: {
-                type: String,
-            },
-            audio: {
-                type: String,
-            },
+            type: mongoose.Types.ObjectId,
+            ref: 'songs',
         },
     ],
     user: {

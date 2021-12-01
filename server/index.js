@@ -15,6 +15,9 @@ const radioViewRouter = require('./routers/radioViewRouter');
 const categoryRouter = require('./routers/categoryRouter');
 const songRouter = require('./routers/songRouter');
 const playlistRouter = require('./routers/playlistRouter');
+const searchRouter = require('./routers/searchRouter');
+const handleSongRouter = require('./routers/handleSongRouter');
+const handleAcceptRouter = require('./routers/AcceptRouter');
 
 const connectDB = async () => {
     try {
@@ -35,8 +38,9 @@ const connectDB = async () => {
 connectDB();
 
 const app = express();
-app.use(express.json({ limit: '60m' }));
-app.use(express.urlencoded({ limit: '50mb', extended: false }));
+app.use(express.json({ limit: '600m' }));
+app.use(express.urlencoded({ limit: '500mb', extended: false }));
+
 app.use(cors());
 app.use(cookieParser());
 
@@ -55,6 +59,9 @@ app.use('/api/radioview', radioViewRouter);
 app.use('/api/category', categoryRouter);
 app.use('/api/song', songRouter);
 app.use('/api/playlist', playlistRouter);
+app.use('/api/search', searchRouter);
+app.use('/api/handlesong', handleSongRouter);
+app.use('/api/handleAccept', handleAcceptRouter);
 
 const PORT = process.env.PORT || 5001;
 

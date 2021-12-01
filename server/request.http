@@ -29,7 +29,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5001/api/song
+GET http://localhost:5001/api/search
 
 ###
 

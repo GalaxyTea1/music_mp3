@@ -5,7 +5,7 @@ import { SONG_MUSIC_DETAIL } from 'Redux/type/Music';
 import { getSongAction } from '../../Redux/action/ListMusicAction';
 
 export default function MusicItem(props) {
-    const { musicDetail } = useSelector((state) => state.detailReducer);
+    const { musicDetail, typeSongMusic } = useSelector((state) => state.detailReducer);
     const dispatch = useDispatch();
     const { item, index, listSong } = props;
 

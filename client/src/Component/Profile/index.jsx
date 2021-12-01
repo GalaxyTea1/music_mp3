@@ -5,9 +5,10 @@ import Box from '@material-ui/core/Box';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SwipeableViews from 'react-swipeable-views';
+import { SongItem } from 'Redux/action/songMusicAction';
 import { SONG_MUSIC_DETAIL } from 'Redux/type/Music';
 
 function TabPanel(props) {
@@ -88,6 +89,10 @@ export default function Profile() {
     const { songMusicReducer } = useSelector((state) => state);
     const { listSongMusic } = useSelector((state) => state.detailReducer);
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(SongItem);
+    }, [dispatch]);
+
     let isId = authReducer?.user?._id;
 
     const resultValueSong = songMusicReducer.map((item) => item);
@@ -95,6 +100,7 @@ export default function Profile() {
     const isSong = resultValueSong.filter(function (song) {
         return song.user === `${isId}`;
     });
+    console.log(songMusicReducer);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -108,6 +114,7 @@ export default function Profile() {
         return isSong?.map((item) => {
             return (
                 <div
+                    className='List__item'
                     onClick={() => {
                         dispatch({
                             type: SONG_MUSIC_DETAIL,
@@ -123,24 +130,24 @@ export default function Profile() {
         });
     }
 
-    function List2() {
-        return listSongMusic?.map((item) => {
-            return (
-                <div
-                    onClick={() => {
-                        dispatch({
-                            type: SONG_MUSIC_DETAIL,
-                            musicDetail: item,
-                            typeSongMusic: true,
-                        });
-                    }}
-                    style={{ color: 'blue', cursor: 'pointer', padding: '3px' }}
-                >
-                    {item.name}
-                </div>
-            );
-        });
-    }
+    // function List2() {
+    //     return listSongMusic?.map((item) => {
+    //         return (
+    //             <div
+    //                 onClick={() => {
+    //                     dispatch({
+    //                         type: SONG_MUSIC_DETAIL,
+    //                         musicDetail: item,
+    //                         typeSongMusic: true,
+    //                     });
+    //                 }}
+    //                 style={{ color: 'blue', cursor: 'pointer', padding: '3px' }}
+    //             >
+    //                 {item.name}
+    //             </div>
+    //         );
+    //     });
+    // }
 
     return (
         <div className={classes.container}>
@@ -177,16 +184,14 @@ export default function Profile() {
                         index={0}
                         dir={theme.direction}
                     >
-                        <List2 />
+                        {/* <List2 /> */}
                     </TabPanel>
                     <TabPanel
                         className={classes.tabpanels}
                         value={value}
                         index={1}
                         dir={theme.direction}
-                    >
-                        Playlist
-                    </TabPanel>
+                    ></TabPanel>
                     <TabPanel
                         className={classes.tabpanels}
                         value={value}

@@ -14,6 +14,7 @@ import React, { useState } from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom';
 import ShowCategory from './components/Category/showCategory';
 import showDiscovery from './components/Discovery/showDiscovery';
+import HandleSong from './components/HandleSong/handleSong';
 import DashRadio from './components/Radio/addRadio';
 import showRadio from './components/Radio/showRadio';
 import DashRank from './components/Rank/addRank';
@@ -24,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
         color: '#fff',
         maxWidth: 360,
         backgroundColor: '#c78f4a',
-        height: '721px',
+        // height: '721px',
+        height: '770px',
     },
     nested: {
         paddingLeft: theme.spacing(4),
@@ -37,6 +39,7 @@ export default function DashAd() {
     const [open1, setOpen1] = useState(true);
     const [open2, setOpen2] = useState(true);
     const [open3, setOpen3] = useState(true);
+    const [open4, setOpen4] = useState(true);
 
     const handleClick = () => {
         setOpen(!open);
@@ -54,8 +57,12 @@ export default function DashAd() {
         setOpen3(!open3);
     };
 
+    const handleClickOpen4 = () => {
+        setOpen4(!open4);
+    };
+
     return (
-        <div className='main'>
+        <div className='main_admin'>
             <div className='navBar_left'>
                 <List
                     component='nav'
@@ -99,7 +106,7 @@ export default function DashAd() {
                         </List>
                     </Collapse>
                     <ListItem button onClick={handleClickOpen}>
-                        <ListItemText primary='Rank' />
+                        <ListItemText primary='Top100' />
                         {open1 ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
                     <Collapse in={open1} timeout='auto' unmountOnExit>
@@ -126,7 +133,7 @@ export default function DashAd() {
                             </ListItem>
                         </List>
                     </Collapse>
-                    <ListItem button onClick={handleClickOpen2}>
+                    {/* <ListItem button onClick={handleClickOpen2}>
                         <ListItemText primary='Radio' />
                         {open2 ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
@@ -153,7 +160,7 @@ export default function DashAd() {
                                 </NavLink>
                             </ListItem>
                         </List>
-                    </Collapse>
+                    </Collapse> */}
                     <ListItem button onClick={handleClickOpen3}>
                         <ListItemText primary='Thể Loại' />
                         {open3 ? <ExpandLess /> : <ExpandMore />}
@@ -190,6 +197,24 @@ export default function DashAd() {
                             </ListItem>
                         </List>
                     </Collapse>
+                    <ListItem button onClick={handleClickOpen4}>
+                        <ListItemText primary='Duyệt Bài Hát ' />
+                        {open4 ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={open4} timeout='auto' unmountOnExit>
+                        <List component='div' disablePadding>
+                            <ListItem button className={classes.nested}>
+                                <ListItemIcon>
+                                    <StarBorder />
+                                </ListItemIcon>
+                                <NavLink exact to='/admin/handle-song' activeClassName='activeLi'>
+                                    <li>
+                                        <ListItemText primary='Duyệt' />
+                                    </li>
+                                </NavLink>
+                            </ListItem>
+                        </List>
+                    </Collapse>
                 </List>
             </div>
             <div className='navBar_right'>
@@ -202,6 +227,7 @@ export default function DashAd() {
                     <Route path='/admin/update-radios' exact component={showRadio} />
                     <Route path='/admin/add-ranks' exact component={DashRank} />
                     <Route path='/admin/update-ranks' exact component={showRank} />
+                    <Route path='/admin/handle-song' exact component={HandleSong} />
                 </Switch>
             </div>
         </div>

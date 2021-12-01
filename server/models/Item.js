@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const DiscoverySchema = new Schema({
+const ItemSchema = new Schema({
     title: {
         type: String,
     },
@@ -20,4 +20,4 @@ const DiscoverySchema = new Schema({
     },
 });
 
-module.exports = mongoose.model('discoverys', DiscoverySchema);
+module.exports = mongoose.model('items', ItemSchema);

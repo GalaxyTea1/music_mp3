@@ -1,16 +1,17 @@
+const express = require('express');
 const router = express.Router();
+const Song = require('../models/Song');
 
-// @route GET api/posts
-// @desc Get posts
-// @access Private
-router.get('/search', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        const search = await Search.find({ title: { $regex: req.query.title } })
+        const search = await Song.find({ name: { $regex: req.query.name } })
             .limit(10)
-            .select('title author img user');
+            .select('name artists_names thumbnail audio');
         res.json({ search });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
 });
+
+module.exports = router;

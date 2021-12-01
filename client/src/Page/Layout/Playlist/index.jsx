@@ -1,13 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { handlePlaylist } from 'Redux/action/handlePlaylist';
 import ChangePlaylist from '../../../Component/ChangePlaylist/index';
 import PlaylistItem from '../../../Component/PlaylistItem/index';
-import { OPEN_MODAL, REMOVE_PLAYLIST, SONG_MUSIC_DETAIL } from '../../../Redux/type/Music';
+import { OPEN_MODAL, REMOVE_PLAYLIST } from '../../../Redux/type/Music';
 
 export default function Playlist(props) {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { authReducer } = useSelector((state) => state);
     const { listSongMusic } = useSelector((state) => state.detailReducer);
     const { listPlaylist } = useSelector((state) => state.PlaylistReducer);
     const findThisPlaylist = () => {
@@ -23,7 +25,7 @@ export default function Playlist(props) {
     const thisPlayList = findThisPlaylist();
     const renderListSongMusicRandom = () => {
         const newArr = listSongMusic.filter((item) => {
-            return !thisPlayList?.listBaiHat.includes(item);
+            return !thisPlayList?.list_song.includes(item);
         });
         return newArr?.slice(0, 5).map((item, index) => {
             return (
@@ -38,8 +40,8 @@ export default function Playlist(props) {
         });
     };
     const renderBaihatPlaylist = () => {
-        const { listBaiHat } = thisPlayList;
-        return listBaiHat.map((item, index) => {
+        const { list_song } = thisPlayList;
+        return list_song.map((item, index) => {
             return (
                 <div key={index}>
                     <PlaylistItem
@@ -50,6 +52,11 @@ export default function Playlist(props) {
                 </div>
             );
         });
+    };
+    console.log(listPlaylist, authReducer.user._id);
+    const handleSubmit = (item) => {
+        console.log(item, authReducer.user._id);
+        dispatch(handlePlaylist({ item, authReducer }));
     };
     return (
         <div
@@ -112,12 +119,15 @@ export default function Playlist(props) {
                     >
                         Sửa Playlist
                     </button>
+                    <button className='mt-0 ml-2' onClick={() => handleSubmit(listPlaylist)}>
+                        Lưu Playlist
+                    </button>
                 </div>
             </div>
             <div className='playlist_right'>
                 <div className='container'>
                     <div className='playlist_listBaiHat'>
-                        {thisPlayList && thisPlayList.listBaiHat.length > 0 ? (
+                        {thisPlayList && thisPlayList.list_song.length > 0 ? (
                             renderBaihatPlaylist()
                         ) : (
                             <div className='container_listBaiHat flex items-center justify-center'>

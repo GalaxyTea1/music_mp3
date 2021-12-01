@@ -1,10 +1,8 @@
 import { Route } from 'react-router';
-import MenuNavBar from '../../Page/Layout/MenuNavbar/index';
-import ListMusic from '../../Page/Layout/ListMusic/index';
-import ListSong from '../../Page/Layout/ListSong/index';
-import Header from '../../Page/Layout/Header/index';
-import Footer from '../../Page/Layout/Footer/index';
 import bg from '../../Page/Images/bg1.png';
+import Footer from '../../Page/Layout/Footer/index';
+import Header from '../../Page/Layout/Header/index';
+import MenuNavBar from '../../Page/Layout/MenuNavbar/index';
 
 export const HomeTemplate = (props) => {
     const { Component, ...restProps } = props;
@@ -26,8 +24,6 @@ export const HomeTemplate = (props) => {
                             <Header></Header>
                             <Component {...propsRouter}></Component>
                         </div>
-                        {/* <ListMusic></ListMusic> */}
-                        {/* <ListSong></ListSong> */}
                         <Footer {...restProps}></Footer>
                     </div>
                 );

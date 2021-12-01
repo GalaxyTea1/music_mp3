@@ -1,10 +1,7 @@
 import {
-    BulbOutlined,
     CustomerServiceOutlined,
     ExceptionOutlined,
     LineChartOutlined,
-    RedditOutlined,
-    TeamOutlined,
     WeiboOutlined,
 } from '@ant-design/icons';
 import { Button, IconButton, makeStyles } from '@material-ui/core';
@@ -52,8 +49,6 @@ export default function MenuNavbar() {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const [mode, setMode] = useState(MODE.LOGIN);
-    // const loggedInUser = useSelector((state) => state);
-    // const isLoggedIn = !!loggedInUser._id
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -126,42 +121,11 @@ export default function MenuNavbar() {
                             Thể Loại
                         </li>
                     </NavLink>
-                    <NavLink exact to='/radio' activeClassName='activeLi'>
-                        <li>
-                            <i>
-                                <RedditOutlined className='block' />
-                            </i>
-                            Radio{' '}
-                            <span className='mt-1 ml-2'>
-                                <img
-                                    src='https://zjs.zadn.vn/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg'
-                                    alt='liveLogo'
-                                ></img>
-                            </span>
-                        </li>
-                    </NavLink>
                 </ul>
             </div>
-            {/* <div className='gach'></div> */}
+            <div className='gach'></div>
             <div className='sideBar__music'>
                 <div className='sideBar__menu2 mt-3' onScroll={handleScroll}>
-                    {/* <ul className='mt-2'>
-                        <NavLink exact to='/radio' activeClassName='activeLi'>
-                            <li>
-                                <i>
-                                    <RedditOutlined className='block' />
-                                </i>
-                                Radio{' '}
-                                <span className='mt-1 ml-2'>
-                                    <img
-                                        src='https://zjs.zadn.vn/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg'
-                                        alt='liveLogo'
-                                    ></img>
-                                </span>
-                            </li>
-                        </NavLink>
-                    </ul>
-                    <br /> */}
                     <div className='sideBar__banner'>
                         <p>Đăng nhập để trải nghiệm cảm giác mới lạ hơn</p>
                         {authReducer.token ? (

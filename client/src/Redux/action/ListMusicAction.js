@@ -60,7 +60,7 @@ export const getListAction = () => {
     };
 };
 
-export const getSongAction = (typeSong = true) => {
+export const getSongAction = (typeSongMusic = true) => {
     return async (dispatch) => {
         try {
             const { data, status } = await axios({
@@ -72,7 +72,7 @@ export const getSongAction = (typeSong = true) => {
                 dispatch({
                     type: SONG_MUSIC_DETAIL,
                     musicDetail: data.songs[0],
-                    typeSong: typeSong,
+                    typeSongMusic: typeSongMusic,
                 });
             }
         } catch (error) {
