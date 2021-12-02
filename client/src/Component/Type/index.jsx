@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Category } from '../../Redux/action/categoryAction';
 import MusicItemView from '../MusicItemView/index';
 
@@ -15,23 +16,25 @@ function Type(props) {
     const renderDataView = (arr) => {
         return arr.map((item, index) => {
             return (
-                <div key={index} className='p-3'>
-                    <MusicItemView item={item}></MusicItemView>
-                    <div className='w-full'>
-                        <p
-                            className='mt-2 font-bold  hover:text-pink-500'
-                            style={{ fontSize: '15px' }}
-                        >
-                            {item.title}
-                        </p>
-                        <p
-                            className=' hover:text-pink-500 opacity-60 hover:opacity-100'
-                            style={{ fontSize: '13px', marginTop: '2px' }}
-                        >
-                            {item.author}
-                        </p>
+                <Link to={`/categoryview/${item._id}`}>
+                    <div key={index} className='p-3'>
+                        <MusicItemView item={item}></MusicItemView>
+                        <div className='w-full'>
+                            <p
+                                className='mt-2 font-bold  hover:text-pink-500'
+                                style={{ fontSize: '15px' }}
+                            >
+                                {item.title}
+                            </p>
+                            <p
+                                className=' hover:text-pink-500 opacity-60 hover:opacity-100'
+                                style={{ fontSize: '13px', marginTop: '2px' }}
+                            >
+                                {item.author}
+                            </p>
+                        </div>
                     </div>
-                </div>
+                </Link>
             );
         });
     };

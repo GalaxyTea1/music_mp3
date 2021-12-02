@@ -1,6 +1,6 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 DashDiscovery.propTypes = {
     onSubmit: PropTypes.func,
@@ -10,8 +10,8 @@ export default function DashDiscovery() {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [image, setImage] = useState();
-
     const [avatar, setAvatar] = useState();
+    const titleRef = useRef();
 
     useEffect(() => {
         return () => {
@@ -60,6 +60,7 @@ export default function DashDiscovery() {
 
         setTitle('');
         setAuthor('');
+        titleRef.current.focus();
     };
 
     return (
@@ -67,6 +68,7 @@ export default function DashDiscovery() {
             <div className='add_album' style={{ margin: '40px 10px 10px 0' }}>
                 <form onSubmit={handleSubmit}>
                     <input
+                        ref={titleRef}
                         type='text'
                         size='50'
                         placeholder='Title'

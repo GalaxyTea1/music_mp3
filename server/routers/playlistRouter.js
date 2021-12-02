@@ -4,12 +4,13 @@ const verifyToken = require('../middleware/auth');
 const Playlist = require('../models/Playlist');
 
 router.post('/', verifyToken, async (req, res) => {
-    const { name } = req.body;
+    const { name, list_song } = req.body;
 
     try {
+        console.log(name, list_song);
         const newPlaylist = new Playlist({
             name,
-            song: req.list_song._id,
+            list_song,
             user: req.user._id,
         });
         await newPlaylist.save();

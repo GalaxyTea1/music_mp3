@@ -1,6 +1,8 @@
 import DashAd from 'Component/Admin/admin';
+import Category2 from 'Component/CategoryView';
 import Follow from 'Component/Follow';
 import Radio from 'Component/Radio';
+import Top from 'Component/TopView';
 import Type from 'Component/Type';
 import { createBrowserHistory } from 'history';
 import NotFound from 'NotFound';
@@ -36,6 +38,12 @@ function App() {
                     <Route path='/admin' component={DashAd}></Route>
                     <HomeTemplate exact path='/playlist/:name' Component={Playlist}></HomeTemplate>
                     <HomeTemplate exact path='/albumview/:id' Component={Album}></HomeTemplate>
+                    <HomeTemplate exact path='/topview/:id' Component={Top}></HomeTemplate>
+                    <HomeTemplate
+                        exact
+                        path='/categoryview/:id'
+                        Component={Category2}
+                    ></HomeTemplate>
                     <HomeTemplate exact path='/type' Component={Type}></HomeTemplate>
                     <HomeTemplate exact path='/follow' Component={Follow}></HomeTemplate>
                     <HomeTemplate exact path='/radio' Component={Radio}></HomeTemplate>

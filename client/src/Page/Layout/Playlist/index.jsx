@@ -53,10 +53,9 @@ export default function Playlist(props) {
             );
         });
     };
-    console.log(listPlaylist, authReducer.user._id);
     const handleSubmit = (item) => {
-        console.log(item, authReducer.user._id);
-        dispatch(handlePlaylist({ item, authReducer }));
+        console.log(item);
+        dispatch(handlePlaylist({ item }));
     };
     return (
         <div
