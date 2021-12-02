@@ -11,9 +11,12 @@ let UserSchema = new Schema({
         type: String,
         required: true,
     },
+    avatar: {
+        type: String,
+    },
     gender: {
         type: String,
-        default: 'Other',
+        default: 'Male',
     },
     roles: {
         type: String,

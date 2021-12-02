@@ -10,26 +10,7 @@ import {
 export default function PlaylistItem(props) {
     const dispatch = useDispatch();
     const { item, namePlaylist, type } = props;
-    const { listSongMusic } = useSelector((state) => state.detailReducer);
-
-    function List() {
-        return listSongMusic?.map((item) => {
-            return (
-                <div
-                    onClick={() => {
-                        dispatch({
-                            type: SONG_MUSIC_DETAIL,
-                            musicDetail: item,
-                            typeSongMusic: true,
-                        });
-                    }}
-                    style={{ color: 'blue', cursor: 'pointer', padding: '3px' }}
-                >
-                    <img src={item.thumbnail} alt='a' />
-                </div>
-            );
-        });
-    }
+    console.log(props);
 
     return (
         <>

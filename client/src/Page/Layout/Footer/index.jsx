@@ -58,52 +58,52 @@ export default function Footer(props) {
         }
     };
 
-    // const changeSong2 = (thamSo, list = listSongMusic) => {
-    //     if (typeSongMusic === false) {
-    //         const path = props.computedMatch.params.name;
-    //         const index = listPlaylist.findIndex((item) => item.name === path);
-    //         if (index !== -1) {
-    //             list = listPlaylist[index].listBaiHat;
-    //         }
-    //     }
-    //     const lastSong = list[list.length - 1];
-    //     //tim bai dang phat (songDetail) trong list;
-    //     //neu nhu bai nay la index thu = (index = 0) return; ko lam gi ca
-    //     const index = list.findIndex((item) => item._id === musicDetail._id);
-    //     let nowSong = {};
-    //     if (index !== -1) {
-    //         if (thamSo === 1) {
-    //             if (list[index]._id === lastSong._id) {
-    //                 return dispatch({
-    //                     type: SONG_MUSIC_DETAIL,
-    //                     musicDetail: list[0],
-    //                     typeSongMusic: typeSongMusic,
-    //                 });
-    //             } else {
-    //                 nowSong = list[index + thamSo];
-    //             }
-    //         } else if (thamSo === -1) {
-    //             if (index === 0) {
-    //                 // console.log('Day la bai dau tien');
+    const changeSong2 = (thamSo, list = listSongMusic) => {
+        if (typeSongMusic === false) {
+            const path = props.computedMatch.params.name; //lay ra ten bai hat dang chon?
+            const index = listPlaylist.findIndex((item) => item.name === path); // lay index bai hat co ten = ten dang chon
+            if (index !== -1) {
+                list = listPlaylist[index].listBaiHat;
+            }
+        }
+        const lastSong = list[list.length - 1];
+        //tim bai dang phat (songDetail) trong list;
+        //neu nhu bai nay la index thu = (index = 0) return; ko lam gi ca
+        const index = list.findIndex((item) => item._id === musicDetail._id);
+        let nowSong = {};
+        if (index !== -1) {
+            if (thamSo === 1) {
+                if (list[index]._id === lastSong._id) {
+                    return dispatch({
+                        type: SONG_MUSIC_DETAIL,
+                        musicDetail: list[0],
+                        typeSongMusic: typeSongMusic,
+                    });
+                } else {
+                    nowSong = list[index + thamSo];
+                }
+            } else if (thamSo === -1) {
+                if (index === 0) {
+                    // console.log('Day la bai dau tien');
 
-    //                 return dispatch({
-    //                     type: SONG_MUSIC_DETAIL,
-    //                     musicDetail: list[list.length - 1],
-    //                     typeSongMusic: typeSongMusic,
-    //                 });
-    //             } else {
-    //                 nowSong = list[index + thamSo];
-    //             }
-    //         } else {
-    //             return;
-    //         }
-    //     }
-    //     dispatch({
-    //         type: SONG_MUSIC_DETAIL,
-    //         musicDetail: nowSong,
-    //         typeSongMusic: typeSongMusic,
-    //     });
-    // };
+                    return dispatch({
+                        type: SONG_MUSIC_DETAIL,
+                        musicDetail: list[list.length - 1],
+                        typeSongMusic: typeSongMusic,
+                    });
+                } else {
+                    nowSong = list[index + thamSo];
+                }
+            } else {
+                return;
+            }
+        }
+        dispatch({
+            type: SONG_MUSIC_DETAIL,
+            musicDetail: nowSong,
+            typeSongMusic: typeSongMusic,
+        });
+    };
 
     useEffect(() => {
         audioRef.current.volume = volume / 100;

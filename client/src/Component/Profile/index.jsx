@@ -130,25 +130,6 @@ export default function Profile() {
         });
     }
 
-    // function List2() {
-    //     return listSongMusic?.map((item) => {
-    //         return (
-    //             <div
-    //                 onClick={() => {
-    //                     dispatch({
-    //                         type: SONG_MUSIC_DETAIL,
-    //                         musicDetail: item,
-    //                         typeSongMusic: true,
-    //                     });
-    //                 }}
-    //                 style={{ color: 'blue', cursor: 'pointer', padding: '3px' }}
-    //             >
-    //                 {item.name}
-    //             </div>
-    //         );
-    //     });
-    // }
-
     return (
         <div className={classes.container}>
             <div className={classes.root}>
@@ -167,9 +148,9 @@ export default function Profile() {
                         variant='fullWidth'
                         aria-label='full width tabs example'
                     >
-                        <Tab label='Bài hát' {...a11yProps(0)} />
-                        <Tab label='Playlist' {...a11yProps(1)} />
-                        <Tab label='Tải lên' {...a11yProps(2)} />
+                        <Tab label='Tổng quan' {...a11yProps(0)} />
+                        <Tab label='Bài hát' {...a11yProps(1)} />
+                        <Tab label='Playlist' {...a11yProps(2)} />
                     </Tabs>
                 </AppBar>
                 <SwipeableViews
@@ -191,15 +172,15 @@ export default function Profile() {
                         value={value}
                         index={1}
                         dir={theme.direction}
-                    ></TabPanel>
+                    >
+                        <List />
+                    </TabPanel>
                     <TabPanel
                         className={classes.tabpanels}
                         value={value}
                         index={2}
                         dir={theme.direction}
-                    >
-                        <List />
-                    </TabPanel>
+                    ></TabPanel>
                 </SwipeableViews>
             </div>
         </div>
