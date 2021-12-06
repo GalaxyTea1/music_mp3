@@ -70,11 +70,11 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5001/api/radioview
+GET http://localhost:5001/api/playlist
 
 ###
 
-DELETE http://localhost:5001/api/radioview/6187dd9c5e2329b5aeb2e3af
+DELETE http://localhost:5001/api/playlist/61ace62e1b587c4f0b027734
 
 ###
 

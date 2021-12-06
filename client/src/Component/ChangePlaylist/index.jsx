@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { putPlaylist } from 'Redux/action/handlePlaylist';
 import { CHANGE_PLAYLIST, CLOSE_MODAL } from '../../Redux/type/Music';
 
 export default function ChangePlaylist(props) {
@@ -11,6 +12,7 @@ export default function ChangePlaylist(props) {
     const [valueInput, setValue] = useState({
         tenPlaylist: props.namePlaylist,
     });
+    const { listPlaylist } = useSelector((state) => state.PlaylistReducer);
     const handleOutSideClick = (e) => {
         const { target } = e;
         if (playlistRef.current && !playlistRef.current.contains(target)) {
@@ -27,20 +29,31 @@ export default function ChangePlaylist(props) {
             document.removeEventListener('mousedown', handleOutSideClick);
         };
     });
+
+    const findThisPlaylist = () => {
+        let index = listPlaylist?.findIndex((item) => item.name === props.match.params.name);
+        let thisPlayList;
+        if (index !== -1) {
+            thisPlayList = listPlaylist[index];
+        }
+        return thisPlayList;
+    };
+
+    const thisPlayList = findThisPlaylist();
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch({
-            type: CHANGE_PLAYLIST,
-            newPlaylist: {
-                oldName: props.namePlaylist,
-                newName: valueInput.tenPlaylist,
-            },
-        });
-        myFormRef.current.reset();
-        history.push(`/playlist/${valueInput.tenPlaylist}`);
-        document.removeEventListener('mousedown', handleOutSideClick);
-        // console.log(props.namePlaylist)
-        // console.log(valueInput.tenPlaylist)
+
+        // dispatch({
+        //     type: CHANGE_PLAYLIST,
+        //     newPlaylist: {
+        //         oldName: props.namePlaylist,
+        //         newName: valueInput.tenPlaylist,
+        //     },
+        // });
+        // dispatch(putPlaylist({ item, _id }));
+        // myFormRef.current.reset();
+        // history.push(`/playlist/${valueInput.tenPlaylist}`);
+        // document.removeEventListener('mousedown', handleOutSideClick);
     };
 
     const handleChange = (e) => {
@@ -50,13 +63,13 @@ export default function ChangePlaylist(props) {
         });
     };
     return (
-        <div ref={playlistRef} className="createPlaylist">
+        <div ref={playlistRef} className='createPlaylist'>
             <p>Sửa Playlist</p>
             <div>
                 <form ref={myFormRef}>
                     <input
-                        name="tenPlaylist"
-                        placeholder="Nhập tên playlist"
+                        name='tenPlaylist'
+                        placeholder='Nhập tên playlist'
                         onChange={handleChange}
                         value={valueInput.tenPlaylist}
                     ></input>
@@ -68,7 +81,7 @@ export default function ChangePlaylist(props) {
                         Sửa
                     </button>
                 ) : (
-                    <button type="submit" value="Submit" onClick={handleSubmit}>
+                    <button type='submit' value='Submit' onClick={() => handleSubmit()}>
                         Sửa
                     </button>
                 )}

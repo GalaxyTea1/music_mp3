@@ -9,10 +9,11 @@ import Box from '@material-ui/core/Box';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import { Close } from '@material-ui/icons';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { logout } from 'Redux/action/authAction';
+import { getPlaylist } from 'Redux/action/handlePlaylist';
 import LoginForm from '../../../Component/auth/LoginForm';
 import RegisterForm from '../../../Component/auth/RegisterForm';
 import NewPlaylist from '../../../Component/NewPlaylist/index';
@@ -58,6 +59,14 @@ export default function MenuNavbar() {
         setOpen(false);
     };
     const { listPlaylist } = useSelector((state) => state.PlaylistReducer);
+    const { getList } = useSelector((state) => state.getListReducer);
+    const namePlaylist = getList.map((item) => item.name);
+    useEffect(() => {
+        dispatch(getPlaylist);
+    }, [dispatch]);
+    const userList = getList;
+    const userAuth = authReducer?.user?._id;
+    const check = userList.filter((item) => item.user === userAuth);
 
     const handleScroll = (e) => {
         e.target.classList.add('isScroll');
@@ -142,7 +151,22 @@ export default function MenuNavbar() {
                         </div>
                     </div>
                     <div className='sideBar__playlist'>
-                        {listPlaylist.map((item, index) => {
+                        {/* {listPlaylist.map((item, index) => {
+                            return (
+                                <div
+                                    key={index}
+                                    className='playlist_item opacity-70 hover:opacity-100'
+                                >
+                                    <NavLink
+                                        to={`/playlist/${item.name || namePlaylist}`}
+                                        style={{ width: '100%', height: '100%', fontSize: '14px' }}
+                                    >
+                                        {item.name || namePlaylist}
+                                    </NavLink>
+                                </div>
+                            );
+                        })} */}
+                        {check.map((item, index) => {
                             return (
                                 <div
                                     key={index}
@@ -150,7 +174,11 @@ export default function MenuNavbar() {
                                 >
                                     <NavLink
                                         to={`/playlist/${item.name}`}
-                                        style={{ width: '100%', height: '100%', fontSize: '14px' }}
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            fontSize: '14px',
+                                        }}
                                     >
                                         {item.name}
                                     </NavLink>

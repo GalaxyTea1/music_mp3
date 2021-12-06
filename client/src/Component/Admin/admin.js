@@ -41,6 +41,19 @@ export default function DashAd() {
     const [open3, setOpen3] = useState(true);
     const [open4, setOpen4] = useState(true);
 
+    // const initialState = true;
+
+    // const OPEN_MENU = 'open';
+    // const reducer = (state, action) => {
+    //     switch (action) {
+    //         case OPEN_MENU:
+    //             return state;
+    //         default:
+    //             throw new Error('Invalid action')
+    //     }
+    // }
+    // const [open, setOpen] = useReducer(reducer,initialState)
+
     const handleClick = () => {
         setOpen(!open);
     };

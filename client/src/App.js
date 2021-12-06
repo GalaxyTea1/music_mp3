@@ -1,6 +1,5 @@
 import DashAd from 'Component/Admin/admin';
 import Category2 from 'Component/CategoryView';
-import Follow from 'Component/Follow';
 import Radio from 'Component/Radio';
 import Top from 'Component/TopView';
 import Type from 'Component/Type';
@@ -45,7 +44,6 @@ function App() {
                         Component={Category2}
                     ></HomeTemplate>
                     <HomeTemplate exact path='/type' Component={Type}></HomeTemplate>
-                    <HomeTemplate exact path='/follow' Component={Follow}></HomeTemplate>
                     <HomeTemplate exact path='/radio' Component={Radio}></HomeTemplate>
                     <HomeTemplate exact path='/rank' Component={Rank}></HomeTemplate>
                     <HomeTemplate exact path='/profile' Component={Profile}></HomeTemplate>

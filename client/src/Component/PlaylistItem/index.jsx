@@ -1,6 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getSongAction } from '../../Redux/action/ListMusicAction';
+import { useDispatch } from 'react-redux';
 import {
     ADD_MUSIC_TO_PLAYLIST,
     REMOVE_MUSIC_TO_PLAYLIST,
@@ -10,7 +9,6 @@ import {
 export default function PlaylistItem(props) {
     const dispatch = useDispatch();
     const { item, namePlaylist, type } = props;
-    console.log(props);
 
     return (
         <>

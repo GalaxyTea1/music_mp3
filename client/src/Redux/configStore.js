@@ -11,6 +11,7 @@ import radioViewReducer from './reducer/radioViewReducer';
 import categoryReducer from './reducer/categoryReducer';
 import songMusicReducer from './reducer/songMusicReducer';
 import detailReducer from './reducer/detailReducer';
+import getListReducer from './reducer/getListReducer';
 
 const rootReducer = combineReducers({
     SongReducer,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     categoryReducer,
     songMusicReducer,
     detailReducer,
+    getListReducer,
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

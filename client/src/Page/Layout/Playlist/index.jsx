@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { handlePlaylist } from 'Redux/action/handlePlaylist';
+import { getPlaylist, handlePlaylist, removePlaylist } from 'Redux/action/handlePlaylist';
 import ChangePlaylist from '../../../Component/ChangePlaylist/index';
 import PlaylistItem from '../../../Component/PlaylistItem/index';
 import { OPEN_MODAL, REMOVE_PLAYLIST } from '../../../Redux/type/Music';
@@ -12,22 +12,27 @@ export default function Playlist(props) {
     const { authReducer } = useSelector((state) => state);
     const { listSongMusic } = useSelector((state) => state.detailReducer);
     const { listPlaylist } = useSelector((state) => state.PlaylistReducer);
+    const { getList } = useSelector((state) => state.getListReducer);
+
+    useEffect(() => {
+        dispatch(getPlaylist);
+    }, [dispatch]);
+
     const findThisPlaylist = () => {
         let index = listPlaylist?.findIndex((item) => item.name === props.match.params.name);
         let thisPlayList;
         if (index !== -1) {
             thisPlayList = listPlaylist[index];
         }
-
         return thisPlayList;
     };
 
     const thisPlayList = findThisPlaylist();
     const renderListSongMusicRandom = () => {
         const newArr = listSongMusic.filter((item) => {
-            return !thisPlayList?.list_song.includes(item);
+            return !thisPlayList?.list_song?.includes(item);
         });
-        return newArr?.slice(0, 5).map((item, index) => {
+        return newArr?.slice(0, 6).map((item, index) => {
             return (
                 <div key={index} className='baiHatGoiY_item'>
                     <PlaylistItem
@@ -39,6 +44,7 @@ export default function Playlist(props) {
             );
         });
     };
+
     const renderBaihatPlaylist = () => {
         const { list_song } = thisPlayList;
         return list_song.map((item, index) => {
@@ -54,8 +60,21 @@ export default function Playlist(props) {
         });
     };
     const handleSubmit = (item) => {
-        console.log(item);
-        dispatch(handlePlaylist({ item }));
+        const result = item.list_song.map((item) => item._id);
+        const newItem = {
+            name: item.name,
+            list_song_id: result,
+        };
+        const data = {
+            item: newItem,
+            authReducer: authReducer,
+        };
+        dispatch(handlePlaylist(data));
+    };
+
+    const handleRemove = (_id) => {
+        dispatch(removePlaylist(_id));
+        history.push('/');
     };
     return (
         <div
@@ -93,13 +112,14 @@ export default function Playlist(props) {
                 <div className='flex justify-between items-center playlist_btn'>
                     <button
                         className='mt-0 mr-2'
-                        onClick={() => {
-                            dispatch({
-                                type: REMOVE_PLAYLIST,
-                                namePlaylist: props.match.params.name,
-                            });
-                            history.push('/');
-                        }}
+                        onClick={() => handleRemove(thisPlayList._id)}
+                        // onClick={() => {
+                        //     dispatch({
+                        //         type: REMOVE_PLAYLIST,
+                        //         namePlaylist: props.match.params.name,
+                        //     });
+                        //     history.push('/');
+                        // }}
                     >
                         Xóa Playlist
                     </button>
@@ -118,7 +138,7 @@ export default function Playlist(props) {
                     >
                         Sửa Playlist
                     </button>
-                    <button className='mt-0 ml-2' onClick={() => handleSubmit(listPlaylist)}>
+                    <button className='mt-0 ml-2' onClick={() => handleSubmit(thisPlayList)}>
                         Lưu Playlist
                     </button>
                 </div>

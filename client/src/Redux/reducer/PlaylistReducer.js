@@ -37,7 +37,11 @@ export default (state = initialState, action) => {
         case ADD_MUSIC_TO_PLAYLIST: {
             const { music, namePlaylist } = action.item;
             let newListPlaylist = [...state.listPlaylist];
-            let index = newListPlaylist.findIndex((item) => item.name === namePlaylist);
+
+            let index = newListPlaylist.findIndex((item) => {
+                return item.name === namePlaylist;
+            });
+
             if (index !== -1) {
                 newListPlaylist[index].list_song.push(music);
             }
