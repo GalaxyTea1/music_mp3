@@ -16,7 +16,7 @@ export const postDataAPI = async (url, post, token) => {
 };
 
 export const putDataAPI = async (url, put, token) => {
-    const res = await axios.post(`/api/${url}`, put, {
+    const res = await axios.put(`/api/${url}`, put, {
         headers: { Authorization: token },
         body: put,
     });

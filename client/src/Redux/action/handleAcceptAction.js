@@ -6,8 +6,15 @@ export const handleAccept =
     async (dispatch) => {
         try {
             const res = await postDataAPI('handleAccept', { item });
+
+            dispatch({
+                type: GLOBALTYPES.ALERT,
+                payload: {
+                    success: res.data.msg,
+                },
+            });
         } catch (error) {
-            dispatch({ type: GLOBALTYPES.ALERT, payload: { message: 'error' } });
+            dispatch({ type: GLOBALTYPES.ALERT, payload: { msg: 'error' } });
         }
     };
 
@@ -16,8 +23,13 @@ export const handleRefuse =
     async (dispatch) => {
         try {
             const res = await deleteDataAPI(`handleSong/${_id}`);
-            console.log(res);
+            dispatch({
+                type: GLOBALTYPES.ALERT,
+                payload: {
+                    success: res.data.msg,
+                },
+            });
         } catch (error) {
-            dispatch({ type: GLOBALTYPES.ALERT, payload: { message: 'error' } });
+            dispatch({ type: GLOBALTYPES.ALERT, payload: { msg: 'error' } });
         }
     };

@@ -14,7 +14,6 @@ export default function CategoryView() {
         });
         setItem(newArg);
     }, [categoryReducer]);
-    console.log('categoryReducer', categoryReducer);
     return (
         <div>
             {item?.map((value) => (

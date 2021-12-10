@@ -34,7 +34,6 @@ export const login = (data) => async (dispatch) => {
 
 export const refreshToken = () => async (dispatch) => {
     const mp3Music = localStorage.getItem('mp3 music');
-    console.log(mp3Music);
     if (mp3Music) {
         try {
             const res = await postDataAPI('refresh_token');

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { getPlaylist, handlePlaylist, removePlaylist } from 'Redux/action/handlePlaylist';
@@ -9,11 +9,11 @@ import { OPEN_MODAL, REMOVE_PLAYLIST } from '../../../Redux/type/Music';
 export default function Playlist(props) {
     const dispatch = useDispatch();
     const history = useHistory();
+
     const { authReducer } = useSelector((state) => state);
     const { listSongMusic } = useSelector((state) => state.detailReducer);
     const { listPlaylist } = useSelector((state) => state.PlaylistReducer);
     const { getList } = useSelector((state) => state.getListReducer);
-
     useEffect(() => {
         dispatch(getPlaylist);
     }, [dispatch]);
@@ -26,13 +26,21 @@ export default function Playlist(props) {
         }
         return thisPlayList;
     };
-
     const thisPlayList = findThisPlaylist();
+
+    const newArr = listSongMusic.filter((item) => {
+        return !thisPlayList?.list_song?.includes(item);
+    });
+    const check = thisPlayList?.list_song;
+    let result = newArr.filter((o1) => !check?.some((o2) => o1.name === o2.name));
+    const newList = result.filter((item) => {
+        return !thisPlayList?.list_song?.includes(item);
+    });
+
+    const show = getList.filter((item) => item?.name === thisPlayList?.name);
+
     const renderListSongMusicRandom = () => {
-        const newArr = listSongMusic.filter((item) => {
-            return !thisPlayList?.list_song?.includes(item);
-        });
-        return newArr?.slice(0, 6).map((item, index) => {
+        return newList?.slice(0, 6).map((item, index) => {
             return (
                 <div key={index} className='baiHatGoiY_item'>
                     <PlaylistItem
@@ -59,6 +67,7 @@ export default function Playlist(props) {
             );
         });
     };
+
     const handleSubmit = (item) => {
         const result = item.list_song.map((item) => item._id);
         const newItem = {
@@ -70,6 +79,7 @@ export default function Playlist(props) {
             authReducer: authReducer,
         };
         dispatch(handlePlaylist(data));
+        history.push('/');
     };
 
     const handleRemove = (_id) => {
@@ -110,37 +120,42 @@ export default function Playlist(props) {
                 </div>
                 <p className='text-center text-xs opacity-60 mt-1'>Công khai </p>
                 <div className='flex justify-between items-center playlist_btn'>
-                    <button
-                        className='mt-0 mr-2'
-                        onClick={() => handleRemove(thisPlayList._id)}
-                        // onClick={() => {
-                        //     dispatch({
-                        //         type: REMOVE_PLAYLIST,
-                        //         namePlaylist: props.match.params.name,
-                        //     });
-                        //     history.push('/');
-                        // }}
-                    >
-                        Xóa Playlist
-                    </button>
-                    <button
-                        className='mt-0 ml-2'
-                        onClick={() => {
-                            dispatch({
-                                type: OPEN_MODAL,
-                                Component: (
-                                    <ChangePlaylist
-                                        namePlaylist={props.match.params.name}
-                                    ></ChangePlaylist>
-                                ),
-                            });
-                        }}
-                    >
-                        Sửa Playlist
-                    </button>
-                    <button className='mt-0 ml-2' onClick={() => handleSubmit(thisPlayList)}>
-                        Lưu Playlist
-                    </button>
+                    {show.length > 0 ? (
+                        <button
+                            className='mt-0 mr-2'
+                            onClick={() => handleRemove(thisPlayList._id)}
+                        >
+                            Xóa Playlist
+                        </button>
+                    ) : (
+                        ''
+                    )}
+                    {show.length > 0 ? (
+                        <button
+                            className='mt-0 ml-2'
+                            onClick={() => {
+                                dispatch({
+                                    type: OPEN_MODAL,
+                                    Component: (
+                                        <ChangePlaylist
+                                            namePlaylist={props.match.params.name}
+                                        ></ChangePlaylist>
+                                    ),
+                                });
+                            }}
+                        >
+                            Sửa Playlist
+                        </button>
+                    ) : (
+                        ''
+                    )}
+                    {show.length <= 0 ? (
+                        <button className='mt-0 ml-2' onClick={() => handleSubmit(thisPlayList)}>
+                            Lưu Playlist
+                        </button>
+                    ) : (
+                        ''
+                    )}
                 </div>
             </div>
             <div className='playlist_right'>

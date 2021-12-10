@@ -64,9 +64,8 @@ export default function MenuNavbar() {
     useEffect(() => {
         dispatch(getPlaylist);
     }, [dispatch]);
-    const userList = getList;
     const userAuth = authReducer?.user?._id;
-    const check = userList.filter((item) => item.user === userAuth);
+    const check = getList.filter((item) => item.user === userAuth);
 
     const handleScroll = (e) => {
         e.target.classList.add('isScroll');
@@ -151,21 +150,6 @@ export default function MenuNavbar() {
                         </div>
                     </div>
                     <div className='sideBar__playlist'>
-                        {/* {listPlaylist.map((item, index) => {
-                            return (
-                                <div
-                                    key={index}
-                                    className='playlist_item opacity-70 hover:opacity-100'
-                                >
-                                    <NavLink
-                                        to={`/playlist/${item.name || namePlaylist}`}
-                                        style={{ width: '100%', height: '100%', fontSize: '14px' }}
-                                    >
-                                        {item.name || namePlaylist}
-                                    </NavLink>
-                                </div>
-                            );
-                        })} */}
                         {check.map((item, index) => {
                             return (
                                 <div

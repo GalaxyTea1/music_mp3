@@ -32,11 +32,10 @@ router.post('/', verifyToken, async (req, res) => {
 router.put('/:id', async (req, res) => {
     const { name, list_song_id } = req.body;
     try {
-        let newPlaylist = new Playlist({
+        let updatedPlaylist = {
             name,
             list_song: list_song_id,
-            user: req.user._id,
-        });
+        };
 
         const playlistUpdateCondition = { _id: req.params.id };
         updatedPlaylist = await Playlist.findOneAndUpdate(
@@ -53,7 +52,7 @@ router.put('/:id', async (req, res) => {
 
         res.json({
             success: true,
-            message: 'Excellent progress!',
+            message: 'Update Playlist Success!',
             playlist: updatedPlaylist,
         });
     } catch (error) {

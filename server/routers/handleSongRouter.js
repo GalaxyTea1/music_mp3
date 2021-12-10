@@ -32,7 +32,11 @@ router.post('/', verifyToken, async (req, res) => {
                             user: req.user._id,
                         });
                         newHandleSong.save();
-                        res.json({ success: true, message: 'Happy!', handlesong: newHandleSong });
+                        res.json({
+                            success: true,
+                            msg: 'Đang chờ xét duyệt!',
+                            handlesong: newHandleSong,
+                        });
                     } catch (error) {
                         console.log(error);
                         res.status(500).json({ success: false, message: 'Internal server error' });
@@ -58,7 +62,7 @@ router.delete('/:id', async (req, res) => {
                 message: 'Song not found or user not authorised',
             });
 
-        res.json({ success: true, handlesong: deletedSong });
+        res.json({ success: true, message: 'Đã xóa', handlesong: deletedSong });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });

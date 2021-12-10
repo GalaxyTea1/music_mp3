@@ -81,7 +81,7 @@ export default (state = initialState, action) => {
             if (index !== -1) {
                 newListPlaylist[index].name = action.newPlaylist.newName;
             }
-            console.log(newListPlaylist);
+            // console.log(newListPlaylist);
             state.listPlaylist = [...newListPlaylist];
             return { ...state, Modal: false };
         }

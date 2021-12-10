@@ -26,10 +26,10 @@ export const getPlaylist = async (dispatch) => {
 };
 
 export const putPlaylist =
-    ({ _id, item, authReducer }) =>
+    ({ _id, newItem }) =>
     async (dispatch) => {
         try {
-            const res = await putDataAPI(`playlist/${_id}`, item, authReducer.token);
+            const res = await putDataAPI(`playlist/${_id}`, newItem);
             dispatch({ type: GLOBALTYPES.ALERT, payload: { message: 'error' } });
         } catch (error) {
             dispatch({ type: GLOBALTYPES.ALERT, payload: { message: 'error' } });

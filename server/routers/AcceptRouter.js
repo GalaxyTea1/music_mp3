@@ -16,6 +16,11 @@ router.post('/', async (req, res) => {
             user: item.user,
         });
         song.save();
+        res.json({
+            success: true,
+            msg: 'Đang chờ xét duyệt!',
+            handle_accept: song,
+        });
         handlesong.remove();
     } catch (error) {
         console.log(error);
