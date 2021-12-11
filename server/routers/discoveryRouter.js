@@ -47,38 +47,37 @@ router.post('/', async (req, res) => {
 // @access Private
 router.put('/:id', async (req, res) => {
     const { image, title, author } = req.body;
+    const file = req.files.image;
+    await cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
+        try {
+            let updatedDiscovery = {
+                image: result.url,
+                title,
+                author,
+            };
+            const discoveryUpdateCondition = { _id: req.params.id };
+            updatedDiscovery = await Discovery.findOneAndUpdate(
+                discoveryUpdateCondition,
+                updatedDiscovery,
+                { new: true }
+            );
 
-    try {
-        let updatedDiscovery = {
-            image,
-            title,
-            author,
-        };
+            if (!updatedDiscovery)
+                return res.status(401).json({
+                    success: false,
+                    message: 'Discovery not found or user not authorised',
+                });
 
-        const discoveryUpdateCondition = { _id: req.params.id };
-
-        updatedDiscovery = await Discovery.findOneAndUpdate(
-            discoveryUpdateCondition,
-            updatedDiscovery,
-            { new: true }
-        );
-
-        // User not authorised to update post or post not found
-        if (!updatedDiscovery)
-            return res.status(401).json({
-                success: false,
-                message: 'Discovery not found or user not authorised',
+            res.json({
+                success: true,
+                message: 'Excellent progress!',
+                discovery: updatedDiscovery,
             });
-
-        res.json({
-            success: true,
-            message: 'Excellent progress!',
-            discovery: updatedDiscovery,
-        });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: 'Internal server error' });
-    }
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ success: false, message: 'Internal server error' });
+        }
+    });
 });
 
 // @route DELETE api/posts

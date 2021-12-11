@@ -7,10 +7,10 @@ import Tabs from '@material-ui/core/Tabs';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 import { SongItem } from 'Redux/action/songMusicAction';
 import { SONG_MUSIC_DETAIL } from 'Redux/type/Music';
-
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -44,6 +44,12 @@ function a11yProps(index) {
 }
 
 const useStyles = makeStyles((theme) => ({
+    root1: {
+        width: '100%',
+        maxWidth: 360,
+        backgroundColor: theme.palette.background.paper,
+    },
+
     container: {
         width: '100%',
     },
@@ -61,6 +67,12 @@ const useStyles = makeStyles((theme) => ({
         height: '100px',
     },
 
+    isAvatar: {
+        margin: theme.spacing(11, 0, 10, 70),
+        width: '100px',
+        height: '100px',
+    },
+
     tabsRoot: {
         width: 1100,
         marginLeft: '100px',
@@ -72,12 +84,13 @@ const useStyles = makeStyles((theme) => ({
     },
 
     swiper: {
-        backgroundColor: '#bcc5d4',
+        backgroundColor: 'rgb(179 195 222 / 50%)',
+        borderRadius: '10px',
         height: '250px',
     },
 
     tabpanels: {
-        color: 'black',
+        color: 'green',
     },
 }));
 
@@ -87,20 +100,20 @@ export default function Profile() {
     const [value, setValue] = useState(0);
     const { authReducer } = useSelector((state) => state);
     const { songMusicReducer } = useSelector((state) => state);
-    const { listSongMusic } = useSelector((state) => state.detailReducer);
+    const { getList } = useSelector((state) => state.getListReducer);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(SongItem);
     }, [dispatch]);
 
     let isId = authReducer?.user?._id;
-
+    const isAvatar = authReducer?.user?.avatar;
+    const isPlaylist = getList.filter((item) => item.user === isId);
     const resultValueSong = songMusicReducer.map((item) => item);
 
     const isSong = resultValueSong.filter(function (song) {
         return song.user === `${isId}`;
     });
-    console.log(songMusicReducer);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -110,7 +123,7 @@ export default function Profile() {
         setValue(index);
     };
 
-    function List() {
+    function ListSong() {
         return isSong?.map((item) => {
             return (
                 <div
@@ -122,9 +135,40 @@ export default function Profile() {
                             typeSongMusic: true,
                         });
                     }}
-                    style={{ color: 'blue', cursor: 'pointer', padding: '3px' }}
+                    style={{ color: 'white', cursor: 'pointer', padding: '3px' }}
                 >
-                    {item.name}
+                    <div style={{ display: 'flex', padding: '5px' }}>
+                        <img
+                            src={item.thumbnail}
+                            alt='songImage'
+                            width='40px'
+                            style={{ borderRadius: '50%' }}
+                        />
+                        <div style={{ paddingLeft: '10px', lineHeight: '40px' }}>{item.name}</div>
+                    </div>
+                </div>
+            );
+        });
+    }
+
+    function Playlist() {
+        return isPlaylist?.map((item) => {
+            return (
+                <div
+                    className='List__item'
+                    style={{ color: 'white', cursor: 'pointer', padding: '3px' }}
+                >
+                    <NavLink
+                        to={`/playlist/${item.name}`}
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            fontSize: '14px',
+                        }}
+                    >
+                        {' '}
+                        {item.name}
+                    </NavLink>
                 </div>
             );
         });
@@ -132,19 +176,36 @@ export default function Profile() {
 
     return (
         <div className={classes.container}>
-            <div className={classes.root}>
-                <Avatar className={classes.avatar} alt='User' src='' />
-            </div>
+            {isAvatar ? (
+                <div className={classes.root}>
+                    <div className={classes.isAvatar}>
+                        <img
+                            src={isAvatar}
+                            alt='user'
+                            style={{ borderRadius: '50%', height: '80%' }}
+                        />
+                    </div>
+                </div>
+            ) : (
+                <div className={classes.root}>
+                    <Avatar className={classes.avatar} alt='User' src='' />
+                </div>
+            )}
+
             <div style={{ marginTop: '-50px', marginLeft: '49%' }}>
                 <h3>{authReducer?.user?.username}</h3>
             </div>
             <div className={classes.tabsRoot}>
-                <AppBar position='static' color='default' style={{ backgroundColor: '#a0aaba' }}>
+                <AppBar
+                    position='static'
+                    color='default'
+                    style={{ backgroundColor: 'rgb(179 195 222 / 50%)', borderRadius: '10px' }}
+                >
                     <Tabs
                         value={value}
                         onChange={handleChange}
                         indicatorColor='primary'
-                        textColor='primary'
+                        style={{ color: 'white' }}
                         variant='fullWidth'
                         aria-label='full width tabs example'
                     >
@@ -164,23 +225,23 @@ export default function Profile() {
                         value={value}
                         index={0}
                         dir={theme.direction}
-                    >
-                        {/* <List2 /> */}
-                    </TabPanel>
+                    ></TabPanel>
                     <TabPanel
                         className={classes.tabpanels}
                         value={value}
                         index={1}
                         dir={theme.direction}
                     >
-                        <List />
+                        <ListSong />
                     </TabPanel>
                     <TabPanel
                         className={classes.tabpanels}
                         value={value}
                         index={2}
                         dir={theme.direction}
-                    ></TabPanel>
+                    >
+                        <Playlist />
+                    </TabPanel>
                 </SwipeableViews>
             </div>
         </div>

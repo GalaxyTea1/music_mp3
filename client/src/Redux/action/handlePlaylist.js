@@ -6,8 +6,13 @@ export const handlePlaylist =
     ({ item, authReducer }) =>
     async (dispatch) => {
         const res = await postDataAPI('playlist', item, authReducer.token);
-        console.log(item);
-        dispatch({ type: GLOBALTYPES.ALERT, payload: { message: 'error' } });
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: {
+                success: res.data.msg,
+            },
+        });
+        // dispatch({ type: GLOBALTYPES.ALERT, payload: { message: 'error' } });
     };
 
 export const getPlaylist = async (dispatch) => {
@@ -19,7 +24,6 @@ export const getPlaylist = async (dispatch) => {
                 dispatch({ type: CREATE_PLAYLIST, newPlaylist: item });
             });
         }
-        // dispatch({ type: CREATE_PLAYLIST, newPlaylist: res.data.playlist });
     } catch (error) {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { message: 'error' } });
     }
@@ -30,7 +34,13 @@ export const putPlaylist =
     async (dispatch) => {
         try {
             const res = await putDataAPI(`playlist/${_id}`, newItem);
-            dispatch({ type: GLOBALTYPES.ALERT, payload: { message: 'error' } });
+            dispatch({
+                type: GLOBALTYPES.ALERT,
+                payload: {
+                    success: res.data.msg,
+                },
+            });
+            // dispatch({ type: GLOBALTYPES.ALERT, payload: { message: 'error' } });
         } catch (error) {
             dispatch({ type: GLOBALTYPES.ALERT, payload: { message: 'error' } });
         }
@@ -39,7 +49,12 @@ export const putPlaylist =
 export const removePlaylist = (_id) => async (dispatch) => {
     try {
         const res = await deleteDataAPI(`playlist/${_id}`);
-        console.log(res);
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: {
+                success: res.data.msg,
+            },
+        });
     } catch (error) {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { message: 'error' } });
     }

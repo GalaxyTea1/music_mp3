@@ -22,7 +22,7 @@ router.post('/', verifyToken, async (req, res) => {
             user: req.user._id,
         });
         await newPlaylist.save();
-        res.json({ success: true, message: 'Happy!', playlist: newPlaylist });
+        res.json({ success: true, msg: 'Tạo Playlist thành công!', playlist: newPlaylist });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });
@@ -52,7 +52,7 @@ router.put('/:id', async (req, res) => {
 
         res.json({
             success: true,
-            message: 'Update Playlist Success!',
+            msg: 'Hey! Cập nhật thành công',
             playlist: updatedPlaylist,
         });
     } catch (error) {
@@ -73,7 +73,7 @@ router.delete('/:id', async (req, res) => {
                 message: 'Playlist not found or user not authorised',
             });
 
-        res.json({ success: true, playlist: deletedPlaylist });
+        res.json({ success: true, msg: 'Đã xóa playlist', playlist: deletedPlaylist });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });

@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
         song.save();
         res.json({
             success: true,
-            msg: 'Đang chờ xét duyệt!',
+            msg: 'Ok! Đã duyệt',
             handle_accept: song,
         });
         handlesong.remove();

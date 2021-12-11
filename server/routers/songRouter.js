@@ -99,7 +99,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const songDeleteCondition = { _id: req.params.id, user: req.user._id };
+        const songDeleteCondition = { _id: req.params.id };
         const deletedSong = await Song.findOneAndDelete(songDeleteCondition);
 
         // User not authorised or post not found

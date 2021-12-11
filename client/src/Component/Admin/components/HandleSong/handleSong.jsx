@@ -2,21 +2,23 @@ import { useEffect, useState } from 'react';
 import React from 'react';
 import { getDataAPI } from '../../../../api/postApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleAccept, handleRefuse } from 'Redux/action/handleAcceptAction';
+import { getSongAccept, handleAccept, handleRefuse } from 'Redux/action/handleAcceptAction';
 
 export default function HandleSong() {
-    const [data, setData] = useState([]);
     const dispatch = useDispatch();
-    const { authReducer } = useSelector((state) => state);
-    useEffect(async () => {
-        const res = await getDataAPI('handlesong');
-        setData(res.data.handlesong);
-    }, []);
+    const { authReducer, acceptReducer } = useSelector((state) => state);
+
+    useEffect(() => {
+        dispatch(getSongAccept());
+    }, [dispatch]);
+
     const handleSubmit = (item) => {
         dispatch(handleAccept({ item, authReducer }));
+        console.log(item);
     };
 
     const handleDeny = (_id) => {
+        console.log(_id);
         dispatch(handleRefuse({ _id, authReducer }));
     };
 
@@ -31,20 +33,21 @@ export default function HandleSong() {
                     <th>Check</th>
                     <th>Refuse</th>
                 </tr>
-                {data.map((item) => (
-                    <tr>
-                        <td>{item.name}</td>
-                        <td>{item.artists_names}</td>
-                        <td>{item.audio}</td>
-                        <td>{item.duration}</td>
-                        <td>
-                            <button onClick={() => handleSubmit(item)}>Accept</button>
-                        </td>
-                        <td>
-                            <button onClick={() => handleDeny(item._id)}>Refuse</button>
-                        </td>
-                    </tr>
-                ))}
+                {acceptReducer &&
+                    acceptReducer.getSongAccept.map((item) => (
+                        <tr>
+                            <td>{item.name}</td>
+                            <td>{item.artists_names}</td>
+                            <td>{item.audio}</td>
+                            <td>{item.duration}</td>
+                            <td>
+                                <button onClick={() => handleSubmit(item)}>Accept</button>
+                            </td>
+                            <td>
+                                <button onClick={() => handleDeny(item._id)}>Refuse</button>
+                            </td>
+                        </tr>
+                    ))}
             </table>
         </div>
     );

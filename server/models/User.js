@@ -20,6 +20,7 @@ let UserSchema = new Schema({
     },
     roles: {
         type: String,
+        default: '0',
     },
     playlist: {
         type: mongoose.Types.ObjectId,

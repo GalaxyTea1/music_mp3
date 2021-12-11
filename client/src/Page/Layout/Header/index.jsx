@@ -3,6 +3,7 @@ import { getDataAPI } from 'api/postApi';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { GLOBALTYPES } from 'Redux/type/globalType';
 import { SONG_MUSIC_DETAIL } from 'Redux/type/Music';
 
 export default function Header() {
@@ -30,7 +31,6 @@ export default function Header() {
 
         let form_data = new FormData();
         form_data.append('audio', audio, audio.name);
-        console.log(form_data);
         let url = 'http://localhost:5001/api/handlesong/';
         axios
             .post(url, form_data, {
@@ -40,7 +40,13 @@ export default function Header() {
                 },
             })
             .then((res) => {
-                console.log(res.data);
+                console.log(res.data.msg);
+                dispatch({
+                    type: GLOBALTYPES.ALERT,
+                    payload: {
+                        success: res.data.msg,
+                    },
+                });
             })
             .catch((err) => console.log(err));
     };
@@ -49,7 +55,6 @@ export default function Header() {
         e.preventDefault();
         const res = await getDataAPI(`search?name=${valueSearch}`);
         setResultSearch(res.data.search);
-        console.log(res);
     };
 
     return (

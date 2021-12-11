@@ -65,6 +65,7 @@ export default function ShowDiscovery() {
         form_data.append('title', title);
         form_data.append('author', author);
         form_data.append('image', image, image.name);
+        console.log(image);
         console.log(form_data);
         let url = `http://localhost:5001/api/discovery/${idFilter}`;
         axios

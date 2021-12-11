@@ -123,7 +123,7 @@ export default function Playlist(props) {
                     {show.length > 0 ? (
                         <button
                             className='mt-0 mr-2'
-                            onClick={() => handleRemove(thisPlayList._id)}
+                            onClick={() => handleRemove(thisPlayList?._id)}
                         >
                             Xóa Playlist
                         </button>

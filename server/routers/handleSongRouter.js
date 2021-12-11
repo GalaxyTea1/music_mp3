@@ -62,7 +62,7 @@ router.delete('/:id', async (req, res) => {
                 message: 'Song not found or user not authorised',
             });
 
-        res.json({ success: true, message: 'Đã xóa', handlesong: deletedSong });
+        res.json({ success: true, msg: 'Đã xóa', handlesong: deletedSong });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });
