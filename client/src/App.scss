@@ -869,15 +869,16 @@
     }
   }
   .table_check {
-    border: 1px solid black;
-    // border-collapse: collapse;
     width: 100%;
-    // position: relative;
+    table,
     th,
     td {
+      border: 1px solid black;
       padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      width: 100px;
     }
     tr:hover {
       background-color: #d6eeee;
@@ -888,22 +889,19 @@
       background-color: gray;
       border-radius: 4px;
       position: none !important;
-      // bottom: 120px;
-      // left: 42%;
     }
   }
   .btn__control {
     width: 29%;
-    height: 5%;
-    background-color: gray;
-    border-radius: 5px;
+    color: white;
     position: absolute;
-    bottom: 150px;
-    left: 42%;
+    margin: 360px;
+    left: 430px;
+ 
   }
 
   .main_admin {
-    background-color: #d3ded6;
+    background-color: #eeeeee;    
     width: 100%;
     height: 770px;
     display: flex;
@@ -921,10 +919,13 @@
     .add_album {
       z-index: 99999;
       color: black;
-      background-color: #6897e3;
+      height: 650px;
+      // background-color: #6897e3;
+    // background-image: linear-gradient(120deg, #893eb2 0%, #f76161 50%, #1b786d 85%);
+
       padding: 30px;
-      width: 800px;
-      height: 600px;
+      // width: 800px;
+      // height: 600px;
     }
   }
 

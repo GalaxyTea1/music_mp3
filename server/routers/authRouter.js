@@ -9,10 +9,10 @@ router.post('/register', async (req, res) => {
         let newUserName = username.toLowerCase().replace(/ /g, '');
 
         const user_name = await Users.findOne({ username: newUserName });
-        if (user_name) return res.status(400).json({ msg: 'User name already exists.' });
+        if (user_name) return res.status(400).json({ msg: 'Tài khoản đã tồn tại' });
 
         if (password.length < 6)
-            return res.status(400).json({ msg: 'Password must be at least 6 characters.' });
+            return res.status(400).json({ msg: 'Mật khẩu phải có ít nhất 6 kí tự' });
         const passwordHash = await bcrypt.hash(password, 12);
 
         const newUser = new Users({
@@ -32,7 +32,7 @@ router.post('/register', async (req, res) => {
         await newUser.save();
 
         res.json({
-            msg: 'Register Successfully!',
+            msg: 'Đăng kí thành công!',
             access_token,
             user: {
                 ...newUser._doc,
@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
         const user = await Users.findOne({ username });
 
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.status(400).json({ msg: 'Password is incorrect.' });
+        if (!isMatch) return res.status(400).json({ msg: 'Sai thông tin tài khoản' });
 
         const access_token = createAccessToken({ id: user._id });
         const refresh_token = createRefreshToken({ id: user._id });
@@ -62,7 +62,7 @@ router.post('/login', async (req, res) => {
         });
 
         res.json({
-            msg: 'Login Successfully!',
+            msg: 'Đăng nhập thành công!',
             access_token,
             user: {
                 ...user._doc,

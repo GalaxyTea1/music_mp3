@@ -45,39 +45,39 @@ router.post('/', async (req, res) => {
 // @desc Update post
 // @access Private
 router.put('/:id', async (req, res) => {
-    const { image, title, author } = req.body;
+    const { title, author } = req.body;
+    const file = req.files.image;
 
-    try {
-        let updatedCategory = {
-            image,
-            title,
-            author,
-        };
+    await cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
+        try {
+            let updatedCategory = {
+                image: result.url,
+                title,
+                author,
+            };
+            const categoryUpdateCondition = { _id: req.params.id };
+            updatedCategory = await Category.findOneAndUpdate(
+                categoryUpdateCondition,
+                updatedCategory,
+                { new: true }
+            );
 
-        const categoryUpdateCondition = { _id: req.params.id };
+            if (!updatedCategory)
+                return res.status(401).json({
+                    success: false,
+                    msg: 'Không tìm thấy thể loại hoặc người dùng không có quyền',
+                });
 
-        updatedCategory = await Category.findOneAndUpdate(
-            categoryUpdateCondition,
-            updatedCategory,
-            { new: true }
-        );
-
-        // User not authorised to update post or post not found
-        if (!updatedCategory)
-            return res.status(401).json({
-                success: false,
-                message: 'Category not found or user not authorised',
+            res.json({
+                success: true,
+                msg: 'Cập nhật thành công!',
+                category: updatedCategory,
             });
-
-        res.json({
-            success: true,
-            message: 'Excellent progress!',
-            category: updatedCategory,
-        });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: 'Internal server error' });
-    }
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ success: false, message: 'Internal server error' });
+        }
+    });
 });
 
 // @route DELETE api/posts

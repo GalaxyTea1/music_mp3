@@ -135,11 +135,16 @@ export default function MenuNavbar() {
             <div className='sideBar__music'>
                 <div className='sideBar__menu2 mt-3' onScroll={handleScroll}>
                     <div className='sideBar__banner'>
-                        <p>Đăng nhập để trải nghiệm cảm giác mới lạ hơn</p>
                         {authReducer.token ? (
-                            <button onClick={() => dispatch(logout())}>Thoát</button>
+                            <div>
+                                <p>Chào mừng bạn đến với thế giới âm nhạc đầy màu sắc</p>
+                                <button onClick={() => dispatch(logout())}>Thoát</button>
+                            </div>
                         ) : (
-                            <button onClick={handleClickOpen}>Đăng Nhập</button>
+                            <div>
+                                <p>Đăng nhập để trải nghiệm cảm giác mới lạ hơn</p>
+                                <button onClick={handleClickOpen}>Đăng Nhập</button>
+                            </div>
                         )}
                     </div>
 

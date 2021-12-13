@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
 // @desc Update post
 // @access Private
 router.put('/:id', async (req, res) => {
-    const { image, title, author } = req.body;
+    const { title, author } = req.body;
     const file = req.files.image;
     await cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
         try {
@@ -65,12 +65,12 @@ router.put('/:id', async (req, res) => {
             if (!updatedDiscovery)
                 return res.status(401).json({
                     success: false,
-                    message: 'Discovery not found or user not authorised',
+                    message: 'Không tìm thấy hoặc người dùng không có quyền',
                 });
 
             res.json({
                 success: true,
-                message: 'Excellent progress!',
+                msg: 'Cập nhật thành công!',
                 discovery: updatedDiscovery,
             });
         } catch (error) {

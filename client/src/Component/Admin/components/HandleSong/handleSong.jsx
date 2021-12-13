@@ -23,15 +23,15 @@ export default function HandleSong() {
     };
 
     return (
-        <div className='' style={{ backgroundColor: 'green', color: 'black', marginTop: '40px' }}>
+        <div className='' style={{ backgroundColor: '#e6e1d5', color: 'black', marginTop: '40px' }}>
             <table className='table_check'>
                 <tr>
-                    <th>Name</th>
-                    <th>Artist Name</th>
-                    <th>Url</th>
-                    <th>Duration</th>
-                    <th>Check</th>
-                    <th>Refuse</th>
+                    <th>Tên bài hát</th>
+                    <th>Tên ca sĩ</th>
+                    <th>Đường dẫn</th>
+                    <th>Thời lượng</th>
+                    <th>Đồng ý</th>
+                    <th>Từ chối</th>
                 </tr>
                 {acceptReducer &&
                     acceptReducer.getSongAccept.map((item) => (

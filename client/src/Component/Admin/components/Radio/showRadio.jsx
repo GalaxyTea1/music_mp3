@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { radioView } from 'Redux/action/radioViewAction';
+import { GLOBALTYPES } from 'Redux/type/globalType';
 
 export default function ShowRadio() {
     const [avatar, setAvatar] = useState();
@@ -77,6 +78,12 @@ export default function ShowRadio() {
             })
             .then((res) => {
                 console.log(res.data);
+                dispatch({
+                    type: GLOBALTYPES.ALERT,
+                    payload: {
+                        success: res.data.msg,
+                    },
+                });
             })
             .catch((err) => console.log(err));
     };

@@ -46,8 +46,6 @@ router.put('/:id', async (req, res) => {
     const { title, author } = req.body;
     const file = req.files.image;
 
-    const rankUpdateCondition = { _id: req.params.id };
-
     await cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
         try {
             let updatedRank = {
@@ -55,21 +53,20 @@ router.put('/:id', async (req, res) => {
                 title,
                 author,
             };
-
+            const rankUpdateCondition = { _id: req.params.id };
             updatedRank = await Rank.findOneAndUpdate(rankUpdateCondition, updatedRank, {
                 new: true,
             });
 
-            // User not authorised to update post or post not found
             if (!updatedRank)
                 return res.status(401).json({
                     success: false,
-                    message: 'Rank not found or user not authorised',
+                    msg: 'Không tìm thấy hoặc người dùng không có quyền',
                 });
 
             res.json({
                 success: true,
-                message: 'Excellent progress!',
+                msg: 'Cập nhật thành công!',
                 rank: updatedRank,
             });
         } catch (error) {
