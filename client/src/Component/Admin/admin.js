@@ -16,6 +16,7 @@ import { NavLink, Route, Switch } from 'react-router-dom';
 import ShowCategory from './components/Category/showCategory';
 import showDiscovery from './components/Discovery/showDiscovery';
 import HandleSong from './components/HandleSong/handleSong';
+import UpdateLyrics from './components/HandleSong/updateLyrics';
 import DashRadio from './components/Radio/addRadio';
 import showRadio from './components/Radio/showRadio';
 import DashRank from './components/Rank/addRank';
@@ -238,8 +239,23 @@ export default function DashAd() {
                                         </li>
                                     </NavLink>
                                 </ListItem>
+                                <ListItem button className={classes.nested}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <NavLink
+                                        exact
+                                        to='/admin/update-lyrics'
+                                        activeClassName='activeLi'
+                                    >
+                                        <li>
+                                            <ListItemText primary='Cập nhật lời bài hát' />
+                                        </li>
+                                    </NavLink>
+                                </ListItem>
                             </List>
                         </Collapse>
+
                         <ListItem button onClick={handleClickOpen}>
                             <ListItemText primary='Top100' />
                             {open1 ? <ExpandLess /> : <ExpandMore />}
@@ -285,6 +301,7 @@ export default function DashAd() {
                         <Route path='/admin/add-ranks' exact component={DashRank} />
                         <Route path='/admin/update-ranks' exact component={showRank} />
                         <Route path='/admin/handle-song' exact component={HandleSong} />
+                        <Route path='/admin/update-lyrics' exact component={UpdateLyrics} />
                     </Switch>
                 </div>
             </div>

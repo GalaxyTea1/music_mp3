@@ -1,10 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
+import Slide from '@material-ui/core/Slide';
+import moment from 'moment';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { animated, useSpring } from 'react-spring';
+import { SONG_MUSIC_DETAIL } from 'Redux/type/Music';
 // import _ from 'lodash';
 import { getListAction, getSongAction } from '../../../Redux/action/ListMusicAction';
-import { useSpring, animated } from 'react-spring';
-import moment from 'moment';
-import { SONG_MUSIC_DETAIL } from 'Redux/type/Music';
+import { GLOBALTYPES } from '../../../Redux/type/globalType';
 
 export default function Footer(props) {
     const [volume, setVolume] = useState(50);
@@ -14,6 +16,8 @@ export default function Footer(props) {
     const [duration, setDuration] = useState(0);
     const [loop, setLoop] = useState(false);
     const [shuffle, setShuffle] = useState(false);
+    const [like, setLike] = useState(false);
+
     const dispatch = useDispatch();
 
     const { musicDetail, listSongMusic, typeSongMusic } = useSelector(
@@ -50,6 +54,7 @@ export default function Footer(props) {
                 return;
             }
             const newSong = list[index + thamSo];
+
             dispatch({
                 type: SONG_MUSIC_DETAIL,
                 musicDetail: newSong,
@@ -58,52 +63,52 @@ export default function Footer(props) {
         }
     };
 
-    const changeSong2 = (thamSo, list = listSongMusic) => {
-        if (typeSongMusic === false) {
-            const path = props.computedMatch.params.name; //lay ra ten bai hat dang chon?
-            const index = listPlaylist.findIndex((item) => item.name === path); // lay index bai hat co ten = ten dang chon
-            if (index !== -1) {
-                list = listPlaylist[index].listBaiHat;
-            }
-        }
-        const lastSong = list[list.length - 1];
-        //tim bai dang phat (songDetail) trong list;
-        //neu nhu bai nay la index thu = (index = 0) return; ko lam gi ca
-        const index = list.findIndex((item) => item._id === musicDetail._id);
-        let nowSong = {};
-        if (index !== -1) {
-            if (thamSo === 1) {
-                if (list[index]._id === lastSong._id) {
-                    return dispatch({
-                        type: SONG_MUSIC_DETAIL,
-                        musicDetail: list[0],
-                        typeSongMusic: typeSongMusic,
-                    });
-                } else {
-                    nowSong = list[index + thamSo];
-                }
-            } else if (thamSo === -1) {
-                if (index === 0) {
-                    // console.log('Day la bai dau tien');
+    // const changeSong2 = (thamSo, list = listSongMusic) => {
+    //     if (typeSongMusic === false) {
+    //         const path = props.computedMatch.params.name; //lay ra ten bai hat dang chon?
+    //         const index = listPlaylist.findIndex((item) => item.name === path); // lay index bai hat co ten = ten dang chon
+    //         if (index !== -1) {
+    //             list = listPlaylist[index].listBaiHat;
+    //         }
+    //     }
+    //     const lastSong = list[list.length - 1];
+    //     //tim bai dang phat (songDetail) trong list;
+    //     //neu nhu bai nay la index thu = (index = 0) return; ko lam gi ca
+    //     const index = list.findIndex((item) => item._id === musicDetail._id);
+    //     let nowSong = {};
+    //     if (index !== -1) {
+    //         if (thamSo === 1) {
+    //             if (list[index]._id === lastSong._id) {
+    //                 return dispatch({
+    //                     type: SONG_MUSIC_DETAIL,
+    //                     musicDetail: list[0],
+    //                     typeSongMusic: typeSongMusic,
+    //                 });
+    //             } else {
+    //                 nowSong = list[index + thamSo];
+    //             }
+    //         } else if (thamSo === -1) {
+    //             if (index === 0) {
+    //                 // console.log('Day la bai dau tien');
 
-                    return dispatch({
-                        type: SONG_MUSIC_DETAIL,
-                        musicDetail: list[list.length - 1],
-                        typeSongMusic: typeSongMusic,
-                    });
-                } else {
-                    nowSong = list[index + thamSo];
-                }
-            } else {
-                return;
-            }
-        }
-        dispatch({
-            type: SONG_MUSIC_DETAIL,
-            musicDetail: nowSong,
-            typeSongMusic: typeSongMusic,
-        });
-    };
+    //                 return dispatch({
+    //                     type: SONG_MUSIC_DETAIL,
+    //                     musicDetail: list[list.length - 1],
+    //                     typeSongMusic: typeSongMusic,
+    //                 });
+    //             } else {
+    //                 nowSong = list[index + thamSo];
+    //             }
+    //         } else {
+    //             return;
+    //         }
+    //     }
+    //     dispatch({
+    //         type: SONG_MUSIC_DETAIL,
+    //         musicDetail: nowSong,
+    //         typeSongMusic: typeSongMusic,
+    //     });
+    // };
 
     useEffect(() => {
         audioRef.current.volume = volume / 100;
@@ -214,10 +219,32 @@ export default function Footer(props) {
                         {musicDetail?.artists_names}
                     </p>
                 </div>
+                <div className='flex text-white footer__button justify-center'>
+                    <button
+                        style={{ padding: '20px' }}
+                        onClick={() => {
+                            setLike(!like);
+                        }}
+                    >
+                        <i className={`fa fa-heart ${like ? 'text-pink-500' : ''}`}></i>
+                    </button>
+                    <button
+                        style={{ padding: '5px', fontSize: '20px' }}
+                        onClick={() => {
+                            dispatch({
+                                type: GLOBALTYPES.OPEN_LYRIC,
+                                payload: { toggleLyric: true },
+                            });
+                        }}
+                    >
+                        <i className={`fa fa-angle-up `}></i>
+                    </button>
+                </div>
             </div>
             <div className='footer__center flex flex-col flex-grow'>
                 <div className='flex text-white footer__button justify-center'>
                     <button
+                        className='btn_like'
                         onClick={() => {
                             setShuffle(!shuffle);
                         }}

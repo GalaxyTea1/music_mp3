@@ -13,6 +13,7 @@ import songMusicReducer from './reducer/songMusicReducer';
 import detailReducer from './reducer/detailReducer';
 import getListReducer from './reducer/getListReducer';
 import acceptReducer from './reducer/acceptReducer';
+import lyricReducer from './reducer/lyricReducer';
 
 const rootReducer = combineReducers({
     SongReducer,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
     detailReducer,
     getListReducer,
     acceptReducer,
+    lyricReducer,
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

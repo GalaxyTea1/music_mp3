@@ -6,6 +6,16 @@
   -webkit-font-smoothing: antialiased;
 }
 
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  // -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
 #root {
   font-family: "Inter", sans-serif;
   position: relative;
@@ -868,6 +878,34 @@
       }
     }
   }
+
+  // .closeLyric {
+  //   position: absolute;
+  //   top: 10px;
+  //   left: 500px;
+  // }
+  // button {
+  //   border: none;
+  // }
+  // button:hover {
+  //   border: none !important;
+  // }
+  // .contentLyric {
+  //   img {
+  //   }
+  // }
+  // .songLyric {
+  //   span {
+  //     font-size: 22px !important;
+  //     white-space: pre-line;
+  //   }
+  // }
+
+  .lyric {
+    width: 50%;
+    height: 80%;
+  }
+
   .table_check {
     width: 100%;
     table,
@@ -897,11 +935,10 @@
     position: absolute;
     margin: 360px;
     left: 430px;
- 
   }
 
   .main_admin {
-    background-color: #eeeeee;    
+    background-color: #eeeeee;
     width: 100%;
     height: 770px;
     display: flex;
@@ -921,7 +958,7 @@
       color: black;
       height: 650px;
       // background-color: #6897e3;
-    // background-image: linear-gradient(120deg, #893eb2 0%, #f76161 50%, #1b786d 85%);
+      // background-image: linear-gradient(120deg, #893eb2 0%, #f76161 50%, #1b786d 85%);
 
       padding: 30px;
       // width: 800px;
@@ -951,5 +988,61 @@
         height: calc(18vw - 50px);
       }
     }
+  }
+}
+
+.header-lyric {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 35px;
+}
+
+.content {
+  img {
+    width: 400px;
+  }
+  h3 {
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: 700;
+  }
+  p {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .content-right {
+    width: 100%;
+    height: 500px;
+    font-size: 30px;
+    // padding: 5px;
+    white-space: pre-line;
+    overflow: scroll;
+    font-family: "Inter", sans-serif;
+    line-height: 60px;
+  }
+}
+
+@keyframes modalFadeIn {
+  from {
+      opacity: 1;
+      transform: translateY(650px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(700px);
   }
 }

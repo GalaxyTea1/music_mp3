@@ -88,3 +88,10 @@ Content-Type: application/json
     "listen": "1423"
 }
 
+###
+PATCH  http://localhost:5001/api/song/update/61a099da23a6896a9e20ed9e
+Content-Type: application/json
+
+{
+    "lyric": "blala"
+}

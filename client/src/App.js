@@ -5,8 +5,9 @@ import Top from 'Component/TopView';
 import Type from 'Component/Type';
 import { createBrowserHistory } from 'history';
 import NotFound from 'NotFound';
+import Lyric from 'Page/Layout/Footer/lyric';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route } from 'react-router';
 import { Router, Switch } from 'react-router-dom';
 import './App.scss';
@@ -23,6 +24,7 @@ import { HomeTemplate } from './Template/HomeTemplate/index';
 export const history = createBrowserHistory();
 
 function App() {
+    const { lyricReducer } = useSelector((state) => state);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(refreshToken());
@@ -30,6 +32,7 @@ function App() {
 
     return (
         <>
+            {lyricReducer.toggleLyric && <Lyric />}
             <Alerts />
             <Router history={history}>
                 <HOCplaylist></HOCplaylist>

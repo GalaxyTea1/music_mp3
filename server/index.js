@@ -38,8 +38,8 @@ const connectDB = async () => {
 connectDB();
 
 const app = express();
-app.use(express.json({ limit: '600m' }));
-app.use(express.urlencoded({ limit: '500mb', extended: false }));
+app.use(express.json({ limit: '6000m' }));
+app.use(express.urlencoded({ limit: '900mb', extended: false }));
 
 app.use(cors());
 app.use(cookieParser());
