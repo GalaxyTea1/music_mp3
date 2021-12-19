@@ -49,7 +49,6 @@ function RegisterForm(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const schema = yup.object().shape({
-
         username: yup.string().required('Please enter your username.'),
         // .email('Please enter a valid email address.'),
         password: yup
@@ -73,7 +72,7 @@ function RegisterForm(props) {
     const handleSubmit = async (values) => {
         console.log(values);
         try {
-             await dispatch(register (values));
+            await dispatch(register(values));
 
             const { closeDialog } = props;
             if (closeDialog) {
@@ -92,24 +91,24 @@ function RegisterForm(props) {
             <Avatar className={classes.avatar}>
                 <LockOutlined></LockOutlined>
             </Avatar>
-            <Typography className={classes.title} components="h3" variant="h5">
-                Create An Account
+            <Typography className={classes.title} components='h3' variant='h5'>
+                Tạo Tài Khoản
             </Typography>
 
             <form onSubmit={form.handleSubmit(handleSubmit)}>
-                <InputField name="username" label="User Name" form={form} />
-                <PasswordField name="password" label="Password" form={form} />
+                <InputField name='username' label='Tên đăng nhập' form={form} />
+                <PasswordField name='password' label='Mật khẩu' form={form} />
                 {/* <PasswordField name="retypePassword" label="Retype Password" form={form} /> */}
                 <Button
                     disabled={isSubmitting}
-                    type="submit"
+                    type='submit'
                     className={classes.submit}
                     fullWidth
-                    variant="contained"
-                    color="primary"
-                    size="large"
+                    variant='contained'
+                    color='primary'
+                    size='large'
                 >
-                    Create an account
+                    Tạo Tài Khoản
                 </Button>
             </form>
         </div>

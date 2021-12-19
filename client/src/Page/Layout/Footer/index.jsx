@@ -23,6 +23,8 @@ export default function Footer(props) {
     const { musicDetail, listSongMusic, typeSongMusic } = useSelector(
         (state) => state.detailReducer
     );
+    const { toggleLyric } = useSelector((state) => state.lyricReducer);
+
     useEffect(() => {
         dispatch(getListAction());
     }, []);
@@ -228,17 +230,19 @@ export default function Footer(props) {
                     >
                         <i className={`fa fa-heart ${like ? 'text-pink-500' : ''}`}></i>
                     </button>
-                    <button
-                        style={{ padding: '5px', fontSize: '20px' }}
-                        onClick={() => {
-                            dispatch({
-                                type: GLOBALTYPES.OPEN_LYRIC,
-                                payload: { toggleLyric: true },
-                            });
-                        }}
-                    >
-                        <i className={`fa fa-angle-up `}></i>
-                    </button>
+                    {!toggleLyric && (
+                        <button
+                            style={{ padding: '5px', fontSize: '20px' }}
+                            onClick={() => {
+                                dispatch({
+                                    type: GLOBALTYPES.OPEN_LYRIC,
+                                    payload: { toggleLyric: true },
+                                });
+                            }}
+                        >
+                            <i className={`fa fa-angle-up `}></i>
+                        </button>
+                    )}
                 </div>
             </div>
             <div className='footer__center flex flex-col flex-grow'>

@@ -51,13 +51,9 @@ function LoginForm(props) {
 
     const dispatch = useDispatch();
     const schema = yup.object().shape({
-        username: yup
-            .string()
-            .required('Please enter your username.'),
+        username: yup.string().required('Please enter your username.'),
 
-        password: yup
-            .string()
-            .required('Please enter your password'),
+        password: yup.string().required('Please enter your password'),
     });
     const form = useForm({
         defaultValues: {
@@ -70,42 +66,41 @@ function LoginForm(props) {
     const handleSubmit = async (values) => {
         try {
             await dispatch(login(values));
-          // close dialog
-          const  {closeDialog} = props;
-          if (closeDialog) {
-            closeDialog();
-          }
+            // close dialog
+            const { closeDialog } = props;
+            if (closeDialog) {
+                closeDialog();
+            }
         } catch (error) {
-          console.log({error: error.response.data.message}, error);
+            console.log({ error: error.response.data.message }, error);
         }
-      };
+    };
 
     const { isSubmitting } = form.formState;
 
     return (
-        
         <div className={classes.root}>
             {isSubmitting && <LinearProgress className={classes.progress} />}
             <Avatar className={classes.avatar}>
                 <LockOutlined></LockOutlined>
             </Avatar>
-            <Typography className={classes.title} components="h3" variant="h5">
-                Sign In
+            <Typography className={classes.title} components='h3' variant='h5'>
+                Đăng Nhập
             </Typography>
 
             <form onSubmit={form.handleSubmit(handleSubmit)}>
-                <InputField name="username" label="User Name" form={form} />
-                <PasswordField name="password" label="Password" form={form} />
+                <InputField name='username' label='Tên đăng nhập' form={form} />
+                <PasswordField name='password' label='Mật khẩu' form={form} />
                 <Button
                     disabled={isSubmitting}
-                    type="submit"
+                    type='submit'
                     className={classes.submit}
                     fullWidth
-                    variant="contained"
-                    color="primary"
-                    size="large"
+                    variant='contained'
+                    color='primary'
+                    size='large'
                 >
-                    Sign In
+                    Đăng Nhập
                 </Button>
             </form>
         </div>

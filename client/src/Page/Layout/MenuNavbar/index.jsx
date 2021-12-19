@@ -191,7 +191,7 @@ export default function MenuNavbar() {
                             <RegisterForm closeDialog={handleClose} />
                             <Box textAlign='center'>
                                 <Button color='primary' onClick={() => setMode(MODE.LOGIN)}>
-                                    Already have an account? Login here
+                                    Bạn đã có tài khoản? Đăng nhập ngay
                                 </Button>
                             </Box>
                         </>
@@ -202,7 +202,7 @@ export default function MenuNavbar() {
                             <LoginForm closeDialog={handleClose} />
                             <Box textAlign='center'>
                                 <Button color='primary' onClick={() => setMode(MODE.REGISTER)}>
-                                    Don't have an account? Register here
+                                    Bạn chưa có tài khoản? Đăng ký ngay
                                 </Button>
                             </Box>
                         </>
