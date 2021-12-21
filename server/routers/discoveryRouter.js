@@ -34,10 +34,10 @@ router.post('/', async (req, res) => {
                 user: req.userId,
             });
             newDiscovery.save();
-            res.json({ success: true, message: 'Happy!', discovery: newDiscovery });
+            res.json({ success: true, msg: 'Thêm thành công!', discovery: newDiscovery });
         } catch (error) {
             console.log(error);
-            res.status(500).json({ success: false, message: 'Internal server error' });
+            res.status(500).json({ success: false, msg: 'Internal server error' });
         }
     });
 });
@@ -65,7 +65,7 @@ router.put('/:id', async (req, res) => {
             if (!updatedDiscovery)
                 return res.status(401).json({
                     success: false,
-                    message: 'Không tìm thấy hoặc người dùng không có quyền',
+                    msg: 'Không tìm thấy hoặc người dùng không có quyền',
                 });
 
             res.json({
@@ -93,10 +93,10 @@ router.delete('/:id', async (req, res) => {
         if (!deletedDiscovery)
             return res.status(401).json({
                 success: false,
-                message: 'Discovery not found or user not authorised',
+                msg: 'Không tìm thấy hoặc người dùng không có quyền',
             });
 
-        res.json({ success: true, discovery: deletedDiscovery });
+        res.json({ success: true, msg: 'Xóa thành công', discovery: deletedDiscovery });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });

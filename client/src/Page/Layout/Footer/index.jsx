@@ -1,4 +1,3 @@
-import Slide from '@material-ui/core/Slide';
 import moment from 'moment';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

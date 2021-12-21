@@ -1,5 +1,5 @@
-import { getDataAPI, postDataAPI } from '../../api/postApi';
 import { GLOBALTYPES } from 'Redux/type/globalType';
+import { deleteDataAPI, getDataAPI } from '../../api/postApi';
 
 export const Discovery = async (dispatch) => {
     try {
@@ -21,3 +21,18 @@ export const Discovery = async (dispatch) => {
 //         console.log(error);
 //     }
 // };
+
+export const handleDeleteItem = (_id) => async (dispatch) => {
+    dispatch({ type: GLOBALTYPES.DELETE_DISCOVERY_ITEM, payload: _id });
+    try {
+        const res = await deleteDataAPI(`discovery/${_id}`);
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: {
+                success: res.data.msg,
+            },
+        });
+    } catch (error) {
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { msg: 'error' } });
+    }
+};

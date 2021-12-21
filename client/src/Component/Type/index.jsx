@@ -7,7 +7,7 @@ import MusicItemView from '../MusicItemView/index';
 Type.propTypes = {};
 
 function Type(props) {
-    const { categoryReducer } = useSelector((state) => state);
+    const { categoryList } = useSelector((state) => state.categoryReducer);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(Category);
@@ -61,19 +61,19 @@ function Type(props) {
         >
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>MOTIVATION</h3>
-                <div className='flex'>{renderDataView(categoryReducer.slice(0, 5))}</div>
+                <div className='flex'>{renderDataView(categoryList.slice(0, 5))}</div>
             </div>
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>TÌNH YÊU</h3>
-                <div className='flex'>{renderDataView(categoryReducer.slice(5, 10))}</div>
+                <div className='flex'>{renderDataView(categoryList.slice(5, 10))}</div>
             </div>
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>TẬP TRUNG</h3>
-                <div className='flex'>{renderDataView(categoryReducer.slice(10, 15))}</div>
+                <div className='flex'>{renderDataView(categoryList.slice(10, 15))}</div>
             </div>
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>NGỦ NGON</h3>
-                <div className='flex'>{renderDataView(categoryReducer.slice(15, 20))}</div>
+                <div className='flex'>{renderDataView(categoryList.slice(15, 20))}</div>
             </div>
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>WORKOUT</h3>

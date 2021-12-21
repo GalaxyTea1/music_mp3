@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 // @desc Create post
 // @access Private
 router.post('/', async (req, res) => {
-    const { image, title, author } = req.body;
+    const { title, author } = req.body;
     const file = req.files.image;
     await cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
         try {
@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
                 user: req.userId,
             });
             newRank.save();
-            res.json({ success: true, message: 'Happy!', rank: newRank });
+            res.json({ success: true, msg: 'Thêm thành công!', rank: newRank });
         } catch (error) {
             console.log(error);
             res.status(500).json({ success: false, message: 'Internal server error' });
@@ -89,10 +89,10 @@ router.delete('/:id', async (req, res) => {
         if (!deletedRank)
             return res.status(401).json({
                 success: false,
-                message: 'Rank not found or user not authorised',
+                msg: 'Rank not found or user not authorised',
             });
 
-        res.json({ success: true, rank: deletedRank });
+        res.json({ success: true, msg: 'Xóa thành công', rank: deletedRank });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });

@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
                 user: req.userId,
             });
             newCategory.save();
-            res.json({ success: true, message: 'Happy!', category: newCategory });
+            res.json({ success: true, msg: 'Thêm thành công!', category: newCategory });
         } catch (error) {
             console.log(error);
             res.status(500).json({ success: false, message: 'Internal server error' });
@@ -93,10 +93,10 @@ router.delete('/:id', async (req, res) => {
         if (!deletedCategory)
             return res.status(401).json({
                 success: false,
-                message: 'Category not found or user not authorised',
+                msg: 'Category not found or user not authorised',
             });
 
-        res.json({ success: true, category: deletedCategory });
+        res.json({ success: true, msg: 'Xóa thành công', category: deletedCategory });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });

@@ -1,4 +1,4 @@
-import { getDataAPI, postDataAPI } from '../../api/postApi';
+import { deleteDataAPI, getDataAPI, postDataAPI } from '../../api/postApi';
 import { GLOBALTYPES } from 'Redux/type/globalType';
 
 export const RankItem = async (dispatch) => {
@@ -21,3 +21,18 @@ export const RankItem = async (dispatch) => {
 //         console.log(error);
 //     }
 // };
+
+export const handleDeleteRankItem = (_id) => async (dispatch) => {
+    dispatch({ type: GLOBALTYPES.DELETE_RANK_ITEM, payload: _id });
+    try {
+        const res = await deleteDataAPI(`rank/${_id}`);
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: {
+                success: res.data.msg,
+            },
+        });
+    } catch (error) {
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { msg: 'error' } });
+    }
+};

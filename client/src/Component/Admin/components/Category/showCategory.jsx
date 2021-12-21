@@ -3,9 +3,9 @@ import { alpha, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Category } from 'Redux/action/categoryAction';
+import { Category, handleDeleteCategoryItem } from 'Redux/action/categoryAction';
 import { GLOBALTYPES } from 'Redux/type/globalType';
 
 const useStyles = makeStyles((theme) => ({
@@ -74,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ShowCategory() {
+    const titleRef = useRef();
     const classes = useStyles();
     const [avatar, setAvatar] = useState();
     const [title, setTitle] = useState('');
@@ -92,7 +93,7 @@ export default function ShowCategory() {
         setAuthor(authorChange);
     };
 
-    const { categoryReducer } = useSelector((state) => state);
+    const { categoryList } = useSelector((state) => state.categoryReducer);
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -117,7 +118,7 @@ export default function ShowCategory() {
 
     const changeValueHandle = (e) => {
         const inputValue = e.target.value;
-        const checkValue = categoryReducer.map((item) => {
+        const checkValue = categoryList.map((item) => {
             if (item._id === inputValue) {
                 return item;
             }
@@ -158,11 +159,17 @@ export default function ShowCategory() {
 
         setTitle('');
         setAuthor('');
+        titleRef.current.focus();
     };
 
     const idFilter = filterArr.map((item) => item._id);
     const titleFilter = filterArr.map((item) => item.title);
     const authorFilter = filterArr.map((item) => item.author);
+
+    const handleDelete = (_id) => {
+        dispatch(handleDeleteCategoryItem(_id));
+        setValue([]);
+    };
 
     return (
         <div className='main'>
@@ -180,7 +187,7 @@ export default function ShowCategory() {
                 <div className='header-form'></div>
                 <form onSubmit={handleSubmit}>
                     <select onChange={changeValueHandle}>
-                        {categoryReducer?.map((option) => (
+                        {categoryList?.map((option) => (
                             <option value={option._id} key={option._id}>
                                 {option.title}
                             </option>
@@ -190,6 +197,7 @@ export default function ShowCategory() {
                     <br />
                     <div className={classes.root}>
                         <TextField
+                            ref={titleRef}
                             value={title}
                             onChange={handleChange}
                             required
@@ -236,6 +244,9 @@ export default function ShowCategory() {
                         style={{ margin: '330px' }}
                     >
                         Sửa Album
+                    </Button>
+                    <Button onClick={() => handleDelete(idFilter)}>
+                        <i className={`fa fa-trash `}></i>
                     </Button>
                 </form>
                 <br />

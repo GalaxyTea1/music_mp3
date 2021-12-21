@@ -4,8 +4,9 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Discovery } from 'Redux/action/discoveryAction';
+import { Discovery, handleDeleteItem } from 'Redux/action/discoveryAction';
 import { GLOBALTYPES } from 'Redux/type/globalType';
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -73,12 +74,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ShowDiscovery() {
+    const titleRef = useRef();
     const classes = useStyles();
     const [avatar, setAvatar] = useState();
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [image, setImage] = useState();
     const [value, setValue] = useState([]);
+    const { discoveryList } = useSelector((state) => state.discoveryReducer);
 
     const handleChange = (e) => {
         const titleChange = e.target.value;
@@ -90,8 +93,6 @@ export default function ShowDiscovery() {
         const authorChange = e.target.value;
         setAuthor(authorChange);
     };
-
-    const { discoveryList } = useSelector((state) => state.discoveryReducer);
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -135,7 +136,6 @@ export default function ShowDiscovery() {
         form_data.append('title', title);
         form_data.append('author', author);
         form_data.append('image', image, image.name);
-        console.log(image);
         console.log(form_data);
         let url = `http://localhost:5001/api/discovery/${idFilter}`;
         axios
@@ -157,11 +157,17 @@ export default function ShowDiscovery() {
 
         setTitle('');
         setAuthor('');
+        titleRef.current.focus();
     };
 
     const idFilter = filterArr.map((item) => item._id);
     const titleFilter = filterArr.map((item) => item.title);
     const authorFilter = filterArr.map((item) => item.author);
+
+    const handleDelete = (_id) => {
+        dispatch(handleDeleteItem(_id));
+        setValue([]);
+    };
 
     return (
         <div className='main'>
@@ -190,12 +196,13 @@ export default function ShowDiscovery() {
                     <div className={classes.root}>
                         <TextField
                             value={title}
+                            ref={titleRef}
                             onChange={handleChange}
                             required
                             id='outlined-full-width'
                             label='Tiêu đề'
                             style={{ margin: 8 }}
-                            placeholder={titleFilter}
+                            placeholder={titleFilter || ''}
                             fullWidth
                             margin='normal'
                             InputLabelProps={{
@@ -211,7 +218,7 @@ export default function ShowDiscovery() {
                             id='outlined-full-width'
                             label='Tên ca sĩ'
                             style={{ margin: 8 }}
-                            placeholder={authorFilter}
+                            placeholder={authorFilter || ''}
                             fullWidth
                             margin='normal'
                             InputLabelProps={{
@@ -235,6 +242,9 @@ export default function ShowDiscovery() {
                         style={{ margin: '330px' }}
                     >
                         Sửa Album
+                    </Button>
+                    <Button onClick={() => handleDelete(idFilter)}>
+                        <i className={`fa fa-trash `}></i>
                     </Button>
                 </form>
                 <br />

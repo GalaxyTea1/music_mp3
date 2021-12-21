@@ -7,7 +7,7 @@ import MusicItemView from '../MusicItemView/index';
 Rank.propTypes = {};
 
 function Rank(props) {
-    const { rankReducer } = useSelector((state) => state);
+    const { rankList } = useSelector((state) => state.rankReducer);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(RankItem);
@@ -61,19 +61,19 @@ function Rank(props) {
         >
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>Top Nổi Bật</h3>
-                <div className='flex'>{renderDataView(rankReducer.slice(0, 5))}</div>
+                <div className='flex'>{renderDataView(rankList.slice(0, 5))}</div>
             </div>
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>Top V-Pop</h3>
-                <div className='flex'>{renderDataView(rankReducer.slice(5, 10))}</div>
+                <div className='flex'>{renderDataView(rankList.slice(5, 10))}</div>
             </div>
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>Top US-UK</h3>
-                <div className='flex'>{renderDataView(rankReducer.slice(10, 15))}</div>
+                <div className='flex'>{renderDataView(rankList.slice(10, 15))}</div>
             </div>
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>Top K- Pop</h3>
-                <div className='flex'>{renderDataView(rankReducer.slice(15, 20))}</div>
+                <div className='flex'>{renderDataView(rankList.slice(15, 20))}</div>
             </div>
             <div className='ngheGanDay mt-3'>
                 <h3 className='px-3 mt-4 text-xl font-bold'>aa </h3>

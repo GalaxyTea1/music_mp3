@@ -1,5 +1,5 @@
-import { getDataAPI, patchDataAPI } from '../../api/postApi';
 import { GLOBALTYPES } from 'Redux/type/globalType';
+import { getDataAPI, patchDataAPI } from '../../api/postApi';
 
 export const SongItem = async (dispatch) => {
     try {
