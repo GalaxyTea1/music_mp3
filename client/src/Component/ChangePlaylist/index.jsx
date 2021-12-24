@@ -61,6 +61,9 @@ export default function ChangePlaylist(props) {
         // history.push(`/playlist/${valueInput.tenPlaylist}`);
         history.push('/');
         document.removeEventListener('mousedown', handleOutSideClick);
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000);
     };
 
     const handleChange = (e) => {

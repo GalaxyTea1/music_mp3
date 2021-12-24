@@ -12,6 +12,7 @@ import { LinearProgress, makeStyles } from '@material-ui/core/';
 import PasswordField from '../form-controls/PasswordField/index';
 import { useDispatch } from 'react-redux';
 import { login } from '../../Redux/action/authAction';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,8 +49,8 @@ LoginForm.propTypes = {
 
 function LoginForm(props) {
     const classes = useStyles();
-
     const dispatch = useDispatch();
+    const { authReducer } = useSelector((state) => state);
     const schema = yup.object().shape({
         username: yup.string().required('Please enter your username.'),
 
@@ -68,7 +69,7 @@ function LoginForm(props) {
             await dispatch(login(values));
             // close dialog
             const { closeDialog } = props;
-            if (closeDialog) {
+            if (authReducer.token) {
                 closeDialog();
             }
         } catch (error) {

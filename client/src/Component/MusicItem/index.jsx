@@ -13,7 +13,7 @@ export default function MusicItem(props) {
         if (item?._id === listSong[0]?._id) {
             dispatch(getSongAction(listSong[0]));
         }
-    }, []);
+    }, [dispatch, listSong, item._id]);
     let classActive = '';
     if (musicDetail?._id === item?._id) {
         classActive = 'activeBgPink';
@@ -26,7 +26,7 @@ export default function MusicItem(props) {
                 dispatch({
                     type: SONG_MUSIC_DETAIL,
                     musicDetail: item,
-                    typeSongMusic: true,
+                    typeSongMusic: false,
                 });
             }}
         >

@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
                 }
                 return musicRandom;
             }
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 5; i++) {
                 let musicRandom =
                     state.listSongMusic[
                         Math.floor(Math.random() * (state.listSongMusic.length - 1))
@@ -47,7 +47,6 @@ export default (state = initialState, action) => {
                 // randomList?.push(music);
                 //
                 // }
-
                 randomList?.push(musicRandom);
             }
             return { ...state, listRandomMusic: [...randomList] };

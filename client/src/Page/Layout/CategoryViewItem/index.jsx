@@ -5,15 +5,15 @@ import { useParams } from 'react-router';
 
 export default function CategoryView() {
     const [item, setItem] = useState([]);
-    const { categoryReducer } = useSelector((state) => state);
+    const { categoryList } = useSelector((state) => state.categoryReducer);
     const { id } = useParams();
 
     useEffect(() => {
-        const newArg = categoryReducer?.filter((item) => {
+        const newArg = categoryList?.filter((item) => {
             return item?._id === id;
         });
         setItem(newArg);
-    }, [categoryReducer]);
+    }, [categoryList]);
     return (
         <div>
             {item?.map((value) => (

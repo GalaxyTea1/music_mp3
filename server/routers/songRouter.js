@@ -32,7 +32,7 @@ router.post('/', verifyToken, async (req, res) => {
                             user: req.user._id,
                         });
                         newSong.save();
-                        res.json({ success: true, message: 'Happy!', song: newSong });
+                        res.json({ success: true, msg: 'Happy!', song: newSong });
                     } catch (error) {
                         console.log(error);
                         res.status(500).json({ success: false, message: 'Internal server error' });
@@ -76,12 +76,12 @@ router.put('/:id', async (req, res) => {
                         if (!updatedSong)
                             return res.status(401).json({
                                 success: false,
-                                message: 'Song not found or user not authorised',
+                                msg: 'Song not found or user not authorised',
                             });
 
                         res.json({
                             success: true,
-                            message: 'Excellent progress!',
+                            msg: 'Excellent progress!',
                             song: updatedSong,
                         });
                     } catch (error) {
@@ -98,23 +98,7 @@ router.put('/:id', async (req, res) => {
 });
 
 router.patch('/update/:id', async (req, res) => {
-    // const songUpdateCondition = { _id: req.params.id };
-
     try {
-        // let updatedSong = {
-        //     lyric: req.body,
-        // };
-
-        // updatedSong = await Song.findOneAndUpdate(songUpdateCondition, updatedSong, {
-        //     new: true,
-        // });
-
-        // // User not authorised to update post or post not found
-        // if (!updatedSong)
-        //     return res.status(401).json({
-        //         success: false,
-        //         message: 'Không tìm thấy hoặc người dùng không có quyền',
-        //     });
         const { name, artists_names, audio, author, album, lyric, duration } = req.body;
         const song = await Song.findOneAndUpdate(
             { _id: req.params.id },

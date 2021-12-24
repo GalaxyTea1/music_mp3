@@ -80,11 +80,17 @@ export default function Playlist(props) {
         };
         dispatch(handlePlaylist(data));
         history.push('/');
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000);
     };
 
     const handleRemove = (_id) => {
         dispatch(removePlaylist(_id));
         history.push('/');
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000);
     };
     return (
         <div

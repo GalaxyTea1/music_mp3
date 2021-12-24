@@ -5,14 +5,14 @@ import { useParams } from 'react-router';
 
 export default function TopView() {
     const [item, setItem] = useState([]);
-    const { rankReducer } = useSelector((state) => state);
+    const { rankList } = useSelector((state) => state.rankReducer);
     const { id } = useParams();
     useEffect(() => {
-        const newArg = rankReducer?.filter((item) => {
+        const newArg = rankList?.filter((item) => {
             return item?._id === id;
         });
         setItem(newArg);
-    }, [rankReducer]);
+    }, [rankList]);
 
     return (
         <div>

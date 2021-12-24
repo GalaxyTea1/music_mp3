@@ -16,25 +16,25 @@ export default function Footer(props) {
     const [loop, setLoop] = useState(false);
     const [shuffle, setShuffle] = useState(false);
     const [like, setLike] = useState(false);
+    const [download, setDownload] = useState('');
 
     const dispatch = useDispatch();
 
     const { musicDetail, listSongMusic, typeSongMusic } = useSelector(
         (state) => state.detailReducer
     );
+
     const { toggleLyric } = useSelector((state) => state.lyricReducer);
 
     useEffect(() => {
         dispatch(getListAction());
-    }, []);
+    }, [dispatch]);
     useEffect(() => {
         dispatch(getSongAction());
-    }, []);
+    }, [dispatch]);
 
     const { listPlaylist } = useSelector((state) => state.PlaylistReducer);
     const changeSong = (thamSo, list = listSongMusic) => {
-        if (typeSongMusic === false) {
-        }
         const index = list.findIndex((item) => item._id === musicDetail._id);
         if (thamSo === -1) {
             //check new day la bai dau tien => return ;
@@ -46,7 +46,7 @@ export default function Footer(props) {
             dispatch({
                 type: SONG_MUSIC_DETAIL,
                 musicDetail: newSong,
-                typeSongMusic: true,
+                typeSongMusic: typeSongMusic,
             });
         } else {
             //bai cuoi cung se bi loi
@@ -59,7 +59,7 @@ export default function Footer(props) {
             dispatch({
                 type: SONG_MUSIC_DETAIL,
                 musicDetail: newSong,
-                typeSongMusic: true,
+                typeSongMusic: typeSongMusic,
             });
         }
     };
@@ -186,6 +186,12 @@ export default function Footer(props) {
 
     const handleChangeVolume = (e) => {
         setVolume(e.target.value);
+    };
+
+    const handleDownload = () => {
+        const download = musicDetail.audio.split('upload');
+        const urlDownload = `${download[0]}/upload/fl_attachment${download[1]}`;
+        setDownload(urlDownload);
     };
 
     return (
@@ -352,6 +358,11 @@ export default function Footer(props) {
                 )}
             </div>
             <div style={{ width: '30%' }} className='footer__right flex justify-end text-white'>
+                <button onClick={() => handleDownload()}>
+                    <a href={download} download>
+                        <i className='fa fa-download'></i>
+                    </a>
+                </button>
                 <button className='footer__right__button'>
                     <i className='fa fa-film '></i>
                 </button>
