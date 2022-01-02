@@ -25,7 +25,8 @@ export default function Footer(props) {
     );
 
     const { toggleLyric } = useSelector((state) => state.lyricReducer);
-
+    const { listPlaylist } = useSelector((state) => state.PlaylistReducer);
+    // console.log(listSongMusic);
     useEffect(() => {
         dispatch(getListAction());
     }, [dispatch]);
@@ -33,12 +34,11 @@ export default function Footer(props) {
         dispatch(getSongAction());
     }, [dispatch]);
 
-    const { listPlaylist } = useSelector((state) => state.PlaylistReducer);
     const changeSong = (thamSo, list = listSongMusic) => {
         const index = list.findIndex((item) => item._id === musicDetail._id);
         if (thamSo === -1) {
-            //check new day la bai dau tien => return ;
-            //kiem tra musicDetail co p la bai dau tien hay ko ?
+            //check is the first song => return ;
+            //check musicDetail is the first song ?
             if (list[0]?._id === musicDetail?._id) {
                 return;
             }
@@ -49,8 +49,7 @@ export default function Footer(props) {
                 typeSongMusic: typeSongMusic,
             });
         } else {
-            //bai cuoi cung se bi loi
-            //check neu day la bai cuoi cung => return
+            //check is the last song => return
             if (list[list.length - 1]?._id === musicDetail?._id) {
                 return;
             }
@@ -64,56 +63,28 @@ export default function Footer(props) {
         }
     };
 
-    // const changeSong2 = (thamSo, list = listSongMusic) => {
-    //     if (typeSongMusic === false) {
-    //         const path = props.computedMatch.params.name; //lay ra ten bai hat dang chon?
-    //         const index = listPlaylist.findIndex((item) => item.name === path); // lay index bai hat co ten = ten dang chon
-    //         if (index !== -1) {
-    //             list = listPlaylist[index].listBaiHat;
-    //         }
-    //     }
-    //     const lastSong = list[list.length - 1];
-    //     //tim bai dang phat (songDetail) trong list;
-    //     //neu nhu bai nay la index thu = (index = 0) return; ko lam gi ca
-    //     const index = list.findIndex((item) => item._id === musicDetail._id);
-    //     let nowSong = {};
-    //     if (index !== -1) {
-    //         if (thamSo === 1) {
-    //             if (list[index]._id === lastSong._id) {
-    //                 return dispatch({
-    //                     type: SONG_MUSIC_DETAIL,
-    //                     musicDetail: list[0],
-    //                     typeSongMusic: typeSongMusic,
-    //                 });
-    //             } else {
-    //                 nowSong = list[index + thamSo];
-    //             }
-    //         } else if (thamSo === -1) {
-    //             if (index === 0) {
-    //                 // console.log('Day la bai dau tien');
+    const changSong2 = (thamSo, list = listSongMusic) => {
+        // if (typeSongMusic === false) {
+        //     const path = props.computedMatch.params.name;
+        //     const index = listPlaylist.findIndex((item) => item.name === path);
+        //     if (index !== -1) {
+        //         list = listPlaylist[index].list_song;
+        //     }
+        // }
 
-    //                 return dispatch({
-    //                     type: SONG_MUSIC_DETAIL,
-    //                     musicDetail: list[list.length - 1],
-    //                     typeSongMusic: typeSongMusic,
-    //                 });
-    //             } else {
-    //                 nowSong = list[index + thamSo];
-    //             }
-    //         } else {
-    //             return;
-    //         }
-    //     }
-    //     dispatch({
-    //         type: SONG_MUSIC_DETAIL,
-    //         musicDetail: nowSong,
-    //         typeSongMusic: typeSongMusic,
-    //     });
-    // };
-
-    useEffect(() => {
-        audioRef.current.volume = volume / 100;
-    }, [volume]);
+        const index = list.findIndex((item) => item._id === musicDetail._id);
+        if (thamSo === -1) {
+            if (list[0]?._id === musicDetail?._id) {
+                return;
+            }
+            const newSong = list[index + thamSo];
+            dispatch({
+                type: SONG_MUSIC_DETAIL,
+                musicDetail: newSong,
+                typeSongMusic: typeSongMusic,
+            });
+        }
+    };
 
     useEffect(() => {
         if (musicDetail.audio) {
@@ -183,6 +154,10 @@ export default function Footer(props) {
             }
         }
     };
+
+    useEffect(() => {
+        audioRef.current.volume = volume / 100;
+    }, [volume]);
 
     const handleChangeVolume = (e) => {
         setVolume(e.target.value);

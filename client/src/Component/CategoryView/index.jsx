@@ -16,7 +16,7 @@ function Category2(props) {
         dispatch(Category);
         const res = await getDataAPI('song');
         dispatch({ type: GLOBALTYPES.GET_SONG_MUSIC, payload: res });
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { getPlaylist, handlePlaylist, removePlaylist } from 'Redux/action/handlePlaylist';
 import ChangePlaylist from '../../../Component/ChangePlaylist/index';
 import PlaylistItem from '../../../Component/PlaylistItem/index';
-import { OPEN_MODAL, REMOVE_PLAYLIST } from '../../../Redux/type/Music';
+import { OPEN_MODAL } from '../../../Redux/type/Music';
 
 export default function Playlist(props) {
     const dispatch = useDispatch();
@@ -122,7 +122,7 @@ export default function Playlist(props) {
                 </div>
                 <div className='flex justify-center items-center'>
                     <p className='text-center text-xs opacity-60 mr-1'>Được tạo bởi: </p>
-                    <span className='text-xs'>User {props.match.params.name}</span>
+                    <span className='text-xs'>User {authReducer.user.username}</span>
                 </div>
                 <p className='text-center text-xs opacity-60 mt-1'>Công khai </p>
                 <div className='flex justify-between items-center playlist_btn'>

@@ -1,11 +1,10 @@
-import _ from 'lodash';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SONG_MUSIC_DETAIL } from 'Redux/type/Music';
+import { GET_DETAIL, SONG_MUSIC_DETAIL } from 'Redux/type/Music';
 import { getSongAction } from '../../Redux/action/ListMusicAction';
 
 export default function MusicItem(props) {
-    const { musicDetail, typeSongMusic } = useSelector((state) => state.detailReducer);
+    const { musicDetail } = useSelector((state) => state.detailReducer);
     const dispatch = useDispatch();
     const { item, index, listSong } = props;
 
@@ -18,6 +17,7 @@ export default function MusicItem(props) {
     if (musicDetail?._id === item?._id) {
         classActive = 'activeBgPink';
     }
+    console.log(listSong);
     return (
         <div
             className={`flex items-center rounded-md p-2 cursor-pointer media  ${classActive}`}
@@ -26,7 +26,11 @@ export default function MusicItem(props) {
                 dispatch({
                     type: SONG_MUSIC_DETAIL,
                     musicDetail: item,
-                    typeSongMusic: false,
+                    typeSongMusic: true,
+                });
+                dispatch({
+                    type: GET_DETAIL,
+                    listSongMusic: listSong,
                 });
             }}
         >

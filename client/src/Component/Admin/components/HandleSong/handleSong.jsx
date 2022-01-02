@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
-import React from 'react';
-import { getDataAPI } from '../../../../api/postApi';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSongAccept, handleAccept, handleRefuse } from 'Redux/action/handleAcceptAction';
 

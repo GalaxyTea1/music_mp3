@@ -2,6 +2,7 @@
 import { GET_DETAIL, SONG_MUSIC_DETAIL, RANDOM_LIST_MUSIC } from '../type/Music';
 const initialState = {
     listSongMusic: [],
+    listSongRender: [],
     musicDetail: {},
     listRandomMusic: [],
     typeSongMusic: true, // true is listSong,false is playlist Song
@@ -10,7 +11,17 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case GET_DETAIL: {
-            return { ...state, listSongMusic: action.listSongMusic };
+            return {
+                ...state,
+                listSongMusic: action.listSongMusic,
+            };
+        }
+        case 'GET_DETAIL_RENDER': {
+            console.log(action.listSongMusic);
+            return {
+                ...state,
+                listSongRender: action.listSongMusic,
+            };
         }
         case SONG_MUSIC_DETAIL: {
             return {
@@ -25,8 +36,8 @@ export default (state = initialState, action) => {
                 let index = randomList.findIndex((item) => item?._id === musicRandom?._id);
                 if (index !== -1) {
                     const musicRandom2 =
-                        state.listSongMusic[
-                            Math.floor(Math.random() * (state.listSongMusic.length - 1))
+                        state.listSongRender[
+                            Math.floor(Math.random() * (state.listSongRender.length - 1))
                         ];
                     return KiemTraTrung(musicRandom2, randomList);
                 }
@@ -34,8 +45,8 @@ export default (state = initialState, action) => {
             }
             for (let i = 0; i < 5; i++) {
                 let musicRandom =
-                    state.listSongMusic[
-                        Math.floor(Math.random() * (state.listSongMusic.length - 1))
+                    state.listSongRender[
+                        Math.floor(Math.random() * (state.listSongRender.length - 1))
                     ];
                 if (musicRandom) {
                     musicRandom = KiemTraTrung(musicRandom, randomList);

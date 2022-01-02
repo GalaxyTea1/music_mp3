@@ -53,6 +53,7 @@ export const getListAction = () => {
                     type: GET_DETAIL,
                     listSongMusic: data.songs,
                 });
+                dispatch({ type: 'GET_DETAIL_RENDER', listSongMusic: data.songs });
             }
         } catch (error) {
             console.log(error);
