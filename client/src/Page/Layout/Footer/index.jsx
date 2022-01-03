@@ -26,7 +26,7 @@ export default function Footer(props) {
 
     const { toggleLyric } = useSelector((state) => state.lyricReducer);
     const { listPlaylist } = useSelector((state) => state.PlaylistReducer);
-    // console.log(listSongMusic);
+
     useEffect(() => {
         dispatch(getListAction());
     }, [dispatch]);
@@ -63,28 +63,28 @@ export default function Footer(props) {
         }
     };
 
-    const changSong2 = (thamSo, list = listSongMusic) => {
-        // if (typeSongMusic === false) {
-        //     const path = props.computedMatch.params.name;
-        //     const index = listPlaylist.findIndex((item) => item.name === path);
-        //     if (index !== -1) {
-        //         list = listPlaylist[index].list_song;
-        //     }
-        // }
+    // const changSong2 = (thamSo, list = listSongMusic) => {
+    //     // if (typeSongMusic === false) {
+    //     //     const path = props.computedMatch.params.name;
+    //     //     const index = listPlaylist.findIndex((item) => item.name === path);
+    //     //     if (index !== -1) {
+    //     //         list = listPlaylist[index].list_song;
+    //     //     }
+    //     // }
 
-        const index = list.findIndex((item) => item._id === musicDetail._id);
-        if (thamSo === -1) {
-            if (list[0]?._id === musicDetail?._id) {
-                return;
-            }
-            const newSong = list[index + thamSo];
-            dispatch({
-                type: SONG_MUSIC_DETAIL,
-                musicDetail: newSong,
-                typeSongMusic: typeSongMusic,
-            });
-        }
-    };
+    //     const index = list.findIndex((item) => item._id === musicDetail._id);
+    //     if (thamSo === -1) {
+    //         if (list[0]?._id === musicDetail?._id) {
+    //             return;
+    //         }
+    //         const newSong = list[index + thamSo];
+    //         dispatch({
+    //             type: SONG_MUSIC_DETAIL,
+    //             musicDetail: newSong,
+    //             typeSongMusic: typeSongMusic,
+    //         });
+    //     }
+    // };
 
     useEffect(() => {
         if (musicDetail.audio) {

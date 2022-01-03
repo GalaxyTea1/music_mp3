@@ -36,8 +36,8 @@ export default (state = initialState, action) => {
                 let index = randomList.findIndex((item) => item?._id === musicRandom?._id);
                 if (index !== -1) {
                     const musicRandom2 =
-                        state.listSongRender[
-                            Math.floor(Math.random() * (state.listSongRender.length - 1))
+                        state.listSongMusic[
+                            Math.floor(Math.random() * (state.listSongMusic.length - 1))
                         ];
                     return KiemTraTrung(musicRandom2, randomList);
                 }
@@ -45,19 +45,12 @@ export default (state = initialState, action) => {
             }
             for (let i = 0; i < 5; i++) {
                 let musicRandom =
-                    state.listSongRender[
-                        Math.floor(Math.random() * (state.listSongRender.length - 1))
+                    state.listSongMusic[
+                        Math.floor(Math.random() * (state.listSongMusic.length - 1))
                     ];
                 if (musicRandom) {
                     musicRandom = KiemTraTrung(musicRandom, randomList);
                 }
-                // if (music) co o trong randomList{
-                // no se chay o day
-                //thi se random ra music moi
-                // } else {
-                // randomList?.push(music);
-                //
-                // }
                 randomList?.push(musicRandom);
             }
             return { ...state, listRandomMusic: [...randomList] };

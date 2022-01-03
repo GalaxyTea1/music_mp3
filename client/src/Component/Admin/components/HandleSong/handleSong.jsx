@@ -12,11 +12,9 @@ export default function HandleSong() {
 
     const handleSubmit = (item) => {
         dispatch(handleAccept({ item, authReducer }));
-        console.log(item);
     };
 
     const handleDeny = (_id) => {
-        console.log(_id);
         dispatch(handleRefuse({ _id, authReducer }));
     };
 
@@ -28,7 +26,7 @@ export default function HandleSong() {
                     <th>Tên ca sĩ</th>
                     <th>Đường dẫn</th>
                     <th>Thời lượng</th>
-                    <th>Đồng ý</th>
+                    <th>Chấp nhận</th>
                     <th>Từ chối</th>
                 </tr>
                 {acceptReducer &&
@@ -39,10 +37,10 @@ export default function HandleSong() {
                             <td>{item.audio}</td>
                             <td>{item.duration}</td>
                             <td>
-                                <button onClick={() => handleSubmit(item)}>Accept</button>
+                                <button onClick={() => handleSubmit(item)}>Chấp nhận</button>
                             </td>
                             <td>
-                                <button onClick={() => handleDeny(item._id)}>Refuse</button>
+                                <button onClick={() => handleDeny(item._id)}>Từ chối</button>
                             </td>
                         </tr>
                     ))}

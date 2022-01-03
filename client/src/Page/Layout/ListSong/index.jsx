@@ -6,22 +6,20 @@ import MusicItem from '../../../Component/MusicItem/index';
 import { getListAction } from '../../../Redux/action/ListMusicAction';
 
 export default function ListSong() {
-    const { listSongMusic, listRandomMusic, listSongRender } = useSelector(
-        (state) => state.detailReducer
-    );
+    const { listSongMusic, listRandomMusic } = useSelector((state) => state.detailReducer);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getListAction());
     }, []);
     useEffect(() => {
-        if (listSongRender.length > 0) {
+        if (listSongMusic.length > 0) {
             dispatch({ type: RANDOM_LIST_MUSIC });
             setState({
                 listNhac: listRandomMusic,
                 active: true,
             });
         }
-    }, [listSongRender]);
+    }, [listSongMusic]);
 
     const [state, setState] = useState({
         listNhac: [],

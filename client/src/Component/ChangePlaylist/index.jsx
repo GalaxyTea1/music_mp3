@@ -58,7 +58,6 @@ export default function ChangePlaylist(props) {
             },
         });
         myFormRef.current.reset();
-        // history.push(`/playlist/${valueInput.tenPlaylist}`);
         history.push('/');
         document.removeEventListener('mousedown', handleOutSideClick);
         setTimeout(() => {
