@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import InputField from '../form-controls/InputField/index';
@@ -67,15 +67,18 @@ function LoginForm(props) {
     const handleSubmit = async (values) => {
         try {
             await dispatch(login(values));
-            // close dialog
-            const { closeDialog } = props;
-            if (authReducer.token) {
-                closeDialog();
-            }
         } catch (error) {
             console.log({ error: error.response.data.message }, error);
         }
     };
+    useEffect(() => {
+        const { closeDialog } = props;
+        if (closeDialog) {
+            if (authReducer.token) {
+                closeDialog();
+            }
+        }
+    }, [authReducer, props]);
 
     const { isSubmitting } = form.formState;
 

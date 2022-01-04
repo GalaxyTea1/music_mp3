@@ -70,7 +70,6 @@ function RegisterForm(props) {
     });
 
     const handleSubmit = async (values) => {
-        console.log(values);
         try {
             await dispatch(register(values));
 

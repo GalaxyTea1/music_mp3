@@ -213,7 +213,13 @@ export default function MenuNavbar() {
                 </IconButton>
             </Dialog>
 
-            <div className='sideBar__footer cursor-pointer' onClick={handleClick}>
+            <div
+                className='sideBar__footer cursor-pointer'
+                style={{
+                    display: typeof authReducer.token === 'string' ? 'block' : 'none',
+                }}
+                onClick={handleClick}
+            >
                 <span>
                     <i className='fa fa-plus mr-2'></i>Tạo playlist mới
                 </span>
